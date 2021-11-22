@@ -1,0 +1,11 @@
+{
+  "apps": [
+    {
+      "app_id": "app_c11fa65f-cd73-413e-be8b-f6d68965f188",
+      "org_id": "user_1c340ef9-72d3-40e1-bc1c-76984f897b1b",
+      "deploy_url": "https://push-n2-par-clevercloud-customers.services.clever-cloud.com/app_c11fa65f-cd73-413e-be8b-f6d68965f188.git",
+      "name": "written_to_many",
+      "alias": "written_to_many"
+    }
+  ]
+}
