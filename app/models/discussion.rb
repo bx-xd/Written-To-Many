@@ -1,6 +1,9 @@
 class Discussion < ApplicationRecord
-  belongs_to :modification
-  belongs_to :project
+  belongs_to :modification, optional: true
+  belongs_to :project, optional: true
+
   has_many :posts
-  has_many :users, throught: :posts
+  has_many :users, through: :posts
+
+  validates :title, presence: true
 end
