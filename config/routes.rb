@@ -7,12 +7,12 @@ Rails.application.routes.draw do
   end
 
   resources :texts, only: %i[show update] do
-    resources :modifications, only: %i[index create]
+    resources :modifications, only: [:create]
   end
 
   resource :dashboard, only: [:show]
 
-  resources :modifications, only: [:show] do
+  resources :modifications, only: %i[show update] do
     member do
       patch :validate
       patch :deny
