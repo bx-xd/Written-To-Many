@@ -10,10 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_160044) do
+ActiveRecord::Schema.define(version: 2021_11_23_101006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contributors", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_contributors_on_project_id"
+    t.index ["user_id"], name: "index_contributors_on_user_id"
+  end
+
+  create_table "discussions", force: :cascade do |t|
+    t.string "title"
+    t.text "context"
+    t.bigint "modification_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["modification_id"], name: "index_discussions_on_modification_id"
+    t.index ["project_id"], name: "index_discussions_on_project_id"
+  end
+
+  create_table "modifications", force: :cascade do |t|
+    t.text "content_before"
+    t.text "content_after"
+    t.text "context"
+    t.string "status"
+    t.bigint "text_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["text_id"], name: "index_modifications_on_text_id"
+    t.index ["user_id"], name: "index_modifications_on_user_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "texts", force: :cascade do |t|
+    t.text "content"
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_texts_on_project_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +77,12 @@ ActiveRecord::Schema.define(version: 2021_11_22_160044) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "contributors", "projects"
+  add_foreign_key "contributors", "users"
+  add_foreign_key "discussions", "modifications"
+  add_foreign_key "discussions", "projects"
+  add_foreign_key "modifications", "texts"
+  add_foreign_key "modifications", "users"
+  add_foreign_key "projects", "users"
+  add_foreign_key "texts", "projects"
 end
