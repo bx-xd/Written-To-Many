@@ -1,16 +1,25 @@
 // Import Google fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
 
-// Define fonts for body and headers
-$body-font: "Work Sans", "Helvetica", "sans-serif";
-$headers-font: "Nunito", "Helvetica", "sans-serif";
-
 // To use a font file (.woff) uncomment following lines
-// @font-face {
-//   font-family: "Font Name";
-//   src: font-url('FontFile.eot');
-//   src: font-url('FontFile.eot?#iefix') format('embedded-opentype'),
-//        font-url('FontFile.woff') format('woff'),
-//        font-url('FontFile.ttf') format('truetype')
-// }
-// $my-font: "Font Name";
+@font-face {
+  font-family: "BP-Bold";
+  src: font-url("Suisse-BP-Bold") format('woff');
+}
+
+@font-face {
+  font-family: "BP-Reg";
+  src: font-url("Suisse-BP-Reg") format('woff');
+}
+
+@font-face {
+  font-family: "BP-Thin";
+  src: font-url("Suisse-BP-Thin") format('woff');
+}
+
+$BP-bold: "BP-Bold";
+$BP-reg: "BP-Reg";
+$BP-thin: "BP-Thin";
+
+$body-font: "BP-Reg", "Helvetica", "sans-serif";
+$headers-font: "BP-Bold", "Helvetica", "sans-serif";
