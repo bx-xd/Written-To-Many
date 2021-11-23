@@ -74,8 +74,10 @@ puts "You have now #{Project.count} projects"
 puts "-> Finish to create 6 Projects"
 
 puts "-> Create 10 Contributors"
-# 12 Contributeurs
+contributors_to_dialogue = []
+Contributor.new(project: )
 puts "-> Finish to create 10 Contributors"
+# 12 Contributeurs
 
 puts "-> Create 6 Texts"
 # file = File.open("textpath")
