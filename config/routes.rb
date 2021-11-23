@@ -2,24 +2,24 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
 
-  resources :projects, only: [:show, :edit, :update, :new, :create] do
-    resources :contributors, only: [:new, :create]
+  resources :projects, only: %i[edit update new create] do
+    resources :contributors, only: %i[new create]
   end
 
-  resources :texts, only: [:show, :update] do
-    resources :modifications, only: [:index, :create]
+  resources :texts, only: %i[show update] do
+    resources :modifications, only: [:create]
   end
 
   resource :dashboard, only: [:show]
 
-  resources :modifications, only: [:show] do
+  resources :modifications, only: %i[show update] do
     member do
       patch :validate
       patch :deny
     end
   end
 
-  resources :discussions, only: [:show] do
+  resources :discussions, only: %i[show index] do
     resources :posts, only: [:create]
   end
 end
