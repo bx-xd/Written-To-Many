@@ -1,0 +1,30 @@
+
+#sidebar {
+  width: 16rem;
+  height: 100vh;
+  background-color: #141414;
+
+  .btn, a {
+    text-decoration: none;
+    font-family: $BP-reg;
+    color: #ffffff;
+    text-align: left;
+  }
+
+  #project_title {
+    font-weight: bold;
+    font-size: 2rem;
+    text-decoration: none;
+  }
+
+  .btn {
+    padding: 5px 0 5px 0;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  a {
+    font-size: 1rem;
+  }
+
+}
