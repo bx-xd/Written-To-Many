@@ -16,74 +16,111 @@
 # 15 Users
 
 puts "-> Reset database"
-# User.destroy_all
-# Project.destroy_all
-Contributor.destroy_all
-Text.destroy_all
-Modification.destroy_all
-Discussion.destroy_all
+
 Post.destroy_all
+Discussion.destroy_all
+Modification.destroy_all
+Text.destroy_all
+Contributor.destroy_all
+Project.destroy_all
+User.destroy_all
+
 puts "-> Reset database successfully"
+
 
 puts "-> Start seeding"
 
-puts "-> Create 6 Users"
+
+puts "-> Create 15 Users"
+
 def create_user(name)
   file = File.open("db/lib/images/#{name}.jpeg")
   name = User.new(username: "#{name}", email: "#{name}@email.com", password: 12345678)
   name.photo.attach(io: file, filename: "#{name}.jpeg", content_type: "image/jpeg")
   name.save!
+  return name
 end
 
-create_user("john")
-create_user("richard")
-create_user("paul")
-create_user("ringo")
-create_user("george")
-create_user("david")
-create_user("roger")
-create_user("syd")
-create_user("siouxsie")
-create_user("robert")
-create_user("katie")
-create_user("joanna")
-create_user("sophie")
-create_user("marine")
-create_user("louis")
+john = create_user("john")
+richard = create_user("richard")
+paul = create_user("paul")
+ringo = create_user("ringo")
+george = create_user("george")
+david = create_user("david")
+roger = create_user("roger")
+syd = create_user("syd")
+siouxsie = create_user("siouxsie")
+robert = create_user("robert")
+katie = create_user("katie")
+joanna = create_user("joanna")
+sophie = create_user("sophie")
+marine = create_user("marine")
+louis = create_user("louis")
 
-puts "You have now #{User.count} projects"
+puts "You have now #{User.count} users"
 puts "-> Finish to create 6 Users"
 
+
 puts "-> Create 6 Projects"
+
 def create_project(project, user)
   file = File.open("db/lib/images/#{project}.jpeg")
   titlized_title = project.split("_").map(&:capitalize).join(' ')
   project = Project.new(title: titlized_title.to_s, description: "", user: user)
   project.photo.attach(io: file, filename: "#{project}.jpeg", content_type: "image/jpeg")
   project.save!
+  return project
 end
 
-create_project("dialogue_aux_enfers_entre_machiavel_et_montesquieu", User.find_by_username("louis"))
-create_project("au_pays_des_moines", User.find_by_username("george"))
-create_project("aventures_extraordinaires_d_un_savant_russe", User.find_by_username("marine"))
-create_project("effreyante_aventure", User.find_by_username("paul"))
-create_project("jean_qui_grogne_jean_qui_rit", User.find_by_username("louis"))
-create_project("plus_fort_que_sherlock", User.find_by_username("joanna"))
+dialogue = create_project("dialogue_aux_enfers_entre_machiavel_et_montesquieu", louis)
+pays_des_moines = create_project("au_pays_des_moines", george)
+savant_russe = create_project("aventures_extraordinaires_d_un_savant_russe", marine)
+effrayante = create_project("effreyante_aventure", paul)
+jean_qui_pleure = create_project("jean_qui_grogne_jean_qui_rit", louis)
+fort_sherlock = create_project("plus_fort_que_sherlock", joanna)
 
 puts "You have now #{Project.count} projects"
 puts "-> Finish to create 6 Projects"
 
+
 puts "-> Create 10 Contributors"
-contributors_to_dialogue = []
-Contributor.new(project: )
+
+def create_contributor(project, users)
+  users.each do |user|
+    contributor = Contributor.new(project: project, user: user)
+    contributor.save!
+  end
+end
+create_contributor(dialogue, [joanna, richard])
+create_contributor(pays_des_moines, [paul, katie, ringo])
+create_contributor(savant_russe, [george, david, louis, sophie])
+create_contributor(effrayante, [louis, syd, roger, siouxsie, robert])
+create_contributor(jean_qui_pleure, [ringo, david, john])
+create_contributor(fort_sherlock, [louis, marine, paul])
+
+puts "You have now #{Contributor.count} contributors"
 puts "-> Finish to create 10 Contributors"
-# 12 Contributeurs
+
 
 puts "-> Create 6 Texts"
-# file = File.open("textpath")
-# result = file.read
-# text = Text.new(project: Project.find, content: result)
+
+def create_text(project, text_file_name)
+  file = File.open("db/lib/texts/#{text_file_name}.txt")
+  result = file.read
+  text = Text.new(project: project, content: result)
+  text.save!
+end
+
+create_text(dialogue, "dialogue_aux_enfers_entre_machiavel_et_montesquieu")
+create_text(pays_des_moines, "au_pays_des_moines")
+create_text(savant_russe, "aventures_extraordinaires_d_un_savant_russe")
+create_text(effrayante, "effreyante_aventure")
+create_text(jean_qui_pleure, "jean_qui_grogne_jean_qui_rit")
+create_text(fort_sherlock, "plus_fort_que_sherlock")
+
+puts "You have now #{Text.count} texts"
 puts "-> Finish to create 6 Texts"
+
 
 puts "-> Create 8 Modifs"
 # 4 modiffication on 2 texts
