@@ -11,12 +11,15 @@
 # Keep in mind that every files attached to user should match to his username
 # Watch out to file extension: '.jpeg', not '.jpg'
 #
+# ADDING MODIFICATIONS
+# For adding modification, modify text with same name and in order of the lib/texts folder
+# keep the naming convention form the original text
+#
 # 6 Créateurs
 # 12 + Contributors
 # 15 Users
 
 puts "-> Reset database"
-
 Post.destroy_all
 Discussion.destroy_all
 Modification.destroy_all
@@ -24,7 +27,6 @@ Text.destroy_all
 Contributor.destroy_all
 Project.destroy_all
 User.destroy_all
-
 puts "-> Reset database successfully"
 
 
@@ -77,7 +79,7 @@ fort_sherlock = create_project("plus_fort_que_sherlock", joanna)
 puts "-> You have now #{Project.count} projects"
 
 
-puts "-> Create 10 Contributors"
+puts "-> Create 20 Contributors"
 def create_contributor(project, users)
   users.each do |user|
     contributor = Contributor.new(project: project, user: user)
@@ -89,7 +91,7 @@ create_contributor(pays_des_moines, [louis, paul, katie])
 create_contributor(savant_russe, [george, david, louis, sophie])
 create_contributor(effrayante, [louis, syd, roger, siouxsie, robert])
 create_contributor(jean_qui_pleure, [ringo, david, john])
-create_contributor(fort_sherlock, [louis, marine, paul])
+create_contributor(fort_sherlock, [louis, marine, paul, syd])
 puts "-> You have now #{Contributor.count} contributors"
 
 
@@ -135,11 +137,12 @@ delete_dialogue = create_modification(dialogue.text,
 add_intro = create_modification(dialogue.text,
                                 richard,
                                 "dialogue_aux_enfers_entre_machiavel_et_montesquieu3",
-                                "Ecriture de la partie 5")
+                                "Ajout d'une introduction sur les intentions du text")
+
 following_story = create_modification(fort_sherlock.text,
                                       louis,
                                       "plus_fort_que_sherlock1",
-                                      "Ajout d'une introduction sur les intentions du text")
+                                      "Ajout de la partie 5")
 add_mother_story = create_modification(fort_sherlock.text,
                                        paul,
                                        "plus_fort_que_sherlock2",
@@ -156,14 +159,33 @@ add_intro_sherlock = create_modification(fort_sherlock.text,
                                          joanna,
                                          "plus_fort_que_sherlock5",
                                          "Ajout d'une introduction 'mystérieuse' sur le détéctive")
-
 puts "-> You have now #{Modification.count} modifications."
+
+
 puts "-> Create 11 Discussions"
-# 8 Dissussion for 8 modifications
-# Then 3 more for general discuss7
-# 1 Discussion sur une modif ouverte
-# 1 Discussion sur une modif fermé
-puts "-> Finish to create 11 Discussions"
+def create_discussion(title, context = nil, project = nil, modification = nil)
+  discussion = Discussion.new(title: title,
+                              context: context,
+                              modification: modification,
+                              project: project)
+  discussion.save!
+  return discussion
+end
+
+dsc_historian = create_discussion("Attachement à la rigueur historique", dialogue)
+dsc_philo = create_discussion("Moral philosophique du texte", dialogue)
+dsc_add_dialogue = create_discussion("Ajout de dialogue de Machiavel", add_dialogue.context, dialogue)
+dsc_delete_dialogue = create_discussion("Suppression d'un dialogue de Montesquieu", delete_dialogue.context, dialogue)
+dsc_add_intro = create_discussion("Ajout d'une introduction", add_intro.context, dialogue)
+
+dsc_parody = create_discussion("Limite de la parodie", fort_sherlock)
+dsc_following_story = create_discussion("Partie 5", following_story.context, fort_sherlock)
+dsc_add_mother_story = create_discussion("Annecdote sur la mère", add_mother_story.context, fort_sherlock)
+dsc_add_letter = create_discussion("Ajout d'une lettre, partie 4", add_letter.context, fort_sherlock)
+dsc_delete_story = create_discussion("Suppression d'une annecdote sur l'enfant", delete_story.context, fort_sherlock)
+dsc_add_intro_sherlock = create_discussion("Ajout d'une intro sur le detective", add_intro_sherlock.context, fort_sherlock)
+puts "-> You have now #{Discussion.count} discussions."
+
 
 puts "-> Create Posts"
 # 1 discussions où il y en a plein
