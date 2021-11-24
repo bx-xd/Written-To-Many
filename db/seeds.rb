@@ -32,7 +32,6 @@ puts "-> Start seeding"
 
 
 puts "-> Create 15 Users"
-
 def create_user(name)
   file = File.open("db/lib/images/#{name}.jpeg")
   name = User.new(username: "#{name}", email: "#{name}@email.com", password: 12345678)
@@ -56,13 +55,10 @@ joanna = create_user("joanna")
 sophie = create_user("sophie")
 marine = create_user("marine")
 louis = create_user("louis")
-
-puts "You have now #{User.count} users"
-puts "-> Finish to create 6 Users"
+puts "-> You have now #{User.count} users"
 
 
 puts "-> Create 6 Projects"
-
 def create_project(project, user)
   file = File.open("db/lib/images/#{project}.jpeg")
   titlized_title = project.split("_").map(&:capitalize).join(' ')
@@ -78,13 +74,10 @@ savant_russe = create_project("aventures_extraordinaires_d_un_savant_russe", mar
 effrayante = create_project("effreyante_aventure", paul)
 jean_qui_pleure = create_project("jean_qui_grogne_jean_qui_rit", louis)
 fort_sherlock = create_project("plus_fort_que_sherlock", joanna)
-
-puts "You have now #{Project.count} projects"
-puts "-> Finish to create 6 Projects"
+puts "-> You have now #{Project.count} projects"
 
 
 puts "-> Create 10 Contributors"
-
 def create_contributor(project, users)
   users.each do |user|
     contributor = Contributor.new(project: project, user: user)
@@ -97,13 +90,10 @@ create_contributor(savant_russe, [george, david, louis, sophie])
 create_contributor(effrayante, [louis, syd, roger, siouxsie, robert])
 create_contributor(jean_qui_pleure, [ringo, david, john])
 create_contributor(fort_sherlock, [louis, marine, paul])
-
-puts "You have now #{Contributor.count} contributors"
-puts "-> Finish to create 10 Contributors"
+puts "-> You have now #{Contributor.count} contributors"
 
 
 puts "-> Create 6 Texts"
-
 def create_text(project, text_file_name)
   file = File.open("db/lib/texts/#{text_file_name}.txt")
   result = file.read
@@ -117,9 +107,7 @@ create_text(savant_russe, "aventures_extraordinaires_d_un_savant_russe")
 create_text(effrayante, "effreyante_aventure")
 create_text(jean_qui_pleure, "jean_qui_grogne_jean_qui_rit")
 create_text(fort_sherlock, "plus_fort_que_sherlock")
-
-puts "You have now #{Text.count} texts"
-puts "-> Finish to create 6 Texts"
+puts "-> You have now #{Text.count} texts"
 
 
 puts "-> Create 8 Modifs"
@@ -133,25 +121,43 @@ def create_modification(text, user, modification_file_name, context)
                                   status: "pending",
                                   context: context)
   modification.save!
+  return modification
 end
 
-create_modification(dialogue.text,
-                    louis,
-                    "dialogue_aux_enfers_entre_machiavel_et_montesquieu1",
-                    "Ajout d'un dialogue de Machiavel")
-create_modification(dialogue.text,
-                    louis,
-                    "dialogue_aux_enfers_entre_machiavel_et_montesquieu2",
-                    "suppression d'un passage de Montesquieu inexacte par rapport à sa philosophie")
-create_modification(dialogue.text,
-                    louis,
-                    "dialogue_aux_enfers_entre_machiavel_et_montesquieu3",
-                    "Ajout d'une introduction sur les intentions du texte")
-# 4 modiffication on 2 texts
-# One text that you create
-# One that you follow as contributor
-puts "-> Finish to create 8 Modifs"
+add_dialogue = create_modification(dialogue.text,
+                                   joanna,
+                                   "dialogue_aux_enfers_entre_machiavel_et_montesquieu1",
+                                   "Ajout d'un dialogue de Machiavel")
+delete_dialogue = create_modification(dialogue.text,
+                                      richard,
+                                      "dialogue_aux_enfers_entre_machiavel_et_montesquieu2",
+                                      "suppression d'un passage de Montesquieu inexacte par rapport à sa philosophie")
+add_intro = create_modification(dialogue.text,
+                                richard,
+                                "dialogue_aux_enfers_entre_machiavel_et_montesquieu3",
+                                "Ecriture de la partie 5")
+following_story = create_modification(fort_sherlock.text,
+                                      louis,
+                                      "plus_fort_que_sherlock1",
+                                      "Ajout d'une introduction sur les intentions du text")
+add_mother_story = create_modification(fort_sherlock.text,
+                                       paul,
+                                       "plus_fort_que_sherlock2",
+                                       "Ajout d'un paragraphe pour détailler la vie difficile de la jeune femme")
+add_letter = create_modification(fort_sherlock.text,
+                                 marine,
+                                 "plus_fort_que_sherlock3",
+                                 "Ajoute une lettre de l'enfant à sa mère pour appuyer les difficultés de l'enfant")
+delete_story = create_modification(fort_sherlock.text,
+                                   louis,
+                                   "plus_fort_que_sherlock4",
+                                   "Suppression d'une annecdote superflue sur l'enfant', perpétue l'intrigue")
+add_intro_sherlock = create_modification(fort_sherlock.text,
+                                         joanna,
+                                         "plus_fort_que_sherlock5",
+                                         "Ajout d'une introduction 'mystérieuse' sur le détéctive")
 
+puts "-> You have now #{Modification.count} modifications."
 puts "-> Create 11 Discussions"
 # 8 Dissussion for 8 modifications
 # Then 3 more for general discuss7

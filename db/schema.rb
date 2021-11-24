@@ -48,10 +48,10 @@ ActiveRecord::Schema.define(version: 2021_11_23_135634) do
   create_table "discussions", force: :cascade do |t|
     t.string "title"
     t.text "context"
-    t.bigint "modification_id", null: false
-    t.bigint "project_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "project_id"
+    t.bigint "modification_id"
     t.index ["modification_id"], name: "index_discussions_on_modification_id"
     t.index ["project_id"], name: "index_discussions_on_project_id"
   end
