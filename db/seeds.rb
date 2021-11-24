@@ -92,7 +92,7 @@ def create_contributor(project, users)
   end
 end
 create_contributor(dialogue, [joanna, richard])
-create_contributor(pays_des_moines, [paul, katie, ringo])
+create_contributor(pays_des_moines, [louis, paul, katie])
 create_contributor(savant_russe, [george, david, louis, sophie])
 create_contributor(effrayante, [louis, syd, roger, siouxsie, robert])
 create_contributor(jean_qui_pleure, [ringo, david, john])
@@ -123,6 +123,30 @@ puts "-> Finish to create 6 Texts"
 
 
 puts "-> Create 8 Modifs"
+def create_modification(text, user, modification_file_name, context)
+  file = File.open("db/lib/texts/#{modification_file_name}.txt")
+  result = file.read
+  modification = Modification.new(text: text,
+                                  user: user,
+                                  content_before: text.content,
+                                  content_after: result,
+                                  status: "pending",
+                                  context: context)
+  modification.save!
+end
+
+create_modification(dialogue.text,
+                    louis,
+                    "dialogue_aux_enfers_entre_machiavel_et_montesquieu1",
+                    "Ajout d'un dialogue de Machiavel")
+create_modification(dialogue.text,
+                    louis,
+                    "dialogue_aux_enfers_entre_machiavel_et_montesquieu2",
+                    "suppression d'un passage de Montesquieu inexacte par rapport à sa philosophie")
+create_modification(dialogue.text,
+                    louis,
+                    "dialogue_aux_enfers_entre_machiavel_et_montesquieu3",
+                    "Ajout d'une introduction sur les intentions du texte")
 # 4 modiffication on 2 texts
 # One text that you create
 # One that you follow as contributor
