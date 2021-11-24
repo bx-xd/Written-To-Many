@@ -188,9 +188,24 @@ puts "-> You have now #{Discussion.count} discussions."
 
 
 puts "-> Create Posts"
+def create_post(user, discussion, text)
+  post = Post.new(user: user, discussion: discussion, text: text)
+  post.save!
+end
+
+create_post(richard, dsc_delete_dialogue,
+            "Je me suis permis de supprimé le passage de Montesquieu qui se présente à Machiavel,
+            En effet ce passage me parait peu rigoureux historiquement parlant, Montesquieu se présente
+            comme un ministre de Louis XVI ce qu'il n'était pas. De plus les locutions pour se dire bonjour ne
+            correspondent pas, vers 1750, date du décès de celui-ci, dans ce dialogue le 'bon' et le 'jour' sont
+            séparés alors que cette façon d'écrire correspond plus à une tradition littéraire du XIIIeme siècle.
+            De manière général j'ai supprimé l'ensemble du passage pour qu'il soit travailler du fait qu'il ne
+            convenait pas à la rigueur qu'on s'est fixé au préalable sur le texte mais aussi car il rompt avec
+            le sens logique des personnages historiques.")
+# Pour créer un post, j'ai besoin d'une discussion, d'un user, et d'un text à écrire
 # 1 discussions où il y en a plein
 # Pour le pitch, besoin d'une deuxieme conversation où il y en a beaucoup peut être moins
 # Sur trois discussions, 4 posts max
-puts "-> Finish to create Posts"
+puts "-> #{Post.count} posts have been create."
 
 puts "-> End of seeding"
