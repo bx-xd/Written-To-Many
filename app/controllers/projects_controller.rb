@@ -16,8 +16,8 @@ class ProjectsController < ApplicationController
     text = Text.new
     @project.text = text
 
-    if @project.save
-      redirect_to text_path(@project.text)
+    if @project.save && text.save
+      redirect_to edit_text_path(@project.text)
     else
       redirect_to "new"
     end

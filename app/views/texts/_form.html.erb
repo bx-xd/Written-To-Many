@@ -1,0 +1,9 @@
+<%= simple_form_for [@text, @modification] do |form| %>
+    <%= form.input :content_after, as: :rich_text_area, label: 'Content', placeholder: 'Text goes here' %>
+
+    <div class="d-none">
+      <%= form.input :content_before, as: :rich_text_area, disabled: true %>
+    </div>
+
+    <%= form.submit "Save", method: :patch %>
+<% end %>
