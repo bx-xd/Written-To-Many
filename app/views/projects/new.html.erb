@@ -1,2 +1,22 @@
-<h1>Projects#new</h1>
-<p>Find me in app/views/projects/new.html.erb</p>
+<div class="container">
+  <div id="form-project" class="row d-grid">
+    <div class="col-4">
+    </div>
+    <div class="col-8">
+
+      <h2>Nouveau Projet</h2>
+
+      <%= simple_form_for(@project) do |form| %>
+        <div class="form-inputs">
+          <%= form.input :title %>
+          <%= form.input :description %>
+        </div>
+
+        <div class="form-actions">
+          <%= form.button :submit, "Créer !", class: "btn btn-primary", method: :post %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>
