@@ -57,7 +57,7 @@ joanna = create_user("joanna")
 sophie = create_user("sophie")
 marine = create_user("marine")
 louis = create_user("louis")
-puts "-> You have now #{User.count} users"
+puts "-> #{User.count} Users have been created."
 
 
 puts "-> Create 6 Projects"
@@ -76,7 +76,7 @@ savant_russe = create_project("aventures_extraordinaires_d_un_savant_russe", mar
 effrayante = create_project("effreyante_aventure", paul)
 jean_qui_pleure = create_project("jean_qui_grogne_jean_qui_rit", louis)
 fort_sherlock = create_project("plus_fort_que_sherlock", joanna)
-puts "-> You have now #{Project.count} projects"
+puts "-> #{Project.count} Projects have been created."
 
 
 puts "-> Create 20 Contributors"
@@ -92,7 +92,7 @@ create_contributor(savant_russe, [george, david, louis, sophie])
 create_contributor(effrayante, [louis, syd, roger, siouxsie, robert])
 create_contributor(jean_qui_pleure, [ringo, david, john])
 create_contributor(fort_sherlock, [louis, marine, paul, syd])
-puts "-> You have now #{Contributor.count} contributors"
+puts "-> #{Contributor.count} contributors have been created."
 
 
 puts "-> Create 6 Texts"
@@ -109,7 +109,7 @@ create_text(savant_russe, "aventures_extraordinaires_d_un_savant_russe")
 create_text(effrayante, "effreyante_aventure")
 create_text(jean_qui_pleure, "jean_qui_grogne_jean_qui_rit")
 create_text(fort_sherlock, "plus_fort_que_sherlock")
-puts "-> You have now #{Text.count} texts"
+puts "-> #{Text.count} texts have been created."
 
 
 puts "-> Create 8 Modifs"
@@ -159,7 +159,7 @@ add_intro_sherlock = create_modification(fort_sherlock.text,
                                          joanna,
                                          "plus_fort_que_sherlock5",
                                          "Ajout d'une introduction 'mystérieuse' sur le détéctive")
-puts "-> You have now #{Modification.count} modifications."
+puts "-> #{Modification.count} modifications have been created."
 
 
 puts "-> Create 11 Discussions"
@@ -180,11 +180,12 @@ dsc_add_intro = create_discussion("Ajout d'une introduction", add_intro.context,
 
 dsc_parody = create_discussion("Limite de la parodie", fort_sherlock)
 dsc_following_story = create_discussion("Partie 5", following_story.context, fort_sherlock)
+dsc_following_story_bebor = create_discussion("Parti 2, 3, 4", following_story.context, fort_sherlock)
 dsc_add_mother_story = create_discussion("Annecdote sur la mère", add_mother_story.context, fort_sherlock)
 dsc_add_letter = create_discussion("Ajout d'une lettre, partie 4", add_letter.context, fort_sherlock)
 dsc_delete_story = create_discussion("Suppression d'une annecdote sur l'enfant", delete_story.context, fort_sherlock)
 dsc_add_intro_sherlock = create_discussion("Ajout d'une intro sur le detective", add_intro_sherlock.context, fort_sherlock)
-puts "-> You have now #{Discussion.count} discussions."
+puts "-> #{Discussion.count} discussions have been created."
 
 
 puts "-> Create Posts"
@@ -202,10 +203,69 @@ create_post(richard, dsc_delete_dialogue,
             De manière général j'ai supprimé l'ensemble du passage pour qu'il soit travailler du fait qu'il ne
             convenait pas à la rigueur qu'on s'est fixé au préalable sur le texte mais aussi car il rompt avec
             le sens logique des personnages historiques.")
-# Pour créer un post, j'ai besoin d'une discussion, d'un user, et d'un text à écrire
-# 1 discussions où il y en a plein
-# Pour le pitch, besoin d'une deuxieme conversation où il y en a beaucoup peut être moins
-# Sur trois discussions, 4 posts max
-puts "-> #{Post.count} posts have been create."
+create_post(louis, dsc_delete_dialogue,
+            "Je te rejoins sur la rigueur des locutions, pour le coup elles sont ici vraiment annachroniques
+            et difficile à lire de manière général, de la même manière qu'il se présente en tant que ministre
+            pose un soucis de cohérence historique pas compliqué à verifier.
+            Par contre je trouve la suppression totale du passage trop sévère. Ce dernier avant l'avantage d'éclairer
+            correctement la philosophie de Montesquieu et de l'introduire correctement. J'aimerai aussi rajouter que
+            on est ici dans un genre proche du postiche, malgré notre volonté de faux écrits, par conséquent
+            je pense qu'on ne doit pas non plus exercer trop de pression pour suivre une forme de rigueur dans nos
+            dialogues.
+            Il faut trouver le bon compromis.")
+create_post(joanna, dsc_delete_dialogue,
+            "Je vous rejoins, même si j'avais écris ce passage ça me va de le supprimer, de toute façon
+            il aurait été trop pénible à reprendre pour le réintégrer. A la limite on pourra réintroduire
+            la philosophie de Montesquieu plus en aval du texte, je pense que ce qui compte c'est qu'on
+            comprenne les valeurs morales de Machiavel avant de les confronter à la philosophie de
+            Montesquieu.")
+# Modification accépté
+create_post(louis, dsc_add_mother_story,
+            "Je me suis permis de rajouter ce passage, je trouver que ça nous permettait de passer
+            à la suite de façon moins abrupt")
+create_post(syd, dsc_add_mother_story,
+            "Je suis pas du tout d'accord, je trouver justement que le passage à la suite nous permettait
+            d'en déduire ou d'imaginer pleins de choses par rapport à ce qui lui été arriver.")
+create_post(joanna, dsc_add_mother_story,
+            "Je rejoins Syd là dessus, je trouve que ça rallonge le texte pour rien, je suis par contre ouverte
+            à ce que l'ensemble de la partie qui introduit la mère soit plus longue et peut être plus étoffé
+            mais pas sur cette fin de partie.")
+create_post(louis, dsc_add_mother_story,
+            "Je peux aussi retravailler le passage pour y ajouter du suspens, j'aimer bien l'idée quand même qu'on
+            explicite mieux le background des personnages et qu'on laisse des non-dits plus loins dans le récit.")
+create_post(paul, dsc_add_mother_story,
+            "Je rejoins les autres, le problème c'est que tu casses l'effet avec ce passage, je vois difficilement
+            comment tu pourrais rattraper ça puisque c'est pas tellement le contenu le problème mais son placement")
+create_post(joanna, dsc_add_mother_story,
+            "Si tout le monde est d'accord je me permets de refuser ce passage.")
+# Modification refusé
+create_post(joanna, dsc_following_story,
+            "J'ouvre la discussion autour de cette nouvelle partie que je viens d'ajouter")
+create_post(louis, dsc_following_story,
+            "J'aime beaucoup le suspence laisser à la fin et en même temps l'arriver du détéctive")
+create_post(paul, dsc_following_story,
+            "Par contre il faut qu'on se pose la question vis à vis de la parodie, par ce que là c'est
+            très bien écrit mais on dirait du pure Conan Doyle, j'ai du mal à voir le pastiche ici.")
+create_post(marine, dsc_following_story,
+            "Je rejoins Paul néanmoins on peut nuancer, cette super introduction du détéctive ira parfaitement
+            en contrepoint de la parodie du personnage qui viendra plus tard dans le texte. Je pense c'est important
+            de pas non plus s'acharner sur ce personnage, on souhaite le parodier, pas le tourner complétement en ridicule,
+            c'est bien par ce qu'on apprécie tous Sherlock qu'on est ici à vouloir le parodier.
+            Dans tous les cas je suis hyper contente de lire ce passage sur son introduction, bravo joanna.")
+create_post(joanna, dsc_following_story,
+            "Merci Marine, en effet j'avais prévu dans la suite du texte de venir introduire un contrepoint, notamment
+            au moment où il est utilisé dans le cadre de son enquête, ses dons d'observations. J'avais pensés à tout un passage
+            très déscriptif où ces dons permettent de résoudre une histoire très anciennes des fermiers chez qui il est sans pour
+            autant résoudre l'affaire en court.
+            A mon sens c'est une manière pour nous aussi de continuer à rendre hommage tout en s'adonnant à une gentille parodie.")
+create_post(syd, dsc_following_story,
+            "Attention à ne pas rejouer la discussion du channel général, je rejoins quand même Paul sur son idée
+            il faut un minimum introduire notre volonté de parodier Holmes si on ne veut pas créer un décalage de ton
+            au moment où on souhaitera le parodier franchement.
+            Pour le moment lorsqu'on relis le texte on a dut mal à discerner l'humour ou la parodie qui pourra intérvenir,
+            c'est même franchement un texte plutôt triste.
+            A mon avis, soit on retouche cette modification, soit on ajoute plus en amont du texte des éléments qui appellent
+            à l'humour qu'on souhaitera utiliser plus tard.")
+puts "-> #{Post.count} posts have been created."
 
 puts "-> End of seeding"
