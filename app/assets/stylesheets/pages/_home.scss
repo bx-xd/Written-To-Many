@@ -1,1 +1,101 @@
 // Specific CSS for your home-page
+
+.navbar {
+  display: none;
+}
+
+.banner {
+  background-size: cover;
+  background-position: center;
+  padding: 150px 0;
+  height: 100vh;
+  display: relative;
+
+  & > a {
+    position: absolute;
+    right: 3rem;
+    top: 2rem;
+  }
+
+  .content {
+    margin-top:18vh;
+  }
+
+  h1 {
+    margin: 0;
+    margin-bottom: 1rem;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  p {
+    margin-bottom: 3rem;
+    font-size: 20px;
+    color: white;
+    opacity: .7;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  }
+}
+
+.value-proposition {
+  background-color: white;
+  box-shadow: 0px 4px 104px rgba(179, 184, 203, 0.5);
+  border-radius: 10px;
+  padding:32px;
+  text-align: center;
+  margin-top: -15vh;
+  margin-bottom: 10vh;
+
+  .value-cards {
+    display:flex;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+
+  .value-card {
+    color:grey;
+
+    img {
+      width: 50%;
+      border-radius: 50%;
+      background-color: grey;
+    }
+
+    h3 {
+      margin-top:40px;
+    }
+  }
+}
+
+.value-section {
+  background-color: #F6F8FA;
+  padding: 3rem 0;
+
+  .section-value-img {
+    padding-right: 2rem;
+    padding-left: 0;
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.value-section:nth-child(2n) {
+  background-color: white;
+  direction: rtl;
+
+  .section-value-img {
+    padding-right: 0;
+    padding-left: 2rem;
+  }
+}
+
+.bottom-cta {
+  height: 25vh;
+  background-color: orange;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
