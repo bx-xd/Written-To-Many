@@ -1,0 +1,114 @@
+.dashboard-navbar {
+  background-color: $light-gray;
+  display: flex;
+  padding: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  h1 {
+    color: black;
+    margin-left: 2rem;
+  }
+  .btn-primary {
+    padding: 0.7rem 2rem;
+    font-size: 1.1rem;
+  }
+}
+
+.dashboard-container>h1 {
+  color:$light-gray;
+  background-color: $gray;
+  padding: 15px;
+  margin: 15px auto;
+  border-radius: 15px 15px 0 0;
+}
+
+.dashboard-container {
+  background-color: $light-gray;
+  margin-top: 4rem;
+  border-radius: 0.8rem;
+}
+
+.dashboard h2 {
+  border-bottom: 1px solid #c08029;
+}
+
+.dashboard-cards{
+  margin: 24px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 32px;
+}
+
+.dashboard-cards-project {
+  margin: 24px 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 32px;
+}
+.dashboard-infos {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 1rem;
+  align-items: center;
+}
+
+.last-modification {
+  display: flex;
+
+}
+
+.dashboard.card-product {
+  overflow: hidden;
+  height: 120px;
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.status {
+  background-color: grey;
+  position: absolute;
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 18px;
+  top: 7px;
+  right: 7px;
+}
+
+a {
+  text-decoration: none;
+  color: black
+}
+
+// Style des tabs de navigation
+
+.list-inline {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  li {
+    color: rgb(104, 104, 104);
+    padding: 5px 50px;
+    font-style: bold;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  a.active {
+      color: $gray;
+      text-decoration: underline;
+      }
+}
+
+
+.content {
+  display: none;
+  &.active {
+    display: block;
+  }
+}

@@ -27,10 +27,12 @@ import "bootstrap";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
+import { dashboard_tabs } from '../components/dashboard_tabs';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
+  dashboard_tabs();
 });
 
 import "controllers"

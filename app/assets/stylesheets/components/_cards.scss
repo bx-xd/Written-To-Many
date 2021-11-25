@@ -1,0 +1,49 @@
+.dashboard-card {
+  width: 345px;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-info-apercu {
+  display: flex;
+  justify-content: space-between;
+  p {
+    color: rgb(100, 100, 100)
+  }
+  h4 {
+    font-style: $headers-font;
+    color: $light-gray;
+  }
+}
+
+.card-project {
+  overflow: hidden;
+  height: 290px;
+  width: 881px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+}
+
+.card-project .project-img {
+  height: 100%;
+  width: 196px;
+  object-fit: cover;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-modifications {
+  list-style: none;
+}
