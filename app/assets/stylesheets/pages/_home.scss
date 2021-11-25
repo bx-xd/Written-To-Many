@@ -19,6 +19,7 @@
 
   .content {
     margin-top:18vh;
+    margin-bottom: 0;
   }
 
   h1 {
@@ -36,6 +37,12 @@
     color: white;
     opacity: .7;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  }
+}
+
+@media (max-height: 650px) {
+  .banner {
+    min-height: 650px;
   }
 }
 
@@ -93,9 +100,24 @@
 }
 
 .bottom-cta {
-  height: 25vh;
-  background-color: orange;
+  padding: 4rem;
+  background-color: $primary;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  h1 {
+    color :white;
+  }
+
+  .btn-primary {
+    background-color: white;
+    color: $primary;
+
+    &:hover {
+      border-color: white;
+      background-color: $primary;
+      color: white;
+    }
+  }
 }
