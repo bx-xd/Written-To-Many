@@ -1,9 +1,11 @@
 class DiscussionsController < ApplicationController
   def show
+    @discussion = Discussion.find(params[:id])
+    @project = @discussion.project
+    @posts = @discussion.posts
   end
 
   def index
-    @current_user = current_user
     @project = Project.find(params[:project_id])
     @project_creator = @current_user == @project.user
     @discussions = Discussion.where(project_id: params[:project_id])

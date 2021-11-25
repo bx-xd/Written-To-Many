@@ -1,2 +1,64 @@
-<h1>Discussions#show</h1>
-<p>Find me in app/views/discussions/show.html.erb</p>
+<div class="disc-header">
+  <div class="container">
+    <div class="nav-item dropdown avatar">
+      <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+        <%= link_to "Mon compte", dashboard_path, class: "dropdown-item" %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+      </div>
+    </div>
+    <div class="disc-project-title">
+      <h1><%= @project.title.capitalize %></h1>
+      <p class="project-creator"><%= @project.user.username.capitalize %></p>
+    </div>
+    <div class="disc-nav">
+      <ul class="nav list-inline" role="tablist">
+        <li id="disc-nav-global" class="list-inline-item nav-item">
+          <a class="nav-link active" id="global-tab" data-toggle="tab" href="#global-disc" role="tab" aria-controls="global-disc" aria-selected="true">
+            <i class="far fa-comment-alt"></i> Discussions générales
+          </a>
+        </li>
+
+        <li id="disc-nav-modification" class="list-inline-item nav-item">
+          <a class="nav-link" id="modification-tab" data-toggle="tab" href="#modification-disc" role="tab" aria-controls="modification-disc" aria-selected="false">
+            <i class="far fa-edit"></i> Modifications
+          </a>
+        </li>
+      </ul>
+      <% if @project_creator %>
+        <%= link_to "Inviter des contributeurs", new_project_contributor_path, class: "btn btn-ghost", id: "add-contributor" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container light-bg d-flex">
+  <div class="disc-box col-8">
+    <h2>Commentaires</h2>
+    <a href="#add-post" class="btn btn-ghost" id="add-post">Ecrire un commentaire</a>
+    <ul class="posts">
+      <% @posts.each do |p| %>
+        <li class="d-flex">
+          <%= cl_image_tag p.user.photo.key, class: "avatar col-1", 'aria-haspopup': true, 'aria-expanded': false %>
+          <div class="post-content col-11">
+            <p class="post-info"><%= p.user.username.capitalize %>, <%= p.created_at %></p>
+            <p><%= p.text %></p>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="disc-info-box col-4">
+    <% if @discussion.context.present? %>
+      <h2>Context</h2>
+      <p><%= @discussion.context %></p>
+    <% end %>
+    <h2>Contributors</h2>
+      <ul class="list-inline">
+        <% @discussion.posts.each do |p| %>
+          <%= cl_image_tag p.user.photo.key, class: "avatar list-inline-item", 'aria-haspopup': true, 'aria-expanded': false %>
+        <% end %>
+      </ul>
+  </div>
+</div>
