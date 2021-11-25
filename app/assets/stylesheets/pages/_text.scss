@@ -1,0 +1,18 @@
+// Hide format options and label
+
+#trix-toolbar-1, .rich_text_area label{
+  display: none;
+}
+
+#modification_content_after {
+  height:100%;
+  border: none;
+  background-color:$ultra-light;
+  color:$gray;
+  font-size:21px;
+  line-height: 38px;
+  &:focus {
+    box-shadow: none !important;
+    border:none !important;
+  }
+}
