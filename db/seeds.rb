@@ -36,7 +36,7 @@ puts "-> Start seeding"
 puts "-> Create 15 Users"
 def create_user(name)
   file = File.open("db/lib/images/#{name}.jpeg")
-  name = User.new(username: "#{name}", email: "#{name}@email.com", password: 12345678)
+  name = User.new(username: "#{name}", email: "#{name}@email.com", password: "12345678")
   name.photo.attach(io: file, filename: "#{name}.jpeg", content_type: "image/jpeg")
   name.save!
   return name

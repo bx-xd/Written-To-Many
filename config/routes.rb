@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :projects, only: %i[edit update new create] do
     resources :contributors, only: %i[new create]
+    resources :discussions, only: %i[index]
   end
 
   resources :texts, only: %i[show update] do
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :discussions, only: %i[show index] do
+  resources :discussions, only: %i[show] do
     resources :posts, only: [:create]
   end
 end

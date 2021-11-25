@@ -1,5 +1,5 @@
 <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://res.cloudinary.com/jbteuma/image/upload/v1637749315/banner_itok2f.jpg);">
-  <a class="btn btn-flat" href="#">Connexion</a>
+  <%= link_to "Connexion", new_user_session_path, class: "btn btn-flat" %>
   <div class="container text-center">
 
     <div class="logo" style="color:white; font-size:32px;">W/M</div>
@@ -7,7 +7,7 @@
     <div class="content">
       <h1>Pourquoi <strong>écrire</strong> seul quand on peut le faire à <strong>plusieurs</strong>!</h1>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni voluptate deleniti nihil consequuntur voluptates.</p>
-      <a class="btn btn-primary" href="#">Créer mon projet</a>
+      <%= link_to "Créer mon projet", new_project_path, class: "btn btn-primary" %>
     </div>
 
   </div>
@@ -46,7 +46,7 @@
           Veniam assumenda magnam voluptas quas expedita ad delectus omnis at suscipit nemo dolores,
           asperiores animi ea voluptates rem excepturi provident perferendis. Rerum.
         </p>
-        <a class="btn btn-ghost" href="#">Je crée mon projet</a>
+        <%= link_to "Créer mon projet", new_project_path, class: "btn btn-ghost" %>
       </div>
     </div>
   </div>
@@ -64,7 +64,7 @@
           Veniam assumenda magnam voluptas quas expedita ad delectus omnis at suscipit nemo dolores,
           asperiores animi ea voluptates rem excepturi provident perferendis. Rerum.
         </p>
-        <a class="btn btn-ghost" href="#">Je crée mon projet</a>
+        <%= link_to "Créer mon projet", new_project_path, class: "btn btn-ghost" %>
       </div>
     </div>
   </div>
@@ -82,7 +82,7 @@
           Veniam assumenda magnam voluptas quas expedita ad delectus omnis at suscipit nemo dolores,
           asperiores animi ea voluptates rem excepturi provident perferendis. Rerum.
         </p>
-        <a class="btn btn-ghost" href="#">Je crée mon projet</a>
+        <%= link_to "Créer mon projet", new_project_path, class: "btn btn-ghost" %>
       </div>
     </div>
   </div>
@@ -91,6 +91,6 @@
 <div class="bottom-cta">
   <div class="text-center">
     <h1>Envie de démarrer l'aventure ?</h1>
-    <a class="btn btn-white" href="#">Je crée mon projet</a>
+    <%= link_to "Créer mon projet", new_project_path, class: "btn btn-white" %>
   </div>
 </div>
