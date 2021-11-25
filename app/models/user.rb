@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :projects
   has_many :contributors
   has_many :projects_contributions, through: :contributors, source: :project
+  has_one_attached :photo
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
