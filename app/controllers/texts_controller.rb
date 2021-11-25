@@ -1,7 +1,10 @@
 class TextsController < ApplicationController
   def show
     @text = Text.find(params[:id])
-    @modification = Modification.new(content_after: @text.content, content_before: @text.content)
+    @modification = Modification.new(uuid: SecureRandom.alphanumeric(30))
+
+    @modifications = @text.modifications.to_json
+
     @project = @text.project
   end
 
@@ -9,7 +12,10 @@ class TextsController < ApplicationController
     text = Text.find(params[:id])
 
     if text.update(text_params)
-      redirect_to text_path(text)
+      respond_to do |format|
+        format.html { redirect_to text_path(text) }
+        format.text
+      end
     else
       render "edit"
     end
