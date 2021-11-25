@@ -3,11 +3,12 @@
 #trix-toolbar-1, .rich_text_area label{
   display: none;
 }
+#trix-toolbar-2, .rich_text_area label{
+  display: none;
+}
 
-#modification_content_after {
+#modification_content_after, #text_content {
   height:100%;
-  border: none;
-  background-color:$ultra-light;
   color:$gray;
   font-size:21px;
   line-height: 38px;
@@ -15,4 +16,11 @@
     box-shadow: none !important;
     border:none !important;
   }
+}
+#text_content {
+  background-color:$ultra-light;
+  border: none;
+}
+#text_content a {
+  color: $gray;
 }
