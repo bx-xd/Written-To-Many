@@ -30,6 +30,6 @@ class ModificationsController < ApplicationController
   private
 
   def modification_params
-    params.require(:modification).permit(:content_after, :content_before)
+    params.require(:modification).permit(:content_after, :content_before, :uuid)
   end
 end
