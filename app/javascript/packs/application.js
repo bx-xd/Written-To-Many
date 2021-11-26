@@ -37,7 +37,6 @@ import { initEditor } from "../components/editor";
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
-  // textShow();
   initEditor();
 });
 
