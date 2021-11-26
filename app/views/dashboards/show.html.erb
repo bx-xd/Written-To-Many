@@ -32,7 +32,7 @@
     <div class="colonne col-9 p-2 content active" id="dashboard-show" >
       <div class="dashboard-cards" >
         <% @projects.each do |project| %>
-          <%= link_to("#") do %>
+          <%= link_to(text_path(project.text)) do %>
             <div class="dashboard-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path project.photo.key %>')">
               <h4><%= project.title %></h4>
               <div class="card-info-apercu">
@@ -46,7 +46,7 @@
           <% end %>
         <% end %>
         <% @contributions.each do |contribution| %>
-          <%= link_to("#") do %>
+          <%= link_to(text_path(contribution.text)) do %>
             <div class="dashboard-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path contribution.photo.key %>')">
               <h4><%= contribution.title %></h4>
               <div class="card-info-apercu">
@@ -66,12 +66,12 @@
       <div class="dashboard-cards-projects" >
         <% @projects.each do |project| %>
           <div class="card-project">
-            <%= link_to("#") do %>
+            <%= link_to(text_path(project.text)) do %>
               <%= cl_image_tag project.photo.key, class: "project-img"%>
             <% end %>
             <div class="card-project-info">
               <div class="card-project-header">
-                <%= link_to("#") do %>
+                <%= link_to(text_path(project.text)) do %>
                   <h4><%= project.title %></h4>
                 <% end %>
                 <p>crée le <%= project.created_at.strftime("%d.%m.%Y") %></p>
@@ -79,7 +79,7 @@
               <ul class="list-modifications">
                 <% project.text.modifications.each do |modification| %>
                   <%= link_to("#") do %>
-                  <li><%= modification.context %></li>
+                    <li><%= modification.context %></li>
                   <% end %>
                 <% end %>
               </ul>
@@ -105,10 +105,14 @@
       <div class="dashboard-cards-projects" >
         <% @contributions.each do |project| %>
           <div class="card-project">
-            <%= cl_image_tag project.photo.key, class: "project-img" %>
+            <%= link_to(text_path(project.text)) do %>
+              <%= cl_image_tag project.photo.key, class: "project-img" %>
+            <% end %>
             <div class="card-project-info">
               <div class="card-project-header">
-                <h4><%= project.title %></h4>
+                <%= link_to(text_path(project.text)) do %>
+                  <h4><%= project.title %></h4>
+                <% end %>
                 <p>crée le <%= project.created_at.strftime("%d.%m.%Y") %></p>
               </div>
               <ul class="list-modifications">
