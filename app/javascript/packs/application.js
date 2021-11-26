@@ -30,8 +30,14 @@ import "bootstrap";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
+import { dashboard_tabs } from '../components/dashboard_tabs';
 
 document.addEventListener('turbolinks:load', () => {
+
+  // Call your functions here, e.g:
+  // initSelect2();
+  dashboard_tabs();
+
   const input = document.querySelector("trix-editor")
   const addBtn = document.getElementById("add-modif")
 
@@ -83,7 +89,6 @@ document.addEventListener('turbolinks:load', () => {
         console.log(data);
       })
   })
-
 
 });
 
