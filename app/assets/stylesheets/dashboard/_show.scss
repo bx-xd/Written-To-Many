@@ -31,6 +31,14 @@
 .dashboard-user-column {
   display:flex;
   flex-direction: column;
+  padding: 40px;
+  align-items: center;
+  .username {
+    margin-bottom: 50px;
+  }
+  .user-info {
+    color: rgb(75, 75, 75);
+  }
 }
 
 .dashboard h2 {
