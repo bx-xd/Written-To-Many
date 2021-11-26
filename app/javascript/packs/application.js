@@ -27,7 +27,6 @@ import "@rails/actiontext"
 
 // External imports
 import "bootstrap";
-import { textShow } from "../components/text";
 import { initEditor } from "../components/editor";
 
 

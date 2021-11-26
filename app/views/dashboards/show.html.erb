@@ -1,6 +1,9 @@
 <div class="dashboard-navbar">
-<h1>Dashboard</h1>
-<a class="btn btn-primary" href="#">Créer un projet</a>
+  <h1>Dashboard</h1>
+  <div class="dashboard-links">
+    <a class="btn btn-primary" href="#">Créer un projet</a>
+    <%= link_to "Deconnexion", destroy_user_session_path, method: :delete, class: "btn btn-ghost" %>
+  </div>
 </div>
 
 
@@ -116,7 +119,7 @@
               </div>
               <ul class="list-modifications">
                 <% project.text.modifications.each do |modification| %>
-                  <%= link_to("#") do %>
+                  <%= link_to(project_discussions_path(project)) do %>
                   <li><%= modification.context %></li>
                   <% end %>
                 <% end %>

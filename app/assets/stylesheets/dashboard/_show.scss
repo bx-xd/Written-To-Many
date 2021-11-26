@@ -1,5 +1,5 @@
 .dashboard-navbar {
-  background-color: $light-gray;
+  background-color: $light-grey;
   display: flex;
   padding: 1.5rem;
   justify-content: space-between;
@@ -12,6 +12,13 @@
     padding: 0.7rem 2rem;
     font-size: 1.1rem;
   }
+
+  .dashboard-links {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+  }
+
 }
 
 .dashboard-container>h1 {
@@ -23,7 +30,7 @@
 }
 
 .dashboard-container {
-  background-color: $light-gray;
+  background-color: $light-grey;
   margin-top: 4rem;
   border-radius: 0.8rem;
 }
@@ -106,29 +113,32 @@ a {
 
 // Style des tabs de navigation
 
-.list-inline {
-  display: flex;
-  justify-content: center;
-  padding: 15px;
-  li>a{
-    color: rgb(104, 104, 104);
-    padding: 5px 40px;
-    font-family: $BP-bold;
-    &:hover {
+.dashboard-container {
+
+  .list-inline {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    li>a{
+      color: rgb(104, 104, 104);
+      padding: 5px 40px;
+      font-family: $BP-bold;
+      &:hover {
+        color: $gray;
+        text-decoration: underline;
+        transition-duration: 0.15s;
+        text-underline-offset: 0.5rem;
+        text-decoration-thickness: 3px;
+      }
+    }
+
+    a.active {
       color: $gray;
       text-decoration: underline;
-      transition-duration: 0.15s;
       text-underline-offset: 0.5rem;
       text-decoration-thickness: 3px;
     }
   }
-
-  a.active {
-    color: $gray;
-    text-decoration: underline;
-    text-underline-offset: 0.5rem;
-    text-decoration-thickness: 3px;
-    }
 }
 
 

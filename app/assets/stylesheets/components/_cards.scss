@@ -10,13 +10,13 @@
   transition:.3s;
   h4 {
     font-style: $headers-font;
-    color: $light-gray;
+    color: white;
   }
 
   .avatar {
     margin-right:-16px;
     box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.46);
-    border: 1px solid $light-gray;
+    border: 1px solid white;
   }
   &:hover {
     box-shadow: 5px 0px 30px rgba(0,0,0,0.3);
@@ -32,7 +32,7 @@
   justify-content: space-between;
   align-items:center;
   p {
-    color: $light-gray;
+    color: white;
     opacity:.8;
     margin:0;
   }
@@ -51,7 +51,7 @@
   .avatar {
     margin-right:-16px;
     box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.46);
-    border: 1px solid $light-gray;
+    border: 1px solid $light-grey;
   }
   .avatar.latest {
     margin-right: 3px;
