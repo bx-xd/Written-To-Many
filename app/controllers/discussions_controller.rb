@@ -3,6 +3,8 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.find(params[:id])
     @project = @discussion.project
     @posts = @discussion.posts
+    @post = Post.new
+    @contributors = @posts.map(&:user).uniq
   end
 
   def index

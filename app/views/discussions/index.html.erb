@@ -37,12 +37,14 @@
     <h2>Discussions générales</h2>
     <ul class="disc-list">
       <% @global_disc.each do |d| %>
-        <li class="disc-card">
-          <div class="disc-card-info">
-            <h3><%= d.title.capitalize %></h3>
-            <p><%= d.updated_at %></p>
-          </div>
-        </li>
+        <%= link_to(discussion_path(d.id), html_options = {class: "disc-card-link"}) do %>
+          <li class="disc-card">
+            <div class="disc-card-info">
+              <h3><%= d.title.capitalize %></h3>
+              <p><%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
+            </div>
+          </li>
+        <% end %>
       <% end %>
     </ul>
   </div>
@@ -52,35 +54,39 @@
     <h3>Ouvertes</h3>
     <ul class="disc-list">
       <% @opened_modif_disc.each do |d| %>
-        <li class="disc-card">
-          <div class="disc-card-info">
-            <h3><%= d.title.capitalize %></h3>
-            <p><%= d.updated_at %></p>
-          </div>
-          <div class="disc-creator col-1">
-            <%= cl_image_tag d.modification.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
-            <p><%= d.modification.user.username.capitalize %></p>
-          </div>
-        </li>
+        <%= link_to(discussion_path(d.id), html_options = {class: "disc-card-link"}) do %>
+          <li class="disc-card">
+            <div class="disc-card-info">
+              <h3><%= d.title.capitalize %></h3>
+              <p><%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
+            </div>
+            <div class="disc-creator col-1">
+              <%= cl_image_tag d.modification.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+              <p><%= d.modification.user.username.capitalize %></p>
+            </div>
+          </li>
+        <% end %>
       <% end %>
     </ul>
     <h3>Fermées</h3>
     <ul class="disc-list">
       <% @closed_modif_disc.each do |d| %>
-        <li class="disc-card">
-          <div class="disc-card-info">
-            <h3><%= d.title.capitalize %></h3>
-            <p><%= d.updated_at %></p>
-          </div>
-          <div class="disc-creator">
-            <%= cl_image_tag d.modification.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
-            <p><%= d.modification.user.username.capitalize %></p>
-          </div>
-        </li>
+        <%= link_to(discussion_path(d.id), html_options = {class: "disc-card-link"}) do %>
+          <li class="disc-card">
+            <div class="disc-card-info">
+              <h3><%= d.title.capitalize %></h3>
+              <p><%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
+            </div>
+            <div class="disc-creator">
+              <%= cl_image_tag d.modification.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+              <p><%= d.modification.user.username.capitalize %></p>
+            </div>
+          </li>
+        <% end %>
       <% end %>
     </ul>
   </div>
 </div>
-<%= link_to dashboard_path, class: "btn btn-round text-link" do %>
+<%= link_to text_path(@project.text), class: "btn btn-round text-link" do %>
   <i class="fas fa-book-open"></i>
 <% end %>
