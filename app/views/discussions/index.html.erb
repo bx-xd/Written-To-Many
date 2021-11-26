@@ -1,2 +1,86 @@
-<h1>Discussions#index</h1>
-<p>Find me in app/views/discussions/index.html.erb</p>
+<div class="disc-header">
+  <div class="container">
+    <div class="nav-item dropdown avatar">
+      <%= cl_image_tag @current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+        <%= link_to "Mon compte", dashboard_path, class: "dropdown-item" %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+      </div>
+    </div>
+    <div class="disc-project-title">
+      <h1><%= @project.title.capitalize %></h1>
+      <p class="project-creator"><%= @project.user.username.capitalize %></p>
+    </div>
+    <div class="disc-nav">
+      <ul class="nav list-inline" role="tablist">
+        <li id="disc-nav-global" class="list-inline-item nav-item">
+          <a class="nav-link active" id="global-tab" data-toggle="tab" href="#global-disc" role="tab" aria-controls="global-disc" aria-selected="true">
+            <i class="far fa-comment-alt"></i> Discussions générales
+          </a>
+        </li>
+
+        <li id="disc-nav-modification" class="list-inline-item nav-item">
+          <a class="nav-link" id="modification-tab" data-toggle="tab" href="#modification-disc" role="tab" aria-controls="modification-disc" aria-selected="false">
+            <i class="far fa-edit"></i> Modifications
+          </a>
+        </li>
+      </ul>
+      <% if @project_creator %>
+        <%= link_to "Inviter des contributeurs", new_project_contributor_path, class: "btn btn-ghost", id: "add-contributor" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="disc-index container tab-content">
+  <div id="global-disc" class="tab-pane fade show active" role="tabpanel" aria-labelledby="global-tab">
+    <h2>Discussions générales</h2>
+    <ul class="disc-list">
+      <% @global_disc.each do |d| %>
+        <li class="disc-card">
+          <div class="disc-card-info">
+            <h3><%= d.title.capitalize %></h3>
+            <p><%= d.updated_at %></p>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div id="modification-disc" class="tab-pane fade" role="tabpanel" aria-labelledby="modification-tab">
+    <h2>Modifications</h2>
+    <h3>Ouvertes</h3>
+    <ul class="disc-list">
+      <% @opened_modif_disc.each do |d| %>
+        <li class="disc-card">
+          <div class="disc-card-info">
+            <h3><%= d.title.capitalize %></h3>
+            <p><%= d.updated_at %></p>
+          </div>
+          <div class="disc-creator col-1">
+            <%= cl_image_tag d.modification.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+            <p><%= d.modification.user.username.capitalize %></p>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+    <h3>Fermées</h3>
+    <ul class="disc-list">
+      <% @closed_modif_disc.each do |d| %>
+        <li class="disc-card">
+          <div class="disc-card-info">
+            <h3><%= d.title.capitalize %></h3>
+            <p><%= d.updated_at %></p>
+          </div>
+          <div class="disc-creator">
+            <%= cl_image_tag d.modification.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+            <p><%= d.modification.user.username.capitalize %></p>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<%= link_to dashboard_path, class: "btn btn-round text-link" do %>
+  <i class="fas fa-book-open"></i>
+<% end %>

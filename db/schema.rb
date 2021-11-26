@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 2021_11_24_093549) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "uuid"
     t.index ["text_id"], name: "index_modifications_on_text_id"
     t.index ["user_id"], name: "index_modifications_on_user_id"
   end
