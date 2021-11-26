@@ -97,7 +97,8 @@ puts "-> #{Contributor.count} contributors have been created."
 
 puts "-> Create 6 Texts"
 def create_text(project, text_file_name)
-  file = File.open("db/lib/texts/#{text_file_name}.txt")
+  extension = text_file_name == "plus_fort_que_sherlock"  ? ".json" : ".txt"
+  file = File.open("db/lib/texts/#{text_file_name}#{extension}")
   result = file.read
   text = Text.new(project: project, content: result)
   text.save!
@@ -126,6 +127,19 @@ def create_modification(text, user, modification_file_name, context)
   return modification
 end
 
+def create_json_modification(text, user, modification_file_name, context)
+  file = File.open("db/lib/texts/#{modification_file_name}.json")
+  result = file.read
+  modification = Modification.new(text: text,
+                                  user: user,
+                                  content_before: text.content,
+                                  content_after: result,
+                                  status: "pending",
+                                  context: context)
+  modification.save!
+  return modification
+end
+
 add_dialogue = create_modification(dialogue.text,
                                    joanna,
                                    "dialogue_aux_enfers_entre_machiavel_et_montesquieu1",
@@ -139,23 +153,23 @@ add_intro = create_modification(dialogue.text,
                                 "dialogue_aux_enfers_entre_machiavel_et_montesquieu3",
                                 "Ajout d'une introduction sur les intentions du text")
 
-following_story = create_modification(fort_sherlock.text,
+following_story = create_json_modification(fort_sherlock.text,
                                       louis,
                                       "plus_fort_que_sherlock1",
                                       "Ajout de la partie 5")
-add_mother_story = create_modification(fort_sherlock.text,
+add_mother_story = create_json_modification(fort_sherlock.text,
                                        paul,
                                        "plus_fort_que_sherlock2",
                                        "Ajout d'un paragraphe pour détailler la vie difficile de la jeune femme")
-add_letter = create_modification(fort_sherlock.text,
+add_letter = create_json_modification(fort_sherlock.text,
                                  marine,
                                  "plus_fort_que_sherlock3",
                                  "Ajoute une lettre de l'enfant à sa mère pour appuyer les difficultés de l'enfant")
-delete_story = create_modification(fort_sherlock.text,
+delete_story = create_json_modification(fort_sherlock.text,
                                    louis,
                                    "plus_fort_que_sherlock4",
                                    "Suppression d'une annecdote superflue sur l'enfant', perpétue l'intrigue")
-add_intro_sherlock = create_modification(fort_sherlock.text,
+add_intro_sherlock = create_json_modification(fort_sherlock.text,
                                          joanna,
                                          "plus_fort_que_sherlock5",
                                          "Ajout d'une introduction 'mystérieuse' sur le détéctive")

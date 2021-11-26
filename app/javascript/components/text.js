@@ -3,7 +3,7 @@ const textShow = () => {
   // const formNewModif = document.querySelector("#input-modif");
 
   // trixEditor.addEventListener("click", (event) => {
-  //   const clickY = event.clientY;
+    //   const clickY = event.clientY;
 
   //   formNewModif.classList.remove('d-none')
   // })
@@ -37,6 +37,9 @@ const textShow = () => {
 
   input.addEventListener("trix-change", (event) => {
     addBtn.classList.remove("d-none")
+    const position = editor.getSelectedRange()
+    console.log(event.clientY)
+    console.log(event.clientX)
   })
 
   addBtn.addEventListener("click", (event) => {

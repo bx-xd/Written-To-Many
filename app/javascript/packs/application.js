@@ -28,6 +28,8 @@ import "@rails/actiontext"
 // External imports
 import "bootstrap";
 import { textShow } from "../components/text";
+import { initEditor } from "../components/editor";
+
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -35,7 +37,8 @@ import { textShow } from "../components/text";
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
-  textShow();
+  // textShow();
+  initEditor();
 });
 
 import "controllers"

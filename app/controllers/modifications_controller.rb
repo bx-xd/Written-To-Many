@@ -12,7 +12,10 @@ class ModificationsController < ApplicationController
     @modification.status = "pending"
 
     if @modification.save
-      redirect_to text_path(@text), notice: "Votre modif a été envoyée !"
+      respond_to do |format|
+        format.html { redirect_to text_path(@text), notice: "Votre modif a été envoyée !" }
+        format.text
+      end
     else
       render "texts/show"
     end

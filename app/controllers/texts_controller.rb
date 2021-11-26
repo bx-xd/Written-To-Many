@@ -3,7 +3,12 @@ class TextsController < ApplicationController
     @text = Text.find(params[:id])
     @modification = Modification.new(uuid: SecureRandom.alphanumeric(30))
 
-    @modifications = @text.modifications.to_json
+    @modifications = @text.modifications
+
+    @content = JSON.parse(@text.content)
+    @modifications.each do |modif|
+      @content["blocks"] = [JSON.parse(modif.content_after)["blocks"], @content["blocks"]].flatten.uniq
+    end
 
     @project = @text.project
   end

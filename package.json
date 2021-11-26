@@ -2,6 +2,7 @@
   "name": "written_to_many",
   "private": true,
   "dependencies": {
+    "@editorjs/editorjs": "^2.22.2",
     "@rails/actioncable": "^6.0.0",
     "@rails/actiontext": "^6.0.4-1",
     "@rails/activestorage": "^6.0.0",
