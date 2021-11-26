@@ -1,0 +1,112 @@
+.dashboard-card {
+  width: 345px;
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding:32px;
+  border-radius:4px;
+  background-size:cover;
+  transition:.3s;
+  h4 {
+    font-style: $headers-font;
+    color: $light-gray;
+  }
+
+  .avatar {
+    margin-right:-16px;
+    box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.46);
+    border: 1px solid $light-gray;
+  }
+  &:hover {
+    box-shadow: 5px 0px 30px rgba(0,0,0,0.3);
+    transition:.3s;
+    //transform:scale(1.05);
+    transform:translateY(-5px);
+  }
+}
+
+
+.card-info-apercu {
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  p {
+    color: $light-gray;
+    opacity:.8;
+    margin:0;
+  }
+}
+
+.card-project {
+  overflow: hidden;
+  height: 290px;
+  width: 100%;
+  background: white;
+  background-size: cover;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  margin:16px auto;
+  .avatar {
+    margin-right:-16px;
+    box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.46);
+    border: 1px solid $light-gray;
+  }
+  .avatar.latest {
+    margin-right: 3px;
+  }
+  &:hover {
+    box-shadow: 5px 0px 30px rgba(0,0,0,0.3);
+    transition:.3s;
+    //transform:scale(1.05);
+    transform:translateY(-5px);
+  }
+  a:first-child {
+    height: 100%;
+  }
+}
+
+.card-project .project-img {
+  height: 100%;
+  width: 196px;
+  object-fit: cover;
+}
+.card-project-info {
+  padding:24px;
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.card-project-header {
+  display: flex;
+  justify-content: space-between;
+  p {
+    color: $medium-gray
+  }
+}
+
+.card-project-footer {
+  display: flex;
+  justify-content: space-between;
+  .card-contributor {
+    margin-right: 45px;
+  }
+}
+
+.list-modifications {
+  list-style: none;
+  margin:12px 0 12px 12px;
+  color:$gray;
+  opacity:.8;
+  border-left:2px solid $medium-gray;
+  padding:0;
+}
+
+.list-modifications li:before {
+  content:'— ';
+  margin-left:-1px;
+  color:$medium-gray;
+}

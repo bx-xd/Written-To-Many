@@ -1,2 +1,139 @@
-<h1>Dashboards#show</h1>
-<p>Find me in app/views/dashboards/show.html.erb</p>
+<div class="dashboard-navbar">
+<h1>Dashboard</h1>
+<a class="btn btn-primary" href="#">Créer un projet</a>
+</div>
+
+
+<div class="container dashboard-container col-11">
+  <div class="tabs">
+    <ul class="list-inline tabs-underlined">
+      <li>
+        <a data-content-active="dashboard-show" href="#dashboard-show" class="tab-underlined active">Aperçu</a>
+      </li>
+      <li>
+        <a data-content-active="dashboard-rental" href="#dashboard-rental" class="tab-underlined">Mes projets</a>
+      </li>
+      <li>
+        <a data-content-active="dashboard-resa" href="#dashboard-resa" class="tab-underlined">Mes contributions</a>
+      </li>
+    </ul>
+  </div>
+<%# La classe 'content' et 'active' sont là pour le JS. Elles permettent de faire jouer le display %>
+  <div class="row">
+    <div class="colonne dashboard-user-column col-3">
+      <%= cl_image_tag current_user.photo.key, class: 'avatar-dashboard mb-4' %>
+      <p class="username"><%= @user.username.capitalize %></p>
+      <div class="user-info">
+        <p>Contributeur dans <%= @contributions.count %> projets</p>
+        <p>Créateur de <%= @projects.count %> projets</p>
+      </div>
+    </div>
+    <div class="colonne col-9 p-2 content active" id="dashboard-show" >
+      <div class="dashboard-cards" >
+        <% @projects.each do |project| %>
+          <%= link_to(text_path(project.text)) do %>
+            <div class="dashboard-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path project.photo.key %>')">
+              <h4><%= project.title %></h4>
+              <div class="card-info-apercu">
+                <p>crée le <%= project.created_at.strftime("%d.%m.%Y") %></p>
+                <div class="card-contributor"><% project.contributors.each do |contributor| %>
+                    <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% @contributions.each do |contribution| %>
+          <%= link_to(text_path(contribution.text)) do %>
+            <div class="dashboard-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path contribution.photo.key %>')">
+              <h4><%= contribution.title %></h4>
+              <div class="card-info-apercu">
+                <p>crée le <%= contribution.created_at.strftime("%d.%m.%Y") %></p>
+                <div class="card-contributor"><% contribution.contributors.each do |contributor| %>
+                    <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="colonne col-9 p-2 content" id="dashboard-rental">
+      <div class="dashboard-cards-projects" >
+        <% @projects.each do |project| %>
+          <div class="card-project">
+            <%= link_to(text_path(project.text)) do %>
+              <%= cl_image_tag project.photo.key, class: "project-img"%>
+            <% end %>
+            <div class="card-project-info">
+              <div class="card-project-header">
+                <%= link_to(text_path(project.text)) do %>
+                  <h4><%= project.title %></h4>
+                <% end %>
+                <p>crée le <%= project.created_at.strftime("%d.%m.%Y") %></p>
+              </div>
+              <ul class="list-modifications">
+                <% project.text.modifications.each do |modification| %>
+                  <%= link_to("#") do %>
+                    <li><%= modification.context %></li>
+                  <% end %>
+                <% end %>
+              </ul>
+              <div class="card-project-footer">
+                <div class="last-modification">
+                  <% if project.modifications.where(status: "pending").any? %>
+                    <%= cl_image_tag project.modifications.where(status: "pending").order("created_at DESC").first.user.photo.key, crop: :thumb, width: 50, class: "avatar latest" %>
+                    <p>a proposé une modification non-résolue</p>
+                  <% end %>
+                </div>
+                <div class="card-contributor"><% project.contributors.each do |contributor| %>
+                    <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="colonne col-9 p-2 content" id="dashboard-resa">
+      <div class="dashboard-cards-projects" >
+        <% @contributions.each do |project| %>
+          <div class="card-project">
+            <%= link_to(text_path(project.text)) do %>
+              <%= cl_image_tag project.photo.key, class: "project-img" %>
+            <% end %>
+            <div class="card-project-info">
+              <div class="card-project-header">
+                <%= link_to(text_path(project.text)) do %>
+                  <h4><%= project.title %></h4>
+                <% end %>
+                <p>crée le <%= project.created_at.strftime("%d.%m.%Y") %></p>
+              </div>
+              <ul class="list-modifications">
+                <% project.text.modifications.each do |modification| %>
+                  <%= link_to("#") do %>
+                  <li><%= modification.context %></li>
+                  <% end %>
+                <% end %>
+              </ul>
+              <div class="card-project-footer">
+                <div class="last-modification">
+                  <p><strong>Votre dernière contribution:</strong>  Aucune</p>
+                </div>
+                <div class="card-contributor"><% project.contributors.each do |contributor| %>
+                    <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
