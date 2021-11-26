@@ -28,6 +28,11 @@
   border-radius: 0.8rem;
 }
 
+.dashboard-user-column {
+  display:flex;
+  flex-direction: column;
+}
+
 .dashboard h2 {
   border-bottom: 1px solid #c08029;
 }
@@ -37,6 +42,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 32px;
+  justify-items: center;
 }
 
 .dashboard-cards-project {
@@ -44,12 +50,14 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 32px;
+  justify-items: center;
 }
 .dashboard-infos {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   padding: 1rem;
   align-items: center;
+  justify-items: center;
 }
 
 .last-modification {
@@ -81,7 +89,11 @@
 
 a {
   text-decoration: none;
-  color: black
+  color: black;
+  &:hover {
+    text-decoration: none;
+    color: black
+  }
 }
 
 // Style des tabs de navigation
@@ -90,19 +102,25 @@ a {
   display: flex;
   justify-content: center;
   padding: 15px;
-  li {
+  li>a{
     color: rgb(104, 104, 104);
-    padding: 5px 50px;
-    font-style: bold;
+    padding: 5px 40px;
+    font-family: $BP-bold;
     &:hover {
+      color: $gray;
       text-decoration: underline;
+      transition-duration: 0.15s;
+      text-underline-offset: 0.5rem;
+      text-decoration-thickness: 3px;
     }
   }
 
   a.active {
-      color: $gray;
-      text-decoration: underline;
-      }
+    color: $gray;
+    text-decoration: underline;
+    text-underline-offset: 0.5rem;
+    text-decoration-thickness: 3px;
+    }
 }
 
 

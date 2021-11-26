@@ -172,19 +172,19 @@ def create_discussion(title, context = nil, project = nil, modification = nil)
   return discussion
 end
 
-dsc_historian = create_discussion("Attachement à la rigueur historique", nil, dialogue)
-dsc_philo = create_discussion("Moral philosophique du texte", nil, dialogue)
-dsc_add_dialogue = create_discussion("Ajout de dialogue de Machiavel", add_dialogue.context, dialogue, add_dialogue)
+create_discussion("Attachement à la rigueur historique", nil, dialogue)
+create_discussion("Moral philosophique du texte", nil, dialogue)
+create_discussion("Ajout de dialogue de Machiavel", add_dialogue.context, dialogue, add_dialogue)
 dsc_delete_dialogue = create_discussion("Suppression d'un dialogue de Montesquieu", delete_dialogue.context, dialogue, delete_dialogue)
-dsc_add_intro = create_discussion("Ajout d'une introduction", add_intro.context, dialogue, add_intro)
+create_discussion("Ajout d'une introduction", add_intro.context, dialogue, add_intro)
 
-dsc_parody = create_discussion("Limite de la parodie", nil, fort_sherlock)
+create_discussion("Limite de la parodie", nil, fort_sherlock)
 dsc_following_story = create_discussion("Partie 5", following_story.context, fort_sherlock, following_story)
-dsc_following_story_bebor = create_discussion("Parti 2, 3, 4", following_story.context, fort_sherlock, following_story)
+create_discussion("Parti 2, 3, 4", following_story.context, fort_sherlock, following_story)
 dsc_add_mother_story = create_discussion("Annecdote sur la mère", add_mother_story.context, fort_sherlock, add_mother_story)
-dsc_add_letter = create_discussion("Ajout d'une lettre, partie 4", add_letter.context, fort_sherlock, add_letter)
-dsc_delete_story = create_discussion("Suppression d'une annecdote sur l'enfant", delete_story.context, fort_sherlock, delete_story)
-dsc_add_intro_sherlock = create_discussion("Ajout d'une intro sur le detective", add_intro_sherlock.context, fort_sherlock, add_intro_sherlock)
+create_discussion("Ajout d'une lettre, partie 4", add_letter.context, fort_sherlock, add_letter)
+create_discussion("Suppression d'une annecdote sur l'enfant", delete_story.context, fort_sherlock, delete_story)
+create_discussion("Ajout d'une intro sur le detective", add_intro_sherlock.context, fort_sherlock, add_intro_sherlock)
 puts "-> #{Discussion.count} discussions have been created."
 
 

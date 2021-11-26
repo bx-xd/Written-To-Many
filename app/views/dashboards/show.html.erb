@@ -4,7 +4,7 @@
 </div>
 
 
-<div class="container dashboard-container col-9">
+<div class="container dashboard-container col-11">
   <div class="tabs">
     <ul class="list-inline tabs-underlined">
       <li>
@@ -20,7 +20,14 @@
   </div>
 <%# La classe 'content' et 'active' sont là pour le JS. Elles permettent de faire jouer le display %>
   <div class="row">
-    <div class="colonne col-12 p-2 content active" id="dashboard-show" >
+    <div class="colonne dashboard-user-column col-3 p-2">
+      <%= cl_image_tag current_user.photo.key, class: 'avatar-dashboard mb-4' %>
+      <p><%= @user.username %></p>
+      <p><%= @projects.count %></p>
+      <p><%= @contributions.count %></p>
+      <p><%= @character %></p>
+    </div>
+    <div class="colonne col-9 p-2 content active" id="dashboard-show" >
       <div class="dashboard-cards" >
         <% @projects.each do |project| %>
           <%= link_to("#") do %>
@@ -51,13 +58,13 @@
       </div>
     </div>
 
-    <div class="colonne col-12 p-2 content" id="dashboard-rental">
+    <div class="colonne col-9 p-2 content" id="dashboard-rental">
       <div class="dashboard-cards-projects" >
         <% @projects.each do |project| %>
           <div class="card-project">
             <%= cl_image_tag project.photo.key, class: "project-img" %>
             <div class="card-project-info">
-              <div class="card-header">
+              <div class="card-project-header">
                 <h4><%= project.title %></h4>
                 <p>crée le <%= project.created_at.strftime("%d.%m.%Y") %></p>
               </div>
@@ -66,10 +73,10 @@
                   <li><%= modification.context %></li>
                 <% end %>
               </ul>
-              <div class="card-footer">
+              <div class="card-project-footer">
                 <div class="last-modification">
                   <% if project.modifications.where(status: "pending").any? %>
-                    <%= cl_image_tag project.modifications.where(status: "pending").order("created_at DESC").first.user.photo.key, crop: :thumb, width: 50, class: "avatar" %>
+                    <%= cl_image_tag project.modifications.where(status: "pending").order("created_at DESC").first.user.photo.key, crop: :thumb, width: 50, class: "avatar latest" %>
                     <p>a proposé une modification non-résolue</p>
                   <% end %>
                 </div>
@@ -84,13 +91,13 @@
       </div>
     </div>
 
-    <div class="colonne col-12 p-2 content" id="dashboard-resa">
+    <div class="colonne col-9 p-2 content" id="dashboard-resa">
       <div class="dashboard-cards-projects" >
         <% @contributions.each do |project| %>
           <div class="card-project">
             <%= cl_image_tag project.photo.key, class: "project-img" %>
             <div class="card-project-info">
-              <div class="card-header">
+              <div class="card-project-header">
                 <h4><%= project.title %></h4>
                 <p>crée le <%= project.created_at.strftime("%d.%m.%Y") %></p>
               </div>
@@ -99,14 +106,13 @@
                   <li><%= modification.context %></li>
                 <% end %>
               </ul>
-              <div class="card-footer">
+              <div class="card-project-footer">
+                <div class="last-modification">
+                  <p><strong>Votre dernière contribution:</strong>  Aucune</p>
+                </div>
                 <div class="card-contributor"><% project.contributors.each do |contributor| %>
                     <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
                   <% end %>
-                </div>
-                <div class="last-modification">
-                  <p>Votre dernière contribution</p>
-                  project.text.
                 </div>
               </div>
             </div>
