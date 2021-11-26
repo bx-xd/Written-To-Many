@@ -8,6 +8,11 @@
 }
 
 @font-face {
+  font-family: "BP-Med";
+  src: font-url("Suisse-BP-Med") format('woff');
+}
+
+@font-face {
   font-family: "BP-Reg";
   src: font-url("Suisse-BP-Reg") format('woff');
 }
@@ -18,8 +23,19 @@
 }
 
 $BP-bold: "BP-Bold";
+$BP-med: "BP-Med";
 $BP-reg: "BP-Reg";
 $BP-thin: "BP-Thin";
 
 $body-font: "BP-Reg", "Helvetica", "sans-serif";
-$headers-font: "BP-Bold", "Helvetica", "sans-serif";
+$headers-font: "BP-Med", "Helvetica", "sans-serif";
+
+
+h1 {
+  font-size:64px !important;
+}
+
+h2 {
+  font-size:24px !important;
+  letter-spacing: 0.05rem;
+}
