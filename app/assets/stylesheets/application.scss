@@ -7,9 +7,11 @@
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "trix/dist/trix";
 
 // Your CSS partials
 @import "components/cards";
 @import "components/index";
+@import "discussions/index";
 @import "pages/index";
 @import "dashboard/show";

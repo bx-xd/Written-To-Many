@@ -1,0 +1,19 @@
+<%= simple_form_for @text do |f| %>
+  <%= f.input :content, as: :rich_text_area, placeholder: 'Text goes here' %>
+<% end %>
+
+<div id="modif-data" data-json="<%= @modifications %>"></div>
+
+<hr>
+<hr>
+<%= simple_form_for [@text, @modification] do |form| %>
+    <button id="add-modif" class="d-none">Ajouter une modification</button>
+
+    <div id="modif-container" class="d-none" data-id="<%= @modification.uuid %>">
+      <%= form.input :content_after, as: :rich_text_area, placeholder: 'Text goes here' %>
+
+      <%= form.input :uuid, as: :hidden %>
+      <%= form.submit "Enregistrer" %>
+    </div>
+
+<% end %>

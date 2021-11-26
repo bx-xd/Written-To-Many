@@ -1,2 +1,13 @@
-<h1>Texts#show</h1>
-<p>Find me in app/views/texts/show.html.erb</p>
+<div class="d-flex">
+  <%= render "shared/sidebar_text" %>
+  <div class="container">
+    <div class="row">
+      <div class="col-10 offset-1">
+        <h2><%= @text.project.title %></h2>
+        <div>
+          <%= render 'texts/form' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

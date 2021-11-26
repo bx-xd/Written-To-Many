@@ -8,6 +8,9 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
+import "trix"
+import "@rails/actiontext"
+
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
@@ -30,9 +33,63 @@ import "bootstrap";
 import { dashboard_tabs } from '../components/dashboard_tabs';
 
 document.addEventListener('turbolinks:load', () => {
+
   // Call your functions here, e.g:
   // initSelect2();
   dashboard_tabs();
+
+  const input = document.querySelector("trix-editor")
+  const addBtn = document.getElementById("add-modif")
+
+  const textForm = document.querySelector(".edit_text")
+
+  const modifContainer = document.getElementById("modif-container")
+  const uuid = modifContainer.dataset.id
+
+
+  const editor = input.editor
+
+  document.addEventListener("trix-initialize", (event) => {
+    console.log("Init done")
+
+    const modifData = JSON.parse(document.querySelector("#modif-data").dataset.json)
+
+    modifData.forEach((data) => {
+      console.log(data)
+      let uuid = data.uuid
+      let a = document.querySelector(`a[href='#${uuid}']`)
+      if (a !== null) {
+        a.innerHTML = data.content_after.body
+      }
+    })
+  })
+
+
+  input.addEventListener("trix-change", (event) => {
+    addBtn.classList.remove("d-none")
+  })
+
+  addBtn.addEventListener("click", (event) => {
+    event.preventDefault()
+
+    modifContainer.classList.remove("d-none")
+
+    const position = editor.getSelectedRange()
+    editor.setSelectedRange(position)
+    editor.insertHTML(`<a href='#${uuid}'>Nouvelle modification #${uuid}</a>`)
+
+    const url = textForm.action
+    fetch(url, {
+      method: 'PATCH',
+      headers: { 'Accept': 'text/plain' },
+      body: new FormData(textForm)
+    })
+      .then(response => response.text())
+      .then((data) => {
+        console.log(data);
+      })
+  })
+
 });
 
 import "controllers"
