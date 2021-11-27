@@ -1,6 +1,6 @@
 <div class="disc-header">
   <div class="container">
-    <div class="nav-item dropdown avatar">
+    <div class="nav-item dropdown avatar-btn">
       <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
         <%= link_to "Mon compte", dashboard_path, class: "dropdown-item" %>
@@ -9,7 +9,7 @@
     </div>
     <div class="disc-project-title">
       <h1><%= @project.title.capitalize %></h1>
-      <p class="project-creator"><%= @project.user.username.capitalize %></p>
+      <p class="project-creator">Projet créé par <%= @project.user.username.capitalize %></p>
     </div>
     <div class="disc-nav">
       <ul class="nav list-inline" role="tablist">
@@ -32,10 +32,28 @@
   </div>
 </div>
 
+<% unless @discussion.modification.nil? %>
+  <div class="container">
+    <div class="modif-context">
+      <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContextCollapse" aria-expanded="true" aria-controls="modifContextCollapse">
+        <h2>Contexte de la modification</h2>
+      </button>
+      <div class="collapse show p-2" id="modifContextCollapse">
+        <p><%= @discussion.modification.context %></p>
+      </div>
+      <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContentCollapse" aria-expanded="true" aria-controls="modifContentCollapse">
+        <h2>Modification proposée</h2>
+      </button>
+      <div class="collapse show p-2" id="modifContentCollapse">
+        <p>C'est juste un nouveau texte</p>
+      </div>
+    </div>
+  </div>
+<% end %>
 <div class="container d-flex">
   <div class="disc-box col-8">
     <h2><%= @discussion.title %></h2>
-    <a href="#add-post-anchor" class="btn btn-ghost" id="add-post-btn">Ecrire un commentaire</a>
+    <a href="#add-post-anchor" class="btn btn-ghost" id="add-post-btn">Derniers commentaires <i class="fas fa-arrow-circle-down"></i></a>
     <p><%= "Ajoutez le premier commentaire" if @posts.empty? %></p>
     <ul class="posts">
       <% @posts.each do |p| %>
@@ -52,11 +70,13 @@
         </li>
       <% end %>
     </ul>
-    <%= simple_form_for([@discussion, @post], remote: true) do |form| %>
+    <div class="text-right new-post-box">
+      <%= simple_form_for([@discussion, @post], remote: true) do |form| %>
           <%= form.input :text, placeholder: "Ecrivez votre commentaire ici", class: "new-post-text", label: false %>
 
-          <%= form.button :submit, "Envoyer mon commentaire !", class: "btn btn-primary post-btn", id: "add-post-anchor", method: :post %>
+          <%= form.button :submit, "Envoyer mon commentaire", class: "btn btn-primary post-btn", id: "add-post-anchor", method: :post %>
       <% end %>
+    </div>
   </div>
 
   <div class="disc-info-box col-4">

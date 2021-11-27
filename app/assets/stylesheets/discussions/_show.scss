@@ -51,7 +51,6 @@
 
     .post-text {
       text-align: right;
-
     }
   }
 }
@@ -72,5 +71,29 @@
 
   .avatar.list-inline-item:nth-child(1) {
     margin-left:0;
+  }
+}
+
+.modif-context {
+  border: 2px solid $super-light;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+  .btn {
+    padding: 0;
+
+    &:focus {
+      box-shadow: none !important;
+    }
+  }
+}
+
+.new-post-box {
+  .btn-primary {
+    padding: 0.5rem 1.3rem;
   }
 }
