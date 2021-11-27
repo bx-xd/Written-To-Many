@@ -1,4 +1,6 @@
 import EditorJS from '@editorjs/editorjs';
+import Header from '@editorjs/header';
+import List from '@editorjs/list';
 
 const initEditor = () => {
 
@@ -16,7 +18,10 @@ const initEditor = () => {
        */
       holder: 'editorjs',
 
-
+      tools: {
+        header: Header,
+        list: List
+      },
       /**
        * Previously saved data that should be rendered
        */

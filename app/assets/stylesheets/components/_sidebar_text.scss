@@ -3,21 +3,45 @@
   width: 16rem;
   height: 100vh;
   background-color: #141414;
+  position: fixed;
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: column;
 
-  .btn, a {
+  .boutonSide, a {
     text-decoration: none;
     font-family: $BP-reg;
     color: #ffffff;
     text-align: left;
+    background-color:#141414;
+    color: white;
+    border: none;
+
+    &:active {
+      border: none!important;
+    }
+    &:focus {
+    border: none!important;
+    }
+    &:visited {
+    border: none!important;
+    }
   }
 
   #project_title {
     font-weight: bold;
     font-size: 2rem;
-    text-decoration: none;
+    color: #ffffff;
+    margin: 1rem 0;
+    padding: 20px;
+    border-bottom: 1px solid $super-light;
   }
 
-  .btn {
+  #list_titles {
+    padding: 0 20px;
+  }
+
+  .boutonSide {
     padding: 5px 0 5px 0;
     font-size: 20px;
     line-height: 24px;

@@ -1,19 +1,6 @@
-// Hide format options and label
 
-#modification_content_after, #text_content {
-  height:100%;
-  color:$gray;
-  font-size:21px;
-  line-height: 38px;
-  &:focus {
-    box-shadow: none !important;
-    border:none !important;
-  }
+#text_title {
+  margin: 3rem 0 3rem 17%;
 }
-#text_content {
-  background-color:$ultra-light;
-  border: none;
-}
-#text_content a {
-  color: $gray;
-}
+
+// EditorJS styling
