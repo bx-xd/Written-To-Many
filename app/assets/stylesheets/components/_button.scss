@@ -1,6 +1,6 @@
 .btn {
   &:focus{
-    box-shadow: 0 0 0 0.2rem $primary-dark;
+    box-shadow: none!important;
   }
 }
 
@@ -14,7 +14,7 @@
   font-size: 1.5rem;
 
   &:hover {
-  background: white;
+  background: transparent;
   color: $primary;
   border-color: $primary;
   transition: 0.5s ease;
@@ -28,10 +28,11 @@
   &:focus {
   background: $primary-light !important;
   border: none!important;
+  box-shadow: none!important;
   }
 
   &:active:focus {
-    box-shadow: 0 0 0 0.2rem $primary-dark!important;
+    box-shadow: none!important;
   }
 }
 

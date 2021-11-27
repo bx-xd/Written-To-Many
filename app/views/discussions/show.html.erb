@@ -35,10 +35,18 @@
 <% unless @discussion.modification.nil? %>
   <div class="container">
     <div class="modif-context">
-      <h2>Contexte de la modification</h2>
-      <p><%= @discussion.modification.context %></p>
-      <h2>Modification proposée</h2>
-      <p>C'est juste un nouveau texte</p>
+      <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContextCollapse" aria-expanded="true" aria-controls="modifContextCollapse">
+        <h2>Contexte de la modification</h2>
+      </button>
+      <div class="collapse show p-2" id="modifContextCollapse">
+        <p><%= @discussion.modification.context %></p>
+      </div>
+      <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContentCollapse" aria-expanded="true" aria-controls="modifContentCollapse">
+        <h2>Modification proposée</h2>
+      </button>
+      <div class="collapse show p-2" id="modifContentCollapse">
+        <p>C'est juste un nouveau texte</p>
+      </div>
     </div>
   </div>
 <% end %>
@@ -62,11 +70,11 @@
         </li>
       <% end %>
     </ul>
-    <div class="text-right">
+    <div class="text-right new-post-box">
       <%= simple_form_for([@discussion, @post], remote: true) do |form| %>
           <%= form.input :text, placeholder: "Ecrivez votre commentaire ici", class: "new-post-text", label: false %>
 
-          <%= form.button :submit, "Envoyer mon commentaire !", class: "btn btn-primary post-btn", id: "add-post-anchor", method: :post %>
+          <%= form.button :submit, "Envoyer mon commentaire", class: "btn btn-primary post-btn", id: "add-post-anchor", method: :post %>
       <% end %>
     </div>
   </div>
