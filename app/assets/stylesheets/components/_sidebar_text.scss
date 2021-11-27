@@ -20,9 +20,9 @@
     font-size: 20px;
     border-radius: 50%;
     text-align: center;
+    z-index: 1000;
     transition-duration: 1s;
     transition-property: rotate, left;
-    z-index: 1000;
   }
 
   .boutonSide, a {
@@ -33,16 +33,6 @@
     background-color:#141414;
     color: white;
     border: none;
-
-    &:active {
-      border: none!important;
-    }
-    &:focus {
-    border: none!important;
-    }
-    &:visited {
-    border: none!important;
-    }
   }
 
   #project_title {
@@ -72,8 +62,6 @@
 }
 
 #sidebar.small {
-  transition-duration: 1s;
-  transition-property: width;
   width: 0;
   height: 100vh;
   background-color: #141414;
@@ -97,13 +85,7 @@
   }
 
   #project_title {
-    // font-weight: bold;
-    // font-size: 2rem;
-    // color: #ffffff;
-    // margin: 1rem 0;
-    // padding: 20px;
-    // border-bottom: 1px solid $super-light;
-    // align-items: center;
+    display: none;
   }
 
   #list_titles {
