@@ -3,15 +3,16 @@ const saveBtn = () => {
   const text = document.getElementById("editorjs");
 
   text.addEventListener('dblclick', (event) => {
+    event.preventDefault();
 
     button.classList.add("active");
   })
 
-  const editorjsOuter = document.querySelector("body:not(#editorjs)") && button
-  document.addEventListener('click', (event) => {
+  // const editorjsOuter = document.querySelector("body:not(#editorjs)") && button
+  // document.addEventListener('click', (event) => {
 
-    button.classList.remove("active");
-  })
+  //   button.classList.remove("active");
+  // })
 }
 
 export { saveBtn }
