@@ -20,8 +20,16 @@ const initEditor = () => {
 
       tools: {
         header: Header,
-        list: List
+        list: List,
+        text: {
+          class: Text,
+          inlineToolbar: true,
+        },
       },
+      // cette ligne désactive le texte coller et la touche ENTER saute une ligne
+      // sans ouvrir de nouveau block
+      // defaultBlock: 'text',
+
       /**
        * Previously saved data that should be rendered
        */
