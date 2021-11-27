@@ -2,6 +2,9 @@
   &:focus{
     box-shadow: 0 0 0 0.2rem $primary-dark;
   }
+  &:active {
+    border: none!important;
+  }
 }
 
 .btn-primary {

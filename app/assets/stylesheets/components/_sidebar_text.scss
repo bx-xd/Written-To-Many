@@ -1,23 +1,53 @@
-
 #sidebar {
   width: 16rem;
   height: 100vh;
   background-color: #141414;
+  position: fixed;
+  box-sizing: content-box;
+  transition-duration: 1s;
+  transition-property: width;
 
-  .btn, a {
+  #sideArrow {
+    position: absolute;
+    top: 42px;
+    left: 275px;
+    background-color: black;
+    color: white;
+    padding: 7px;
+    width: 33px;
+    font-size: 20px;
+    border-radius: 50%;
+    text-align: center;
+    z-index: 1000;
+    transition-duration: 1s;
+    transition-property: rotate, left;
+  }
+
+  .boutonSide, a {
     text-decoration: none;
     font-family: $BP-reg;
     color: #ffffff;
     text-align: left;
+    background-color:#141414;
+    color: white;
+    border: none;
   }
 
   #project_title {
     font-weight: bold;
     font-size: 2rem;
-    text-decoration: none;
+    color: #ffffff;
+    margin: 1rem 0;
+    padding: 20px;
+    border-bottom: 1px solid $super-light;
+    align-items: center;
   }
 
-  .btn {
+  #list_titles {
+    padding: 0 20px;
+  }
+
+  .boutonSide {
     padding: 5px 0 5px 0;
     font-size: 20px;
     line-height: 24px;
@@ -27,4 +57,36 @@
     font-size: 1rem;
   }
 
+}
+
+#sidebar.small {
+  width: 0;
+  height: 100vh;
+  background-color: #141414;
+  position: fixed;
+
+  #sideArrow {
+    transition-duration: 1s;
+    transition-property: rotate, left;
+    transform: rotate(180deg);
+    position: absolute;
+    top: 42px;
+    left: 78px;
+    background-color: black;
+    color: white;
+    padding: 7px;
+    width: 33px;
+    font-size: 20px;
+    border-radius: 50%;
+    text-align: center;
+    z-index: 1000;
+  }
+
+  #project_title {
+    display: none;
+  }
+
+  #list_titles {
+    display: none;
+  }
 }

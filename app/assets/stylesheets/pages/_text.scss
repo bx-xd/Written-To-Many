@@ -1,19 +1,40 @@
-// Hide format options and label
 
-#modification_content_after, #text_content {
-  height:100%;
-  color:$gray;
-  font-size:21px;
-  line-height: 38px;
-  &:focus {
-    box-shadow: none !important;
-    border:none !important;
+#text_title {
+  margin: 3rem 0 3rem 0;
+  text-align: center;
+}
+
+#new_modification {
+  position: relative;
+
+}
+
+#saveBtn {
+  display: none;
+
+  &.active {
+    display: block;
+    z-index: 1000;
+    position: fixed;
+    left: 300px;
+    bottom: 3rem;
+    background-color: #e0371e;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    padding: 5px 16px;
+    transition-duration: 0.5s;
+
+      &:hover {
+        background-color: white;
+        color: #e0371e;
+        border: 1px solid #e0371e;
+      }
   }
 }
-#text_content {
-  background-color:$ultra-light;
-  border: none;
-}
-#text_content a {
-  color: $gray;
+
+// EditorJS styling
+
+#editorjs {
+  font-size: 24px;
 }

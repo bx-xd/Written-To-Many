@@ -28,6 +28,8 @@ import "@rails/actiontext"
 // External imports
 import "bootstrap";
 import { initEditor } from "../components/editor";
+import { toggle } from "../components/toggleSidebar"
+import { saveBtn } from "../components/save_btn"
 
 
 // Internal imports, e.g:
@@ -39,6 +41,8 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
   initEditor();
   dashboard_tabs();
+  toggle();
+  saveBtn();
 });
 
 import "controllers"

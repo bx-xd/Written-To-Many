@@ -1,15 +1,12 @@
 <div class="d-flex">
   <%= render "shared/sidebar_text" %>
   <div class="container">
-    <div class="row">
-      <div class="col-10 offset-1">
-        <h2><%= @text.project.title %></h2>
-        <div>
-          <%= render 'texts/form' %>
-        </div>
-      </div>
+    <h1 id="text_title"><%= @text.project.title %></h1>
+    <div id="textFormulaire">
+      <%= render 'texts/form' %>
     </div>
   </div>
+  <button id="saveBtn">Créer une nouvelle modification</button>
   <%= link_to project_discussions_path(@text.project), class: "btn btn-round text-link" do %>
     <i class="far fa-comment-alt"></i>
   <% end %>
