@@ -61,21 +61,21 @@ puts "-> #{User.count} Users have been created."
 
 
 puts "-> Create 6 Projects"
-def create_project(project, user)
+def create_project(project, user, created_at)
   file = File.open("db/lib/images/#{project}.jpeg")
   titlized_title = project.split("_").map(&:capitalize).join(' ')
-  project = Project.new(title: titlized_title.to_s, description: "", user: user)
+  project = Project.new(title: titlized_title.to_s, description: "", user: user, created_at: created_at)
   project.photo.attach(io: file, filename: "#{project}.jpeg", content_type: "image/jpeg")
   project.save!
   return project
 end
 
-dialogue = create_project("dialogue_aux_enfers_entre_machiavel_et_montesquieu", louis)
-pays_des_moines = create_project("au_pays_des_moines", george)
-savant_russe = create_project("aventures_extraordinaires_d_un_savant_russe", marine)
-effrayante = create_project("effreyante_aventure", paul)
-jean_qui_pleure = create_project("jean_qui_grogne_jean_qui_rit", louis)
-fort_sherlock = create_project("plus_fort_que_sherlock", joanna)
+dialogue = create_project("dialogue_aux_enfers_entre_machiavel_et_montesquieu", louis, Date.new(2021, 10, 28))
+pays_des_moines = create_project("au_pays_des_moines", george, Date.new(2021, 11, 3))
+savant_russe = create_project("aventures_extraordinaires_d_un_savant_russe", marine, Date.new(2021, 11, 15))
+effrayante = create_project("effreyante_aventure", paul, Date.new(2021, 11, 10))
+jean_qui_pleure = create_project("jean_qui_grogne_jean_qui_rit", louis, Date.new(2021, 8, 18))
+fort_sherlock = create_project("plus_fort_que_sherlock", joanna, Date.new(2021, 9, 28))
 puts "-> #{Project.count} Projects have been created."
 
 
@@ -100,7 +100,7 @@ def create_text(project, text_file_name)
   extension = text_file_name == "plus_fort_que_sherlock"  ? ".json" : ".txt"
   file = File.open("db/lib/texts/#{text_file_name}#{extension}")
   result = file.read
-  text = Text.new(project: project, content: result)
+  text = Text.new(project: project, content: result, created_at: project.created_at)
   text.save!
 end
 
@@ -145,44 +145,52 @@ end
 add_dialogue = create_modification(dialogue.text,
                                    joanna,
                                    "dialogue_aux_enfers_entre_machiavel_et_montesquieu1",
-                                   "Ajout d'un dialogue de Machiavel",
                                    "pending",
-                                    Date.new(2021, 11, 29))
+                                   "Ajout d'un dialogue de Machiavel",
+                                   Date.new(2021, 11, 29))
 delete_dialogue = create_modification(dialogue.text,
                                       richard,
                                       "dialogue_aux_enfers_entre_machiavel_et_montesquieu2",
-                                      "suppression d'un passage de Montesquieu inexacte par rapport à sa philosophie",
                                       "accepted",
+                                      "suppression d'un passage de Montesquieu inexacte par rapport à sa philosophie",
                                       Date.new(2021, 11, 27))
 add_intro = create_modification(dialogue.text,
                                 richard,
                                 "dialogue_aux_enfers_entre_machiavel_et_montesquieu3",
-                                "Ajout d'une introduction sur les intentions du text",
                                 "denied",
+                                "Ajout d'une introduction sur les intentions du text",
                                 Date.new(2021, 11, 25))
 
 following_story = create_json_modification(fort_sherlock.text,
-                                           louis,
+                                           paul,
                                            "plus_fort_que_sherlock1",
-                                           "Ajout de la partie 5",
                                            "pending",
+                                           "Ajout de la partie 5",
                                            Date.new(2021, 11, 25))
 add_mother_story = create_json_modification(fort_sherlock.text,
-                                       paul,
-                                       "plus_fort_que_sherlock2",
-                                       "Ajout d'un paragraphe pour détailler la vie difficile de la jeune femme")
+                                            louis,
+                                            "plus_fort_que_sherlock2",
+                                            "pending",
+                                            "Ajout d'un paragraphe pour détailler la vie difficile de la jeune femme",
+                                            Date.new(2021, 11, 24))
 add_letter = create_json_modification(fort_sherlock.text,
-                                 marine,
-                                 "plus_fort_que_sherlock3",
-                                 "Ajoute une lettre de l'enfant à sa mère pour appuyer les difficultés de l'enfant")
+                                      marine,
+                                      "plus_fort_que_sherlock3",
+                                      "accepted",
+                                      "Ajoute une lettre de l'enfant à sa mère pour appuyer les difficultés de l'enfant",
+                                      Date.new(2021, 11, 27))
 delete_story = create_json_modification(fort_sherlock.text,
-                                   louis,
-                                   "plus_fort_que_sherlock4",
-                                   "Suppression d'une annecdote superflue sur l'enfant', perpétue l'intrigue")
+                                        louis,
+                                        "plus_fort_que_sherlock4",
+                                        "pending",
+                                        "Suppression d'une annecdote superflue sur l'enfant', perpétue l'intrigue",
+                                        Date.new(2021, 11, 22))
 add_intro_sherlock = create_json_modification(fort_sherlock.text,
-                                         joanna,
-                                         "plus_fort_que_sherlock5",
-                                         "Ajout d'une introduction 'mystérieuse' sur le détéctive")
+                                              joanna,
+                                              "plus_fort_que_sherlock5",
+                                              "accepted",
+                                              "Ajout d'une introduction 'mystérieuse' sur le détéctive",
+                                              Date.new(2021, 11, 19))
 puts "-> #{Modification.count} modifications have been created."
 
 
@@ -191,13 +199,14 @@ def create_discussion(title, context = nil, project = nil, modification = nil)
   discussion = Discussion.new(title: title,
                               context: context,
                               modification: modification,
-                              project: project)
+                              project: project,
+                              created_at: modification ? modification.created_at : project.created_at)
   discussion.save!
   return discussion
 end
 
-create_discussion("Attachement à la rigueur historique", nil, dialogue)
-create_discussion("Moral philosophique du texte", nil, dialogue)
+# create_discussion("Attachement à la rigueur historique", nil, dialogue, Date.new(2021, 11, 23))
+# create_discussion("Moral philosophique du texte", nil, dialogue, Date.new(2021, 11, 23))
 create_discussion("Ajout de dialogue de Machiavel", add_dialogue.context, dialogue, add_dialogue)
 dsc_delete_dialogue = create_discussion("Suppression d'un dialogue de Montesquieu", delete_dialogue.context, dialogue, delete_dialogue)
 create_discussion("Ajout d'une introduction", add_intro.context, dialogue, add_intro)
@@ -213,8 +222,8 @@ puts "-> #{Discussion.count} discussions have been created."
 
 
 puts "-> Create Posts"
-def create_post(user, discussion, text)
-  post = Post.new(user: user, discussion: discussion, text: text)
+def create_post(user, discussion, text, created_at)
+  post = Post.new(user: user, discussion: discussion, text: text, created_at: created_at)
   post.save!
 end
 
@@ -226,7 +235,8 @@ create_post(richard, dsc_delete_dialogue,
             séparés alors que cette façon d'écrire correspond plus à une tradition littéraire du XIIIeme siècle.
             De manière général j'ai supprimé l'ensemble du passage pour qu'il soit travailler du fait qu'il ne
             convenait pas à la rigueur qu'on s'est fixé au préalable sur le texte mais aussi car il rompt avec
-            le sens logique des personnages historiques.")
+            le sens logique des personnages historiques.",
+            Date.new(2021, 11, 29))
 create_post(louis, dsc_delete_dialogue,
             "Je te rejoins sur la rigueur des locutions, pour le coup elles sont ici vraiment annachroniques
             et difficile à lire de manière général, de la même manière qu'il se présente en tant que ministre
@@ -236,52 +246,65 @@ create_post(louis, dsc_delete_dialogue,
             on est ici dans un genre proche du postiche, malgré notre volonté de faux écrits, par conséquent
             je pense qu'on ne doit pas non plus exercer trop de pression pour suivre une forme de rigueur dans nos
             dialogues.
-            Il faut trouver le bon compromis.")
+            Il faut trouver le bon compromis.",
+            Date.new(2021, 11, 30))
 create_post(joanna, dsc_delete_dialogue,
             "Je vous rejoins, même si j'avais écris ce passage ça me va de le supprimer, de toute façon
             il aurait été trop pénible à reprendre pour le réintégrer. A la limite on pourra réintroduire
             la philosophie de Montesquieu plus en aval du texte, je pense que ce qui compte c'est qu'on
             comprenne les valeurs morales de Machiavel avant de les confronter à la philosophie de
-            Montesquieu.")
+            Montesquieu.",
+            Date.new(2021, 11, 30))
 # Modification accépté
 create_post(louis, dsc_add_mother_story,
             "Je me suis permis de rajouter ce passage, je trouver que ça nous permettait de passer
-            à la suite de façon moins abrupt")
+            à la suite de façon moins abrupt",
+            Date.new(2021, 11, 24))
 create_post(syd, dsc_add_mother_story,
             "Je suis pas du tout d'accord, je trouver justement que le passage à la suite nous permettait
-            d'en déduire ou d'imaginer pleins de choses par rapport à ce qui lui été arriver.")
+            d'en déduire ou d'imaginer pleins de choses par rapport à ce qui lui été arriver.",
+            Date.new(2021, 11, 25))
 create_post(joanna, dsc_add_mother_story,
             "Je rejoins Syd là dessus, je trouve que ça rallonge le texte pour rien, je suis par contre ouverte
             à ce que l'ensemble de la partie qui introduit la mère soit plus longue et peut être plus étoffé
-            mais pas sur cette fin de partie.")
+            mais pas sur cette fin de partie.",
+            Date.new(2021, 11, 25))
 create_post(louis, dsc_add_mother_story,
             "Je peux aussi retravailler le passage pour y ajouter du suspens, j'aimer bien l'idée quand même qu'on
-            explicite mieux le background des personnages et qu'on laisse des non-dits plus loins dans le récit.")
+            explicite mieux le background des personnages et qu'on laisse des non-dits plus loins dans le récit.",
+            Date.new(2021, 11, 26))
 create_post(paul, dsc_add_mother_story,
             "Je rejoins les autres, le problème c'est que tu casses l'effet avec ce passage, je vois difficilement
-            comment tu pourrais rattraper ça puisque c'est pas tellement le contenu le problème mais son placement")
+            comment tu pourrais rattraper ça puisque c'est pas tellement le contenu le problème mais son placement",
+            Date.new(2021, 11, 30))
 create_post(joanna, dsc_add_mother_story,
-            "Si tout le monde est d'accord je me permets de refuser ce passage.")
+            "Si tout le monde est d'accord je me permets de refuser ce passage.",
+            Date.new(2021, 12, 2))
 # Modification refusé
 create_post(joanna, dsc_following_story,
-            "J'ouvre la discussion autour de cette nouvelle partie que je viens d'ajouter")
+            "J'ouvre la discussion autour de cette nouvelle partie que je viens d'ajouter",
+            Date.new(2021, 11, 25))
 create_post(louis, dsc_following_story,
-            "J'aime beaucoup le suspence laisser à la fin et en même temps l'arriver du détéctive")
+            "J'aime beaucoup le suspence laisser à la fin et en même temps l'arriver du détéctive",
+            Date.new(2021, 11, 25))
 create_post(paul, dsc_following_story,
             "Par contre il faut qu'on se pose la question vis à vis de la parodie, par ce que là c'est
-            très bien écrit mais on dirait du pure Conan Doyle, j'ai du mal à voir le pastiche ici.")
+            très bien écrit mais on dirait du pure Conan Doyle, j'ai du mal à voir le pastiche ici.",
+            Date.new(2021, 11, 26))
 create_post(marine, dsc_following_story,
             "Je rejoins Paul néanmoins on peut nuancer, cette super introduction du détéctive ira parfaitement
             en contrepoint de la parodie du personnage qui viendra plus tard dans le texte. Je pense c'est important
             de pas non plus s'acharner sur ce personnage, on souhaite le parodier, pas le tourner complétement en ridicule,
             c'est bien par ce qu'on apprécie tous Sherlock qu'on est ici à vouloir le parodier.
-            Dans tous les cas je suis hyper contente de lire ce passage sur son introduction, bravo joanna.")
+            Dans tous les cas je suis hyper contente de lire ce passage sur son introduction, bravo joanna.",
+            Date.new(2021, 11, 27))
 create_post(joanna, dsc_following_story,
             "Merci Marine, en effet j'avais prévu dans la suite du texte de venir introduire un contrepoint, notamment
             au moment où il est utilisé dans le cadre de son enquête, ses dons d'observations. J'avais pensés à tout un passage
             très déscriptif où ces dons permettent de résoudre une histoire très anciennes des fermiers chez qui il est sans pour
             autant résoudre l'affaire en court.
-            A mon sens c'est une manière pour nous aussi de continuer à rendre hommage tout en s'adonnant à une gentille parodie.")
+            A mon sens c'est une manière pour nous aussi de continuer à rendre hommage tout en s'adonnant à une gentille parodie.",
+            Date.new(2021, 11, 28))
 create_post(syd, dsc_following_story,
             "Attention à ne pas rejouer la discussion du channel général, je rejoins quand même Paul sur son idée
             il faut un minimum introduire notre volonté de parodier Holmes si on ne veut pas créer un décalage de ton
@@ -289,7 +312,8 @@ create_post(syd, dsc_following_story,
             Pour le moment lorsqu'on relis le texte on a dut mal à discerner l'humour ou la parodie qui pourra intérvenir,
             c'est même franchement un texte plutôt triste.
             A mon avis, soit on retouche cette modification, soit on ajoute plus en amont du texte des éléments qui appellent
-            à l'humour qu'on souhaitera utiliser plus tard.")
+            à l'humour qu'on souhaitera utiliser plus tard.",
+            Date.new(2021, 11, 29))
 puts "-> #{Post.count} posts have been created."
 
 puts "-> End of seeding"
