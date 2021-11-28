@@ -114,28 +114,30 @@ puts "-> #{Text.count} texts have been created."
 
 
 puts "-> Create 8 Modifs"
-def create_modification(text, user, modification_file_name, context)
+def create_modification(text, user, modification_file_name, status, context, created_at)
   file = File.open("db/lib/texts/#{modification_file_name}.txt")
   result = file.read
   modification = Modification.new(text: text,
                                   user: user,
                                   content_before: text.content,
                                   content_after: result,
-                                  status: "pending",
-                                  context: context)
+                                  status: status,
+                                  context: context,
+                                  created_at: created_at)
   modification.save!
   return modification
 end
 
-def create_json_modification(text, user, modification_file_name, context)
+def create_json_modification(text, user, modification_file_name, status, context, created_at)
   file = File.open("db/lib/texts/#{modification_file_name}.json")
   result = file.read
   modification = Modification.new(text: text,
                                   user: user,
                                   content_before: text.content,
                                   content_after: result,
-                                  status: "pending",
-                                  context: context)
+                                  status: status,
+                                  context: context,
+                                  created_at: created_at)
   modification.save!
   return modification
 end
@@ -143,20 +145,28 @@ end
 add_dialogue = create_modification(dialogue.text,
                                    joanna,
                                    "dialogue_aux_enfers_entre_machiavel_et_montesquieu1",
-                                   "Ajout d'un dialogue de Machiavel")
+                                   "Ajout d'un dialogue de Machiavel",
+                                   "pending",
+                                    Date.new(2021, 11, 29))
 delete_dialogue = create_modification(dialogue.text,
                                       richard,
                                       "dialogue_aux_enfers_entre_machiavel_et_montesquieu2",
-                                      "suppression d'un passage de Montesquieu inexacte par rapport à sa philosophie")
+                                      "suppression d'un passage de Montesquieu inexacte par rapport à sa philosophie",
+                                      "accepted",
+                                      Date.new(2021, 11, 27))
 add_intro = create_modification(dialogue.text,
                                 richard,
                                 "dialogue_aux_enfers_entre_machiavel_et_montesquieu3",
-                                "Ajout d'une introduction sur les intentions du text")
+                                "Ajout d'une introduction sur les intentions du text",
+                                "denied",
+                                Date.new(2021, 11, 25))
 
 following_story = create_json_modification(fort_sherlock.text,
-                                      louis,
-                                      "plus_fort_que_sherlock1",
-                                      "Ajout de la partie 5")
+                                           louis,
+                                           "plus_fort_que_sherlock1",
+                                           "Ajout de la partie 5",
+                                           "pending",
+                                           Date.new(2021, 11, 25))
 add_mother_story = create_json_modification(fort_sherlock.text,
                                        paul,
                                        "plus_fort_que_sherlock2",
