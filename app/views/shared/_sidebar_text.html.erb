@@ -5,31 +5,26 @@
       <%= @text.project.title %>
     </h2>
   </div>
+
   <ul id="list_titles" class="list-unstyled ps-0">
     <li class="mb-1">
-      <button class="boutonSide" data-toggle="collapse" data-target="#partie1Collapse" aria-expanded="false" aria-controls="partie1Collapse">
-        Partie 1 - Harry Potter et ses parents
-      </button>
-      <div class="collapse" id="partie1Collapse">
-        <ul class="btn-toggle-nav list-unstyled fw-normal pl-3 pb-1 small">
-          <li><a href="#" class="link-dark rounded">Famille d'accueil</a></li>
-          <li><a href="#" class="link-dark rounded">Découverte de la magie</a></li>
-          <li><a href="#" class="link-dark rounded">Découverte de Poudlard</a></li>
-        </ul>
-      </div>
-    </li>
+      <%# <% @content["blocks"].each do  |block| %>
+        <%# <% if block["type"] == "header" && block["data"]["level"] == 1 %>
+          <button class="boutonSide" data-toggle="collapse" data-target="#partie1Collapse" aria-expanded="false" aria-controls="partie1Collapse">
+            <%# <%= block["data"]["text"] %>
+          </button>
+        <%# <% end %>
 
-    <li class="mb-1">
-      <button class="boutonSide" data-toggle="collapse" data-target="#partie2Collapse" aria-expanded="false">
-        Partie 2 - Poudlard
-      </button>
-      <div class="collapse" id="partie2Collapse">
-        <ul class="btn-toggle-nav list-unstyled fw-normal pl-3 pb-1 small">
-          <li><a href="#" class="link-dark rounded">Hermione</a></li>
-          <li><a href="#" class="link-dark rounded">Ron</a></li>
-          <li><a href="#" class="link-dark rounded">Dumbledore</a></li>
-        </ul>
-      </div>
+          <div class="collapse" id="partie1Collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pl-3 pb-1 small">
+            <%# <% if block["type"] == "header" && block["data"]["level"] == 2 %>
+              <li>
+                <%# <%= block["data"]["text"] %>
+              </li>
+            <%# <% end %>
+      <%# <% end %>
+            </ul>
+          </div>
     </li>
   </ul>
 </div>

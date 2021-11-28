@@ -26,8 +26,8 @@ const initEditor = () => {
           inlineToolbar: true,
         },
       },
-      // cette ligne désactive le texte coller et la touche ENTER saute une ligne
-      // sans ouvrir de nouveau block
+      // cette ligne désactive le texte coller et la touche ENTER saute
+      // une ligne sans ouvrir de nouveau block
       // defaultBlock: 'text',
 
       /**
