@@ -1,13 +1,51 @@
 .dashboard-navbar {
-  background-color: $light-grey;
-  display: flex;
-  padding: 1.5rem;
-  justify-content: space-between;
-  align-items: center;
-  h1 {
-    color: black;
-    margin-left: 2rem;
+  background-color: $ultra-light;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 2rem;
+  position: relative;
+  .navbar-head {
+    display: flex;
+    justify-content: space-between;
   }
+  .avatar-btn {
+    position: absolute;
+    right: 2rem;
+    top: 1rem;
+
+    .avatar {
+      width: 4rem;
+      height: 4rem;
+      box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.5);
+    }
+  }
+  h1 {
+    padding: 2rem 0;
+    p {
+      color:grey;
+    }
+  }
+  .list-inline{
+    padding: 0.5rem 1rem;
+   a{
+     color: black;
+   }
+
+   li{
+     list-style: none;
+     padding: 0.5rem;
+     color: black;
+
+     &:hover {
+       cursor: pointer;
+     }
+   }
+
+   .active {
+     font-weight: bold;
+     border-bottom: 1px solid $primary;
+   }
+  }
+
   .btn-primary {
     padding: 0.7rem 2rem;
     font-size: 1.1rem;
@@ -30,9 +68,10 @@
 }
 
 .dashboard-container {
-  background-color: $light-grey;
-  margin-top: 4rem;
-  border-radius: 0.8rem;
+  border: 2px solid rgba(128, 128, 128, 0.322);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
 }
 
 .dashboard-user-column {
@@ -113,28 +152,7 @@ a {
 
 // Style des tabs de navigation
 
-.dashboard-container {
-   margin-bottom: 50px;
-   .list-inline{
-    a{
-      color: black;
-    }
-
-    li{
-      list-style: none;
-      padding: 0.5rem;
-      color: black;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    .active {
-      font-weight: bold;
-      border-bottom: 1px solid $primary;
-    }
-  }
+// .dashboard-container {
   // .list-inline {
   //   display: flex;
   //   justify-content: center;
@@ -159,7 +177,7 @@ a {
   //     text-decoration-thickness: 3px;
   //   }
   // }
-}
+// }
 
 
 .content {

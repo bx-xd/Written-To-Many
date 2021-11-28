@@ -1,26 +1,36 @@
 <div class="dashboard-navbar">
-  <h1>Dashboard</h1>
-  <div class="dashboard-links">
-    <a class="btn btn-primary" href="#">Créer un projet</a>
-    <%= link_to "Deconnexion", destroy_user_session_path, method: :delete, class: "btn btn-ghost" %>
+  <div class="container">
+    <div class="navbar-head">
+      <div class="dashboard-title">
+        <h1>Tableau de bord</h1>
+      </div>
+      <div class="dashboard-links">
+        <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <%= link_to "Mon compte", dashboard_path, class: "dropdown-item" %>
+          <%= link_to "Deconnexion", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+        </div>
+        <a class="btn btn-primary" href="#">Créer un projet</a>
+      </div>
+    </div>
+    <div class="tabs">
+      <ul class="list-inline tabs-underlined">
+        <li>
+          <a data-content-active="dashboard-show" href="#dashboard-show" class="tab-underlined active">Aperçu</a>
+        </li>
+        <li>
+          <a data-content-active="dashboard-rental" href="#dashboard-rental" class="tab-underlined">Mes projets</a>
+        </li>
+        <li>
+          <a data-content-active="dashboard-resa" href="#dashboard-resa" class="tab-underlined">Mes contributions</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 
 
 <div class="container dashboard-container col-11">
-  <div class="tabs">
-    <ul class="list-inline tabs-underlined">
-      <li>
-        <a data-content-active="dashboard-show" href="#dashboard-show" class="tab-underlined active">Aperçu</a>
-      </li>
-      <li>
-        <a data-content-active="dashboard-rental" href="#dashboard-rental" class="tab-underlined">Mes projets</a>
-      </li>
-      <li>
-        <a data-content-active="dashboard-resa" href="#dashboard-resa" class="tab-underlined">Mes contributions</a>
-      </li>
-    </ul>
-  </div>
 <%# La classe 'content' et 'active' sont là pour le JS. Elles permettent de faire jouer le display %>
   <div class="row">
     <div class="colonne dashboard-user-column col-3">
