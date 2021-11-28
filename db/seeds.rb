@@ -114,13 +114,15 @@ puts "-> #{Text.count} texts have been created."
 
 
 puts "-> Create 8 Modifs"
-def create_modification(text, user, modification_file_name, status, context, created_at)
-  file = File.open("db/lib/texts/#{modification_file_name}.txt")
-  result = file.read
+def create_modification(text, user, modification_file_name = nil, status, context, created_at)
+  if modification_file_name
+    file = File.open("db/lib/texts/#{modification_file_name}.txt")
+    result = file.read
+  end
   modification = Modification.new(text: text,
                                   user: user,
                                   content_before: text.content,
-                                  content_after: result,
+                                  content_after: result ? result : "text.content",
                                   status: status,
                                   context: context,
                                   created_at: created_at)
@@ -128,13 +130,15 @@ def create_modification(text, user, modification_file_name, status, context, cre
   return modification
 end
 
-def create_json_modification(text, user, modification_file_name, status, context, created_at)
-  file = File.open("db/lib/texts/#{modification_file_name}.json")
-  result = file.read
+def create_json_modification(text, user, modification_file_name = nil, status, context, created_at)
+  if modification_file_name
+    file = File.open("db/lib/texts/#{modification_file_name}.json")
+    result = file.read
+  end
   modification = Modification.new(text: text,
                                   user: user,
                                   content_before: text.content,
-                                  content_after: result,
+                                  content_after: result ? result : "text.content",
                                   status: status,
                                   context: context,
                                   created_at: created_at)
@@ -142,6 +146,18 @@ def create_json_modification(text, user, modification_file_name, status, context
   return modification
 end
 
+create_modification(pays_des_moines.text, paul, "pending", "Partie 4", Date.new(2021, 11, 24))
+create_modification(pays_des_moines.text, george, "pending", "Ajout de déscriptions du monastère", Date.new(2021, 11, 15))
+create_modification(pays_des_moines.text, louis, "pending", "Reprise de la liaison entre partie 2 et 3", Date.new(2021, 11, 28))
+create_modification(savant_russe.text, david, "pending", "La mort de Raspoutine", Date.new(2021, 11, 20))
+create_modification(savant_russe.text, sophie, "pending", "Dénouement de l'arc sur le voyage du savant", Date.new(2021, 11, 23))
+create_modification(effrayante.text, syd, "pending", "Suite et fin du personnage de Josie", Date.new(2021, 11, 10))
+create_modification(effrayante.text, siouxsie, "pending", "Partie 3", Date.new(2021, 11, 11))
+create_modification(effrayante.text, louis, "pending", "Supression de la conclusion partie 2", Date.new(2021, 11, 12))
+create_modification(effrayante.text, paul, "pending", "Introduciton du personnage de Tom", Date.new(2021, 11, 13))
+create_modification(jean_qui_pleure.text, ringo, "pending", "Titres des parties", Date.new(2021, 8, 18))
+create_modification(jean_qui_pleure.text, david, "pending", "Déscription de la maison de campagne", Date.new(2021, 8, 19))
+create_modification(jean_qui_pleure.text, john, "pending", "Passage dans la cours décole - Chapitre 3", Date.new(2021, 8, 20))
 add_dialogue = create_modification(dialogue.text,
                                    joanna,
                                    "dialogue_aux_enfers_entre_machiavel_et_montesquieu1",
@@ -205,8 +221,8 @@ def create_discussion(title, context = nil, project = nil, modification = nil)
   return discussion
 end
 
-# create_discussion("Attachement à la rigueur historique", nil, dialogue, Date.new(2021, 11, 23))
-# create_discussion("Moral philosophique du texte", nil, dialogue, Date.new(2021, 11, 23))
+create_discussion("Attachement à la rigueur historique", nil, dialogue)
+create_discussion("Moral philosophique du texte", nil, dialogue)
 create_discussion("Ajout de dialogue de Machiavel", add_dialogue.context, dialogue, add_dialogue)
 dsc_delete_dialogue = create_discussion("Suppression d'un dialogue de Montesquieu", delete_dialogue.context, dialogue, delete_dialogue)
 create_discussion("Ajout d'une introduction", add_intro.context, dialogue, add_intro)
