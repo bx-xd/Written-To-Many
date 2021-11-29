@@ -50,10 +50,10 @@
         <div class="card-notif">
           <div class="card-notif-head">
             <div class="notif-head-info">
-              <%= cl_image_tag current_user.photo.key, class: "avatar" %>
+              <%= cl_image_tag @random_user_two.photo.key, class: "avatar" %>
               <div>
-                <p class="notif-main-infos"><strong><%= current_user.username.capitalize %></strong> reply <strong><%= current_user.projects.last.modifications.last.context %></strong></p>
-                <p class="subtitle">In <strong><%= current_user.projects.last.title %></strong> from <strong> <%= current_user.projects.last.user.username.capitalize %></strong></p>
+                <p class="notif-main-infos"><strong><%= @random_user_two.username.capitalize %></strong> a repondu à <strong><%= @random_user_two.projects.last.modifications.last.context %></strong></p>
+                <p class="subtitle">Dans <strong><%= @random_user_two.projects.last.title %></strong> de <strong> <%= @random_user_two.projects.last.user.username.capitalize %></strong></p>
               </div>
             </div>
             <div class="notif-head-time">
@@ -61,14 +61,32 @@
             </div>
           </div>
           <div class="card-notif-body">
-            <p>Je me suis permis de supprimé le passage de Montesquieu qui se présente à Machiavel,
-            En effet ce passage me parait peu rigoureux historiquement parlant, Montesquieu se présente
-            comme un ministre de Louis XVI ce qu'il n'était pas. De plus les locutions pour se dire bonjour ne
-            correspondent pas, vers 1750, date du décès de celui-ci, dans ce dialogue le 'bon' et le 'jour' sont
-            séparés alors que cette façon d'écrire correspond plus à une tradition littéraire du XIIIeme siècle.
-            De manière général j'ai supprimé l'ensemble du passage pour qu'il soit travailler du fait qu'il ne
-            convenait pas à la rigueur qu'on s'est fixé au préalable sur le texte mais aussi car il rompt avec
-            le sens logique des personnages historiques.</p>
+            <p>Il y a, dans le moment où Jean se chahute avec ses camarades, une situation dramatique
+            qui à mon sens mériterait d'être mieux traité.
+            J'ai réécris un des passage et me suis permis d'étoffer d'autres où on passait rapidement dessus
+            histoire d'appuyer cette idée d'une situation dramatique, sans trop être tire larme.</p>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-cards" >
+        <div class="card-notif">
+          <div class="card-notif-head">
+            <div class="notif-head-info">
+              <%= cl_image_tag @random_user.photo.key, class: "avatar" %>
+              <div>
+                <p class="notif-main-infos"><strong><%= @random_user.username.capitalize %></strong> à ajouter une modification: <strong><%= @random_user.modifications.last.context %></strong></p>
+                <p class="subtitle">Dans <strong><%= @random_user.modifications.last.text.project.title %></strong> de <strong> <%= @random_user.modifications.last.text.project.user.username.capitalize %></strong></p>
+              </div>
+            </div>
+            <div class="notif-head-time">
+              <p>22 hours ago</p>
+            </div>
+          </div>
+          <div class="card-notif-body">
+            <p>Il y a, dans le moment où Jean se chahute avec ses camarades, une situation dramatique
+            qui à mon sens mériterait d'être mieux traité.
+            J'ai réécris un des passage et me suis permis d'étoffer d'autres où on passait rapidement dessus
+            histoire d'appuyer cette idée d'une situation dramatique, sans trop être tire larme.</p>
           </div>
         </div>
       </div>
@@ -98,8 +116,8 @@
               </div>
               <ul class="list-modifications">
                 <% project.text.modifications.each do |modification| %>
-                  <%= link_to("#") do %>
-                    <li><%= modification.context %></li>
+                  <%= link_to(discussion_path(modification.id)) do %>
+                      <li><%= modification.context %></li>
                   <% end %>
                 <% end %>
               </ul>

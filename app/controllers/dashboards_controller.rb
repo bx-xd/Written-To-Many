@@ -4,6 +4,8 @@ class DashboardsController < ApplicationController
     @projects = @user.projects
     @contributions = @user.projects_contributions
     @character = compting_writing_character
+    @random_user = User.first
+    @random_user_two = User.find_by_username("george")
   end
 
   def compting_writing_character
