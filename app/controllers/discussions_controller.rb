@@ -6,6 +6,13 @@ class DiscussionsController < ApplicationController
     @posts = @discussion.posts
     @post = Post.new
     @contributors = @posts.map(&:user).uniq
+
+    @text = @project.text
+
+    # Permet d'afficher ce qui est PROPRE à la modif'
+    if @discussion.modification
+      @modification_content = JSON.parse(@discussion.modification.content_after)["blocks"] - JSON.parse(@discussion.modification.content_before)["blocks"]
+    end
   end
 
   def index

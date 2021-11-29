@@ -6,7 +6,8 @@
       <%= render 'texts/form' %>
     </div>
   </div>
-  <%= link_to "Créer une nouvelle modification", project_discussions_path(@text.project), id: "saveBtn" %>
+
+  <button id="saveBtn">Créer une nouvelle modification</button>
 
   <%= link_to project_discussions_path(@text.project), class: "btn btn-round text-link" do %>
     <i class="far fa-comment-alt"></i>

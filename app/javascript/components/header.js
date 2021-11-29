@@ -1,29 +1,49 @@
 const header = () => {
   const txtEditor = document.querySelector("#editorjs");
-  const headersSidebars = document.querySelector("#list_titles");
 
   if (txtEditor) {
+    const headersSidebar = document.querySelector("#list_titles");
+    const h1sText = txtEditor.getElementsByTagName("h1");
+
     // Permet d'afficher les titres H1 dans la sidebar
     const loadTitle = () => {
-      const h1sText = txtEditor.getElementsByTagName("h1");
 
       Array.from(h1sText).forEach((h1, index) => {
-        const generatedID = `h1-${index}`;
-        h1.setAttribute("id", generatedID);
 
-        headersSidebars.insertAdjacentHTML("beforeend",
-          `<a href="#${generatedID}" class="boutonSide" data-toggle="collapse" data-target="#partie1Collapse"
-          aria-expanded="false" aria-controls="partie1Collapse">
-          ${h1.innerText}
-          </a>`);
+        headersSidebar.insertAdjacentHTML("beforeend",
+        `<button class="boutonSide">
+        ${h1.innerText}
+        </button>`);
+
+        const buttonsInside = document.getElementsByClassName("boutonSide")
+        scrollBtn(buttonsInside, h1)
       });
     }
+
+    const scrollBtn = (buttons, header) => {
+      if (buttons) {
+        Array.from(buttons).forEach((button) => {
+          button.addEventListener("click", (event) => {
+            event.preventDefault();
+
+            const h1Position = Math.round(header.getBoundingClientRect()["y"]);
+
+            window.scrollTo({
+              top: h1Position,
+              left: 0,
+              behavior: 'smooth'
+            });
+          })
+        })
+      }
+    }
+
 
     // Permet de charger tous les titres dès que la souris passe sur la page
     document.addEventListener('mousemove', (event) => {
       event.preventDefault();
 
-      headersSidebars.innerHTML = "";
+      headersSidebar.innerHTML = "";
 
       loadTitle();
     });
