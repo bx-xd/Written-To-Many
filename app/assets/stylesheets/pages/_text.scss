@@ -37,4 +37,21 @@
 
 #editorjs {
   font-size: 24px;
+
+  h1 {
+    font-size: 40px !important;
+  }
+
+  h2 {
+    font-size: 32px;
+  }
+}
+
+// élargit la largeur de texte
+.ce-block__content, .ce-toolbar__content {
+  margin-left: 20%;
+  max-width:calc(100% - 80px) !important;
+}
+.cdx-block {
+  max-width: 100% !important;
 }

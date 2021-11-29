@@ -1,12 +1,14 @@
 const toggle = () => {
-  const arrow = document.getElementById("sideArrow");
   const sidebar = document.getElementById("sidebar");
+  const arrow = document.getElementById("sideArrow");
 
-  arrow.addEventListener("click", (event) => {
-    event.preventDefault();
+  if (sidebar) {
+    arrow.addEventListener("click", (event) => {
+      event.preventDefault();
 
-    sidebar.classList.toggle("small")
-  })
+      sidebar.classList.toggle("small")
+    })
+  }
 }
 
 export { toggle }

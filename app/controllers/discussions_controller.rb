@@ -1,6 +1,7 @@
 class DiscussionsController < ApplicationController
   def show
     @discussion = Discussion.find(params[:id])
+    @modification = @discussion.modification
     @project = @discussion.project
     @posts = @discussion.posts
     @post = Post.new
@@ -14,5 +15,24 @@ class DiscussionsController < ApplicationController
     @global_disc = @discussions.select { |d| d.modification_id.nil? }
     @opened_modif_disc = @discussions.select { |d| d.modification_id.present? && d.modification.status == "pending" }
     @closed_modif_disc = @discussions.select { |d| d.modification_id.present? && d.modification.status != "pending" }
+    @discussion = Discussion.new
+  end
+
+  def create
+    @project = Project.find(params[:project_id])
+    @discussion = Discussion.new(disc_params)
+    @discussion.project = @project
+
+    if @discussion.save
+      redirect_to discussion_path(@discussion)
+    else
+      render "discussions/index"
+    end
+  end
+
+  private
+
+  def disc_params
+    params.require(:discussion).permit(:title, :context)
   end
 end

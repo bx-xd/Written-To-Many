@@ -3,9 +3,10 @@
   "blocks": [
     {
       "id": "1UqPXebAGB",
-      "type": "paragraph",
+      "type": "header",
       "data": {
-        "text": "TABLE"
+        "text": "TABLE",
+        "level": 1
       }
     },
     {
