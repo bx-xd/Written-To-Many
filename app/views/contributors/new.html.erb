@@ -1,2 +1,8 @@
-<h1>Contributors#new</h1>
-<p>Find me in app/views/contributors/new.html.erb</p>
+<div class="container">
+  <h2>Ajouter un contributeur au projet <strong><%= @project.title %></strong></h2>
+  <%= simple_form_for([@project, @contributor]) do |form| %>
+    <%= form.association :user, label: "Contributeur", collection: @users, label_method: :second, value_method: :first %>
+
+    <%= form.button :submit, "Ajouter un contributeur", class: "btn btn-primary post-btn", method: :post %>
+  <% end %>
+</div>
