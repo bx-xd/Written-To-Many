@@ -85,9 +85,28 @@
 
   .btn {
     padding: 0;
+    font-size: 1rem;
 
     &:focus {
       box-shadow: none !important;
+    }
+  }
+
+  .add-context-form {
+    text-align: right;
+
+    .form-group {
+      text-align: left;
+    }
+
+    .add-context-btn {
+      padding: 0.4rem 1rem;
+    }
+  }
+
+  .valid-btns {
+    .btn {
+      padding: 0.4rem 1rem;
     }
   }
 }

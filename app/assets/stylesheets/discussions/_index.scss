@@ -101,3 +101,16 @@
   padding: 1rem;
   margin-bottom: 2rem;
 }
+
+#add-global-disc-form {
+  text-align: right;
+
+  .form-group {
+    text-align: left;
+  }
+
+  .add-global-disc-btn {
+    padding: 0.4rem 1rem;
+    font-size: 1rem;
+  }
+}

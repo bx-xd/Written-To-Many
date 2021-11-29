@@ -32,21 +32,43 @@
   </div>
 </div>
 
-<% unless @discussion.modification.nil? %>
+<% unless @modification.nil? %>
   <div class="container">
     <div class="modif-context">
-      <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContextCollapse" aria-expanded="true" aria-controls="modifContextCollapse">
-        <h2>Contexte de la modification</h2>
-      </button>
-      <div class="collapse show p-2" id="modifContextCollapse">
-        <p><%= @discussion.modification.context %></p>
-      </div>
+      <% if @modification.context.nil? && current_user == @modification.user %>
+        <h2>Ma nouvelle modification</h2>
+        <%= simple_form_for(@modification, remote: true, html: { class: "add-context-form" }) do |form| %>
+          <%= form.input :title, label: "Titre de la modification", placeholder: "Titre de la modification", class: "add-context-input" %>
+          <%= form.input :context, label: "Contexte de la modification", placeholder: "Donnez nous le contexte de votre modification", class: "add-context-input" %>
+
+          <%= form.button :submit, "Valider", class: "btn btn-primary add-context-btn", method: :update %>
+        <% end %>
+      <% else %>
+        <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContextCollapse" aria-expanded="true" aria-controls="modifContextCollapse">
+          <h2>Contexte de la modification</h2>
+        </button>
+        <div class="collapse show p-2" id="modifContextCollapse">
+          <p><%= @modification.context %></p>
+        </div>
+      <% end %>
       <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContentCollapse" aria-expanded="true" aria-controls="modifContentCollapse">
         <h2>Modification proposée</h2>
       </button>
       <div class="collapse show p-2" id="modifContentCollapse">
         <p>C'est juste un nouveau texte</p>
       </div>
+      <% if current_user == @project.user && @modification.status == "pending" %>
+        <div class="valid-btns text-right">
+          <%= link_to "Valider la modification", validate_modification_path(@modification), method: :patch, class: "btn btn-primary btn-validate" %>
+          <%= link_to "Refuser la modification", deny_modification_path(@modification), method: :patch, class: "btn btn-flat btn-deny" %>
+        </div>
+      <% elsif @modification.status == "accepted" %>
+        <h4 class="text-right">La modification à été <strong>validée</strong></h4>
+      <% elsif @modification.status == "denied" %>
+        <h4 class="text-right">La modification à été <strong>refusée</strong></h4>
+      <% else %>
+        <h4 class="text-right">La modification est en cours de <strong>discussion</strong></h4>
+      <% end %>
     </div>
   </div>
 <% end %>

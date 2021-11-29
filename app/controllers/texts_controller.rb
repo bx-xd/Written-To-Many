@@ -3,7 +3,7 @@ class TextsController < ApplicationController
     @text = Text.find(params[:id])
     @modification = Modification.new(uuid: SecureRandom.alphanumeric(30))
 
-    @modifications = @text.modifications
+    @modifications = @text.modifications.where.not(status: "denied")
 
     @content = JSON.parse(@text.content)
     @modifications.each do |modif|

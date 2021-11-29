@@ -25,17 +25,28 @@ class ModificationsController < ApplicationController
   end
 
   def update
+    @modification = Modification.find(params[:id])
+    @modification.update(context: modification_params[:context], title: modification_params[:title])
+    @modification.discussion.update(context: modification_params[:context], title: modification_params[:title])
+
+    redirect_to discussion_path(@modification.discussion)
   end
 
   def validate
+    @modification = Modification.find(params[:id])
+    @modification.update(status: "accepted")
+    redirect_to discussion_path(@modification.discussion)
   end
 
   def deny
+    @modification = Modification.find(params[:id])
+    @modification.update(status: "denied")
+    redirect_to discussion_path(@modification.discussion)
   end
 
   private
 
   def modification_params
-    params.require(:modification).permit(:content_after, :content_before, :uuid)
+    params.require(:modification).permit(:content_after, :content_before, :uuid, :context, :title)
   end
 end
