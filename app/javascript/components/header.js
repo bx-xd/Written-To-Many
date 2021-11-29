@@ -9,11 +9,9 @@ const header = () => {
     const loadTitle = () => {
 
       Array.from(h1sText).forEach((h1, index) => {
-        const generatedID = `h1-${index}`;
-        h1.setAttribute("id", generatedID);
 
         headersSidebar.insertAdjacentHTML("beforeend",
-        `<button href="#${generatedID}" class="boutonSide">
+        `<button class="boutonSide">
         ${h1.innerText}
         </button>`);
 

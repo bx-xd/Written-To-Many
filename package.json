@@ -5,6 +5,7 @@
     "@editorjs/editorjs": "^2.22.2",
     "@editorjs/header": "^2.6.2",
     "@editorjs/list": "^1.6.2",
+    "@editorjs/paragraph": "^2.8.0",
     "@rails/actioncable": "^6.0.0",
     "@rails/actiontext": "^6.0.4-1",
     "@rails/activestorage": "^6.0.0",
