@@ -26,7 +26,8 @@ class ModificationsController < ApplicationController
 
   def update
     @modification = Modification.find(params[:id])
-    @modification.update(context: modification_params[:context])
+    @modification.update(context: modification_params[:context], title: modification_params[:title])
+    @modification.discussion.update(context: modification_params[:context], title: modification_params[:title])
 
     redirect_to discussion_path(@modification.discussion)
   end
@@ -46,6 +47,6 @@ class ModificationsController < ApplicationController
   private
 
   def modification_params
-    params.require(:modification).permit(:content_after, :content_before, :uuid, :context)
+    params.require(:modification).permit(:content_after, :content_before, :uuid, :context, :title)
   end
 end
