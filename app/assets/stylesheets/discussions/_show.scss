@@ -90,6 +90,20 @@
       box-shadow: none !important;
     }
   }
+
+  .add-context-form {
+    text-align: right;
+
+    .add-context-btn {
+      padding: 0.4rem 1rem;
+    }
+  }
+
+  .valid-btns {
+    .btn {
+      padding: 0.4rem 1rem;
+    }
+  }
 }
 
 .new-post-box {
