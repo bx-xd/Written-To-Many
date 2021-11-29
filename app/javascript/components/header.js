@@ -1,11 +1,11 @@
 const header = () => {
   const txtEditor = document.querySelector("#editorjs");
-  const headersSidebars = document.querySelector("#list_titles");
 
   if (txtEditor) {
+    const headersSidebars = document.querySelector("#list_titles");
+    const h1sText = txtEditor.getElementsByTagName("h1");
     // Permet d'afficher les titres H1 dans la sidebar
     const loadTitle = () => {
-      const h1sText = txtEditor.getElementsByTagName("h1");
 
       Array.from(h1sText).forEach((h1, index) => {
         const generatedID = `h1-${index}`;

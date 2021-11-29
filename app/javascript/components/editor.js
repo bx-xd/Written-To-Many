@@ -19,8 +19,14 @@ const initEditor = () => {
       holder: 'editorjs',
 
       tools: {
-        header: Header,
-        list: List,
+        header: {
+          class: Header,
+          inlineToolbar: true,
+        },
+        list: {
+          class: List,
+          inlineToolbar: true,
+        },
         text: {
           class: Text,
           inlineToolbar: true,
