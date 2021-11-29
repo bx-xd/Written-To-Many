@@ -1,5 +1,5 @@
 <%= simple_form_for [@text, @modification] do |f| %>
-  <%= f.input :content_before, as: :hidden %>
+  <%= f.input :content_before, as: :hidden, value: @content.to_json %>
   <%= f.input :content_after, as: :hidden %>
 <% end %>
 

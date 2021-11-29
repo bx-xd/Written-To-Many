@@ -5,6 +5,11 @@ class DiscussionsController < ApplicationController
     @posts = @discussion.posts
     @post = Post.new
     @contributors = @posts.map(&:user).uniq
+
+    @text = @project.text
+    if @discussion.modification
+      @modification_content = JSON.parse(@discussion.modification.content_after)["blocks"] - JSON.parse(@discussion.modification.content_before)["blocks"]
+    end
   end
 
   def index

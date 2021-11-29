@@ -47,15 +47,7 @@ const initEditor = () => {
           const afterInput = document.getElementById("modification_content_after")
           afterInput.value = JSON.stringify(savedData)
 
-          fetch(url, {
-            method: 'POST',
-            headers: { 'Accept': 'text/plain' },
-            body: new FormData(form)
-          })
-            .then(response => response.text())
-            .then((data) => {
-              console.log(data);
-            })
+          form.submit()
         })
     })
   }

@@ -13,10 +13,10 @@ class ModificationsController < ApplicationController
 
 
     if @modification.save
-      Discussion.create(modification: @modification, title: "Nouvelle modification", project: @text.project)
+      @discussion = Discussion.create(modification: @modification, title: "Nouvelle modification", project: @text.project)
 
       respond_to do |format|
-        format.html { redirect_to project_discussions_path(@text.project), notice: "Votre modif a été envoyée !" }
+        format.html { redirect_to discussion_path(@discussion), notice: "Votre modif a été envoyée !" }
         format.text
       end
     else
