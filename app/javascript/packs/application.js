@@ -43,8 +43,8 @@ document.addEventListener('turbolinks:load', () => {
   header();
   initEditor();
   dashboard_tabs();
-  // toggle();
-  // saveBtn();
+  toggle();
+  saveBtn();
 });
 
 import "controllers"
