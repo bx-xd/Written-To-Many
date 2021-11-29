@@ -72,7 +72,7 @@
     </div>
 
     <div class="colonne content" id="dashboard-rental">
-      <div class="dashboard-cards-projects" >
+      <div class="dashboard-cards-projects", style="padding: 0px 16px;" >
         <% @projects.each do |project| %>
           <div class="card-project">
             <%= link_to(text_path(project.text)) do %>

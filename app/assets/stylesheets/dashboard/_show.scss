@@ -10,6 +10,9 @@
   }
 }
 
+.content.active {
+  width: 100%;
+}
 
 .dashboard-container>h1 {
   color:$light-gray;
@@ -33,6 +36,7 @@
   display: flex;
   border-bottom: 1px solid $light-gray;
   align-items: center;
+  margin-bottom: 0px;
     a{
       color: black;
     }
@@ -89,6 +93,8 @@
   grid-template-columns: 1fr;
   grid-gap: 32px;
   justify-items: center;
+  width: 100%;
+  padding: 0px 16px;
 }
 
 .dashboard-infos {
