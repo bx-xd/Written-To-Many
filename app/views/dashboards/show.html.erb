@@ -11,6 +11,7 @@
           <div class="subinfos">
             <p>Contributeur dans <%= @contributions.count %> projets</p>
             <p>Créateur de <%= @projects.count %> projets</p>
+            <p> <%= @character %> caractères écrits</p>
           </div>
         </div>
       </div>
@@ -26,19 +27,21 @@
   <div class="row">
     <div class="colonne tabs">
       <ul class="list-inline tabs-underlined">
-        <li>
-          <a data-content-active="dashboard-show" href="#dashboard-show" class="tab-underlined active">Dernières Modifications</a>
+        <li data-content-active="dashboard-show" class="tab-underlined active">
+          <i class="fas fa-bell"></i>
+          <a href="#dashboard-show">Dernières Modifications</a>
         </li>
-        <li>
+        <li data-content-active="dashboard-rental" class="tab-underlined">
+          <i class="fas fa-pen"></i>
+          <a href="#dashboard-rental">Mes projets</a>
+        </li>
+        <li data-content-active="dashboard-resa" class="tab-underlined">
           <i class="fas fa-pencil-ruler"></i>
-          <a data-content-active="dashboard-rental" href="#dashboard-rental" class="tab-underlined">Mes projets</a>
+          <a href="#dashboard-resa">Mes contributions</a>
         </li>
-        <li>
-          <i class="fas fa-pencil-ruler"></i>
-          <a data-content-active="dashboard-resa" href="#dashboard-resa" class="tab-underlined">Mes contributions</a>
-        </li>
-        <li>
-          <a class="create-project" href="#">+ Nouveau Projet</a>
+        <li class="create-project">
+          <i class="fas fa-plus"></i>
+          <a href="#">Nouveau Projet</a>
         </li>
       </ul>
     </div>
@@ -131,14 +134,20 @@
               <ul class="list-modifications">
                 <div class="list">
                   <% project.text.modifications.last(3).each do |modification| %>
-                    <%= link_to("#") do %>
+                    <%= link_to(discussion_path(modification.id)) do %>
                       <li><%= modification.context %></li>
                     <% end %>
                   <% end %>
                 </div>
               </ul>
               <div class="last-modification">
-                <p><strong>Votre dernière contribution:</strong>  Aucune</p>
+                <% if project.modifications.where(user: current_user).last %>
+                  <%= link_to(discussion_path(project.modifications.where(user: current_user).last.id)) do %>
+                    <p><strong>Votre dernière contribution:</strong> <%= project.modifications.where(user: current_user).last.context%> </p>
+                  <% end %>
+                <% else %>
+                 <p><strong>Votre dernière contribution:</strong> Aucune </p>
+                <% end %>
               </div>
             </div>
           </div>

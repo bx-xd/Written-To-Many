@@ -104,6 +104,9 @@
   .avatar {
     margin-right:-16px;
     border: 1px solid $light-grey;
+    &:last-child {
+      margin-right:0px;
+    }
   }
   .avatar.latest {
     margin-right: 3px;
@@ -160,6 +163,11 @@
   justify-content: space-between;
   li {
     border-left:2px solid $medium-gray;
+    font-size:14px;
+    opacity:.75;
+  }
+  .last-modification {
+    font-size:14px;
   }
 }
 

@@ -23,8 +23,8 @@
 }
 
 .dashboard-container {
-  border: 2px solid rgba(128, 128, 128, 0.322);
-  border-radius: 3px;
+  border: 1px solid $super-light;
+  border-radius: 2px;
   margin-bottom: 2rem;
 
   .tabs {
@@ -34,33 +34,45 @@
   .list-inline{
   padding: 0rem 1rem;
   display: flex;
-  border-bottom: 1px solid $light-gray;
+  border-bottom: 1px solid $super-light;
   align-items: center;
   margin-bottom: 0px;
     a{
       color: black;
     }
 
-    .create-project {
-      font-family: $BP-bold;
-      color: $primary-light;
-    }
-
     li{
       list-style: none;
       color: black;
       margin: 16px;
+      font-size:18px;
+      font-family:$BP-med;
 
       &:hover {
         cursor: pointer;
         color: $primary-light
+      }
+      &:not(.active) {
+        opacity:.5;
+      }
+    }
+
+    .create-project {
+      font-family: $BP-bold;
+      opacity:1 !important;
+      a {
+        color: $primary-light !important;
+      }
+      i{
+        color: $primary-light !important;
       }
     }
 
     .active {
       font-weight: bold;
       border-bottom: 4px solid #e03715;
-      padding-bottom: 16px;
+      padding-bottom: 17px;
+      margin-bottom:0px;
     }
   }
 }
