@@ -154,9 +154,11 @@
   margin:12px 0 12px 12px;
   color:$gray;
   opacity:.8;
-  border-left:2px solid $medium-gray;
-  padding:0;
+  padding:25px;
   background-color: $light-grey;
+  li {
+    border-left:2px solid $medium-gray;
+  }
 }
 
 .list-modifications li:before {

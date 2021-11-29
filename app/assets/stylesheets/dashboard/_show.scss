@@ -24,10 +24,15 @@
   border-radius: 3px;
   margin-bottom: 2rem;
 
+  .tabs {
+    width: 100%;
+  }
+
   .list-inline{
-  padding: 0.5rem 1rem;
+  padding: 0rem 1rem;
   display: flex;
   border-bottom: 1px solid $light-gray;
+  align-items: center;
     a{
       color: black;
     }
@@ -39,7 +44,6 @@
 
     li{
       list-style: none;
-      padding: 0.5rem;
       color: black;
       margin: 16px;
 
@@ -51,7 +55,7 @@
     .active {
       font-weight: bold;
       border-bottom: 4px solid #e03715;
-      padding-bottom: 32px;
+      padding-bottom: 16px;
     }
   }
 }
