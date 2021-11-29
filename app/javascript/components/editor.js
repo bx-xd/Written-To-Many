@@ -1,5 +1,5 @@
 import EditorJS from '@editorjs/editorjs';
-import Header from '@editorjs/header';
+// import Header from '@editorjs/header';
 import List from '@editorjs/list';
 
 const initEditor = () => {
