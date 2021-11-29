@@ -1,3 +1,56 @@
+.card-notif {
+  position:relative;
+}
+
+.card-notif:after {
+    content:'';
+    height:1px;
+    width:100%;
+    bottom:-16px;
+    background:$super-light;
+    position:absolute;
+}
+
+.card-notif-head{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  .avatar {
+    margin-right:8px;
+    width:32px;
+    height:32px;
+  }
+  .notif-main-infos {
+    margin:0;
+  }
+  .notif-head-info {
+    display:flex;
+    align-items: center;
+  }
+  p {
+    font-size: 16px;
+    margin:0;
+  }
+  .subtitle, .notif-head-time, .notif-head-time p {
+    font-size: 14px !important;
+    color: $light-gray;
+    margin:0;
+  }
+}
+
+.card-notif-body {
+  border: 1px solid $super-light;
+  border-radius:  2px;
+  padding: 16px;
+  margin-top: 8px;
+  margin-left:40px;
+  p {
+    font-size: 14px;
+    line-height: 25px;
+    opacity:  0.7;
+  }
+}
+
 .dashboard-card {
   width: 345px;
   height: 240px;
@@ -44,14 +97,16 @@
   width: 100%;
   background: white;
   background-size: cover;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border: 1px solid $light-grey;
   display: flex;
   align-items: center;
   margin:16px auto;
   .avatar {
     margin-right:-16px;
-    box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.46);
     border: 1px solid $light-grey;
+    &:last-child {
+      margin-right:0px;
+    }
   }
   .avatar.latest {
     margin-right: 3px;
@@ -81,28 +136,39 @@
   height: 100%;
 }
 .card-project-header {
-  display: flex;
-  justify-content: space-between;
+  .card-project-header-infos {
+    display: flex;
+    justify-content: space-between;
+  }
+  .date-infos {
+    display: flex;
+    justify-content: space-between;
+  }
   p {
+    margin: 8px;
     color: $medium-gray
   }
 }
 
-.card-project-footer {
-  display: flex;
-  justify-content: space-between;
-  .card-contributor {
-    margin-right: 45px;
-  }
-}
 
 .list-modifications {
   list-style: none;
   margin:12px 0 12px 12px;
   color:$gray;
   opacity:.8;
-  border-left:2px solid $medium-gray;
-  padding:0;
+  padding:25px;
+  background-color: $light-grey;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  li {
+    border-left:2px solid $medium-gray;
+    font-size:14px;
+    opacity:.75;
+  }
+  .last-modification {
+    font-size:14px;
+  }
 }
 
 .list-modifications li:before {

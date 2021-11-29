@@ -1,24 +1,17 @@
 .dashboard-navbar {
-  background-color: $light-grey;
-  display: flex;
-  padding: 1.5rem;
-  justify-content: space-between;
-  align-items: center;
-  h1 {
-    color: black;
-    margin-left: 2rem;
-  }
-  .btn-primary {
-    padding: 0.7rem 2rem;
-    font-size: 1.1rem;
-  }
-
-  .dashboard-links {
+  background-color: $ultra-light;
+  // box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 2rem;
+  position: relative;
+  border-bottom: 1px solid $super-light;
+  .navbar-head {
     display: flex;
-    justify-content: space-around;
-    flex-direction: column;
+    justify-content: space-between;
   }
+}
 
+.content.active {
+  width: 100%;
 }
 
 .dashboard-container>h1 {
@@ -30,10 +23,61 @@
 }
 
 .dashboard-container {
-  background-color: $light-grey;
-  margin-top: 4rem;
-  border-radius: 0.8rem;
+  border: 1px solid $super-light;
+  border-radius: 2px;
+  margin-bottom: 2rem;
+
+  .tabs {
+    width: 100%;
+  }
+
+  .list-inline{
+  padding: 0rem 1rem;
+  display: flex;
+  border-bottom: 1px solid $super-light;
+  align-items: center;
+  margin-bottom: 0px;
+    a{
+      color: black;
+    }
+
+    li{
+      list-style: none;
+      color: black;
+      margin: 16px;
+      font-size:18px;
+      font-family:$BP-med;
+
+      &:hover {
+        cursor: pointer;
+        color: $primary-light
+      }
+      &:not(.active) {
+        opacity:.5;
+      }
+    }
+
+    .create-project {
+      font-family: $BP-bold;
+      opacity:1 !important;
+      a {
+        color: $primary-light !important;
+      }
+      i{
+        color: $primary-light !important;
+      }
+    }
+
+    .active {
+      font-weight: bold;
+      border-bottom: 4px solid #e03715;
+      padding-bottom: 17px;
+      margin-bottom:0px;
+    }
+  }
 }
+
+
 
 .dashboard-user-column {
   display:flex;
@@ -54,10 +98,6 @@
 
 .dashboard-cards{
   margin: 24px 24px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 32px;
-  justify-items: center;
 }
 
 .dashboard-cards-project {
@@ -66,7 +106,10 @@
   grid-template-columns: 1fr;
   grid-gap: 32px;
   justify-items: center;
+  width: 100%;
+  padding: 0px 16px;
 }
+
 .dashboard-infos {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -113,33 +156,32 @@ a {
 
 // Style des tabs de navigation
 
-.dashboard-container {
+// .dashboard-container {
+  // .list-inline {
+  //   display: flex;
+  //   justify-content: center;
+  //   padding: 15px;
+  //   li>a{
+  //     color: rgb(104, 104, 104);
+  //     padding: 5px 40px;
+  //     font-family: $BP-bold;
+  //     &:hover {
+  //       color: $gray;
+  //       text-decoration: underline;
+        // transition-duration: 0.15s;
+  //       text-underline-offset: 0.5rem;
+  //       text-decoration-thickness: 3px;
+  //     }
+  //   }
 
-  .list-inline {
-    display: flex;
-    justify-content: center;
-    padding: 15px;
-    li>a{
-      color: rgb(104, 104, 104);
-      padding: 5px 40px;
-      font-family: $BP-bold;
-      &:hover {
-        color: $gray;
-        text-decoration: underline;
-        transition-duration: 0.15s;
-        text-underline-offset: 0.5rem;
-        text-decoration-thickness: 3px;
-      }
-    }
-
-    a.active {
-      color: $gray;
-      text-decoration: underline;
-      text-underline-offset: 0.5rem;
-      text-decoration-thickness: 3px;
-    }
-  }
-}
+  //   a.active {
+  //     color: $gray;
+  //     text-decoration: underline;
+  //     text-underline-offset: 0.5rem;
+  //     text-decoration-thickness: 3px;
+  //   }
+  // }
+// }
 
 
 .content {

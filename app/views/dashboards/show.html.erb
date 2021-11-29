@@ -1,71 +1,98 @@
 <div class="dashboard-navbar">
-  <h1>Dashboard</h1>
-  <div class="dashboard-links">
-    <a class="btn btn-primary" href="#">Créer un projet</a>
-    <%= link_to "Deconnexion", destroy_user_session_path, method: :delete, class: "btn btn-ghost" %>
+  <div class="container">
+    <div class="navbar-page-info">
+      <div class="navbar-body">
+        <%= cl_image_tag current_user.photo.key, class: 'navbar-page-image' %>
+
+        <div class="navbar-info">
+          <h1 class="username"><%= @user.username.capitalize %></h1>
+          <div class="subtitle">Membre depuis le 21.02.2012</div>
+
+          <div class="subinfos">
+            <p>Contributeur dans <%= @contributions.count %> projets</p>
+            <p>Créateur de <%= @projects.count %> projets</p>
+            <p> <%= @character %> caractères écrits</p>
+          </div>
+        </div>
+      </div>
+      <div class="link"><%= link_to "Deconnexion", destroy_user_session_path, method: :delete %></div>
+    </div>
+
   </div>
 </div>
 
 
 <div class="container dashboard-container col-11">
-  <div class="tabs">
-    <ul class="list-inline tabs-underlined">
-      <li>
-        <a data-content-active="dashboard-show" href="#dashboard-show" class="tab-underlined active">Aperçu</a>
-      </li>
-      <li>
-        <a data-content-active="dashboard-rental" href="#dashboard-rental" class="tab-underlined">Mes projets</a>
-      </li>
-      <li>
-        <a data-content-active="dashboard-resa" href="#dashboard-resa" class="tab-underlined">Mes contributions</a>
-      </li>
-    </ul>
-  </div>
 <%# La classe 'content' et 'active' sont là pour le JS. Elles permettent de faire jouer le display %>
   <div class="row">
-    <div class="colonne dashboard-user-column col-3">
-      <%= cl_image_tag current_user.photo.key, class: 'avatar-dashboard mb-4' %>
-      <p class="username"><%= @user.username.capitalize %></p>
-      <div class="user-info">
-        <p>Contributeur dans <%= @contributions.count %> projets</p>
-        <p>Créateur de <%= @projects.count %> projets</p>
-      </div>
+    <div class="colonne tabs">
+      <ul class="list-inline tabs-underlined">
+        <li data-content-active="dashboard-show" class="tab-underlined active">
+          <i class="fas fa-bell"></i>
+          <a href="#dashboard-show">Dernières Modifications</a>
+        </li>
+        <li data-content-active="dashboard-rental" class="tab-underlined">
+          <i class="fas fa-pen"></i>
+          <a href="#dashboard-rental">Mes projets</a>
+        </li>
+        <li data-content-active="dashboard-resa" class="tab-underlined">
+          <i class="fas fa-pencil-ruler"></i>
+          <a href="#dashboard-resa">Mes contributions</a>
+        </li>
+        <li class="create-project">
+          <i class="fas fa-plus"></i>
+          <a href="#">Nouveau Projet</a>
+        </li>
+      </ul>
     </div>
-    <div class="colonne col-9 p-2 content active" id="dashboard-show" >
+    <div class="colonne content active" id="dashboard-show" >
       <div class="dashboard-cards" >
-        <% @projects.each do |project| %>
-          <%= link_to(text_path(project.text)) do %>
-            <div class="dashboard-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path project.photo.key %>')">
-              <h4><%= project.title %></h4>
-              <div class="card-info-apercu">
-                <p>crée le <%= project.created_at.strftime("%d.%m.%Y") %></p>
-                <div class="card-contributor"><% project.contributors.each do |contributor| %>
-                    <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
-                  <% end %>
-                </div>
+        <div class="card-notif">
+          <div class="card-notif-head">
+            <div class="notif-head-info">
+              <%= cl_image_tag @random_user_two.photo.key, class: "avatar" %>
+              <div>
+                <p class="notif-main-infos"><strong><%= @random_user_two.username.capitalize %></strong> a repondu à <strong><%= @random_user_two.projects.last.modifications.last.context %></strong></p>
+                <p class="subtitle">Dans <strong><%= @random_user_two.projects.last.title %></strong> de <strong> <%= @random_user_two.projects.last.user.username.capitalize %></strong></p>
               </div>
             </div>
-          <% end %>
-        <% end %>
-        <% @contributions.each do |contribution| %>
-          <%= link_to(text_path(contribution.text)) do %>
-            <div class="dashboard-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path contribution.photo.key %>')">
-              <h4><%= contribution.title %></h4>
-              <div class="card-info-apercu">
-                <p>crée le <%= contribution.created_at.strftime("%d.%m.%Y") %></p>
-                <div class="card-contributor"><% contribution.contributors.each do |contributor| %>
-                    <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
-                  <% end %>
-                </div>
+            <div class="notif-head-time">
+              <p>2 hours ago</p>
+            </div>
+          </div>
+          <div class="card-notif-body">
+            <p>Il y a, dans le moment où Jean se chahute avec ses camarades, une situation dramatique
+            qui à mon sens mériterait d'être mieux traité.
+            J'ai réécris un des passage et me suis permis d'étoffer d'autres où on passait rapidement dessus
+            histoire d'appuyer cette idée d'une situation dramatique, sans trop être tire larme.</p>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-cards" >
+        <div class="card-notif">
+          <div class="card-notif-head">
+            <div class="notif-head-info">
+              <%= cl_image_tag @random_user.photo.key, class: "avatar" %>
+              <div>
+                <p class="notif-main-infos"><strong><%= @random_user.username.capitalize %></strong> à ajouter une modification: <strong><%= @random_user.modifications.last.context %></strong></p>
+                <p class="subtitle">Dans <strong><%= @random_user.modifications.last.text.project.title %></strong> de <strong> <%= @random_user.modifications.last.text.project.user.username.capitalize %></strong></p>
               </div>
             </div>
-          <% end %>
-        <% end %>
+            <div class="notif-head-time">
+              <p>22 hours ago</p>
+            </div>
+          </div>
+          <div class="card-notif-body">
+            <p>Il y a, dans le moment où Jean se chahute avec ses camarades, une situation dramatique
+            qui à mon sens mériterait d'être mieux traité.
+            J'ai réécris un des passage et me suis permis d'étoffer d'autres où on passait rapidement dessus
+            histoire d'appuyer cette idée d'une situation dramatique, sans trop être tire larme.</p>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="colonne col-9 p-2 content" id="dashboard-rental">
-      <div class="dashboard-cards-projects" >
+    <div class="colonne content" id="dashboard-rental">
+      <div class="dashboard-cards-projects", style="padding: 0px 16px;" >
         <% @projects.each do |project| %>
           <div class="card-project">
             <%= link_to(text_path(project.text)) do %>
@@ -76,62 +103,69 @@
                 <%= link_to(text_path(project.text)) do %>
                   <h4><%= project.title %></h4>
                 <% end %>
-                <p>crée le <%= project.created_at.strftime("%d.%m.%Y") %></p>
+                <div class="card-project-header-infos">
+                  <div class="date-infos">
+                    <p>crée le <strong><%= project.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <p>modificé le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
+                  </div>
+                  <div class="card-contributor"><% project.contributors.each do |contributor| %>
+                      <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
+                    <% end %>
+                  </div>
+                </div>
               </div>
               <ul class="list-modifications">
                 <% project.text.modifications.each do |modification| %>
-                  <%= link_to("#") do %>
-                    <li><%= modification.context %></li>
+                  <%= link_to(discussion_path(modification.id)) do %>
+                      <li><%= modification.context %></li>
                   <% end %>
                 <% end %>
               </ul>
-              <div class="card-project-footer">
-                <div class="last-modification">
-                  <% if project.modifications.where(status: "pending").any? %>
-                    <%= cl_image_tag project.modifications.where(status: "pending").order("created_at DESC").first.user.photo.key, crop: :thumb, width: 50, class: "avatar latest" %>
-                    <p>a proposé une modification non-résolue</p>
-                  <% end %>
-                </div>
-                <div class="card-contributor"><% project.contributors.each do |contributor| %>
-                    <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
-                  <% end %>
-                </div>
-              </div>
             </div>
           </div>
         <% end %>
       </div>
     </div>
-
-    <div class="colonne col-9 p-2 content" id="dashboard-resa">
-      <div class="dashboard-cards-projects" >
+    <div class="colonne content" id="dashboard-resa">
+      <div class="dashboard-cards-projects", style="padding: 0px 16px;" >
         <% @contributions.each do |project| %>
           <div class="card-project">
             <%= link_to(text_path(project.text)) do %>
-              <%= cl_image_tag project.photo.key, class: "project-img" %>
+              <%= cl_image_tag project.photo.key, class: "project-img"%>
             <% end %>
             <div class="card-project-info">
               <div class="card-project-header">
                 <%= link_to(text_path(project.text)) do %>
                   <h4><%= project.title %></h4>
                 <% end %>
-                <p>crée le <%= project.created_at.strftime("%d.%m.%Y") %></p>
+                <div class="card-project-header-infos">
+                  <div class="date-infos">
+                    <p>crée le <strong><%= project.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <p>modificé le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
+                  </div>
+                  <div class="card-contributor"><% project.contributors.each do |contributor| %>
+                      <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
+                    <% end %>
+                  </div>
+                </div>
               </div>
               <ul class="list-modifications">
-                <% project.text.modifications.each do |modification| %>
-                  <%= link_to(project_discussions_path(project)) do %>
-                  <li><%= modification.context %></li>
+                <div class="list">
+                  <% project.text.modifications.last(3).each do |modification| %>
+                    <%= link_to(discussion_path(modification.id)) do %>
+                      <li><%= modification.context %></li>
+                    <% end %>
                   <% end %>
-                <% end %>
+                </div>
               </ul>
-              <div class="card-project-footer">
-                <div class="last-modification">
-                  <p><strong>Votre dernière contribution:</strong>  Aucune</p>
-                </div>
-                <div class="card-contributor"><% project.contributors.each do |contributor| %>
-                    <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
+              <div class="last-modification">
+                <% if project.modifications.where(user: current_user).last %>
+                  <%= link_to(discussion_path(project.modifications.where(user: current_user).last.id)) do %>
+                    <p><strong>Votre dernière contribution:</strong> <%= project.modifications.where(user: current_user).last.context%> </p>
                   <% end %>
-                </div>
+                <% else %>
+                 <p><strong>Votre dernière contribution:</strong> Aucune </p>
+                <% end %>
               </div>
             </div>
           </div>

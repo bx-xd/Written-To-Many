@@ -1,0 +1,41 @@
+<%# Cards des projets aperçu dashboard %>
+        <% @projects.each do |project| %>
+          <%= link_to(text_path(project.text)) do %>
+            <div class="dashboard-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path project.photo.key %>')">
+              <h4><%= project.title %></h4>
+              <div class="card-info-apercu">
+                <p>crée le <%= project.created_at.strftime("%d.%m.%Y") %></p>
+                <div class="card-contributor"><% project.contributors.each do |contributor| %>
+                    <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+        <% @contributions.each do |contribution| %>
+          <%= link_to(text_path(contribution.text)) do %>
+            <div class="dashboard-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path contribution.photo.key %>')">
+              <h4><%= contribution.title %></h4>
+              <div class="card-info-apercu">
+                <p>crée le <%= contribution.created_at.strftime("%d.%m.%Y") %></p>
+                <div class="card-contributor"><% contribution.contributors.each do |contributor| %>
+                    <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+
+<%# NAVBAR %>
+        <div class="dashboard-links">
+        <div class="nav-item dropdown avatar-btn">
+          <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <%= link_to "Mon compte", dashboard_path, class: "dropdown-item" %>
+            <%= link_to "Deconnexion", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </div>
+        <a class="btn btn-primary" href="#">Créer un projet</a>
+      </div>
