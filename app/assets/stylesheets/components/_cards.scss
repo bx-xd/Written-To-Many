@@ -155,6 +155,9 @@
   opacity:.8;
   padding:25px;
   background-color: $light-grey;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   li {
     border-left:2px solid $medium-gray;
   }

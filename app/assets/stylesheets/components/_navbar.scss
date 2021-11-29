@@ -17,10 +17,14 @@
   h1 {
     font-size: 32px !important;
   }
-  .subtitle, .subinfos p {
+  .subtitle, .subinfos p, .link, a {
     font-size: 14px;
     color: $light-gray;
     margin:0;
+  }
+
+  .link:hover {
+    color: black
   }
 
   .subinfos {

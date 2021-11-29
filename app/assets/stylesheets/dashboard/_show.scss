@@ -53,6 +53,7 @@
 
       &:hover {
         cursor: pointer;
+        color: $primary-light
       }
     }
 
@@ -155,7 +156,7 @@ a {
   //     &:hover {
   //       color: $gray;
   //       text-decoration: underline;
-  //       transition-duration: 0.15s;
+        // transition-duration: 0.15s;
   //       text-underline-offset: 0.5rem;
   //       text-decoration-thickness: 3px;
   //     }

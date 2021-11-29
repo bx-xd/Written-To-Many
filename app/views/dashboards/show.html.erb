@@ -14,7 +14,7 @@
           </div>
         </div>
       </div>
-      <div class="link">Deconnexion</div>
+      <div class="link"><%= link_to "Deconnexion", destroy_user_session_path, method: :delete %></div>
     </div>
 
   </div>
@@ -70,7 +70,6 @@
         </div>
       </div>
     </div>
-
     <div class="colonne content" id="dashboard-rental">
       <div class="dashboard-cards-projects", style="padding: 0px 16px;" >
         <% @projects.each do |project| %>
@@ -107,34 +106,39 @@
       </div>
     </div>
     <div class="colonne content" id="dashboard-resa">
-      <div class="dashboard-cards-projects" >
+      <div class="dashboard-cards-projects", style="padding: 0px 16px;" >
         <% @contributions.each do |project| %>
           <div class="card-project">
             <%= link_to(text_path(project.text)) do %>
-              <%= cl_image_tag project.photo.key, class: "project-img" %>
+              <%= cl_image_tag project.photo.key, class: "project-img"%>
             <% end %>
             <div class="card-project-info">
               <div class="card-project-header">
                 <%= link_to(text_path(project.text)) do %>
                   <h4><%= project.title %></h4>
                 <% end %>
-                <p>crée le <%= project.created_at.strftime("%d.%m.%Y") %></p>
+                <div class="card-project-header-infos">
+                  <div class="date-infos">
+                    <p>crée le <strong><%= project.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <p>modificé le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
+                  </div>
+                  <div class="card-contributor"><% project.contributors.each do |contributor| %>
+                      <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
+                    <% end %>
+                  </div>
+                </div>
               </div>
               <ul class="list-modifications">
-                <% project.text.modifications.each do |modification| %>
-                  <%= link_to(project_discussions_path(project)) do %>
-                  <li><%= modification.context %></li>
+                <div class="list">
+                  <% project.text.modifications.last(3).each do |modification| %>
+                    <%= link_to("#") do %>
+                      <li><%= modification.context %></li>
+                    <% end %>
                   <% end %>
-                <% end %>
+                </div>
               </ul>
-              <div class="card-project-footer">
-                <div class="last-modification">
-                  <p><strong>Votre dernière contribution:</strong>  Aucune</p>
-                </div>
-                <div class="card-contributor"><% project.contributors.each do |contributor| %>
-                    <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
-                  <% end %>
-                </div>
+              <div class="last-modification">
+                <p><strong>Votre dernière contribution:</strong>  Aucune</p>
               </div>
             </div>
           </div>
