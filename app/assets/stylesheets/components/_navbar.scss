@@ -22,15 +22,34 @@
     color: $light-gray;
     margin:0;
   }
-
   .link:hover {
     color: black
   }
-
+  .navbar-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
   .subinfos {
     display: flex;
     p {
       margin-right:24px;
     }
+  }
+  .avatar {
+    margin-right:-16px;
+    border: 1px solid $light-grey;
+    &:last-child {
+      margin-right:0px;
+    }
+  }
+
+  .avatar.latest {
+    margin-right: 3px;
+  }
+  .add-contributor {
+    color: $primary-light;
+    font-size: 16px;
+    font-family: $BP-bold
   }
 }

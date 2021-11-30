@@ -7,7 +7,6 @@
         <div class="navbar-info">
           <h1 class="username"><%= @user.username.capitalize %></h1>
           <div class="subtitle">Membre depuis le 21.02.2012</div>
-
           <div class="subinfos">
             <p>Contributeur dans <%= @contributions.count %> projets</p>
             <p>Créateur de <%= @projects.count %> projets</p>
@@ -22,9 +21,9 @@
 </div>
 
 
-<div class="container dashboard-container col-11">
+<div class="container">
 <%# La classe 'content' et 'active' sont là pour le JS. Elles permettent de faire jouer le display %>
-  <div class="row">
+  <div class="dashboard-container">
     <div class="colonne tabs">
       <ul class="list-inline tabs-underlined">
         <li data-content-active="dashboard-show" class="tab-underlined active">
@@ -110,7 +109,8 @@
                       <p>modifié le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
                     <% end %>
                   </div>
-                  <div class="card-contributor"><% project.contributors.each do |contributor| %>
+                  <div class="card-contributor">
+                    <% project.contributors.each do |contributor| %>
                       <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
                     <% end %>
                   </div>
@@ -119,8 +119,8 @@
               <% if project.modifications.any? %>
               <ul class="list-modifications">
                 <% project.text.modifications.each do |modification| %>
-                  <%= link_to(discussion_path(modification.id)) do %>
-                      <li><%= modification.context %></li>
+                  <%= link_to(discussion_path(modification.discussion)) do %>
+                      <li><%= modification.title %></li>
                   <% end %>
                 <% end %>
               <% end %>
@@ -144,8 +144,8 @@
                 <% end %>
                 <div class="card-project-header-infos">
                   <div class="date-infos">
-                    <p>crée le <strong><%= project.created_at.strftime("%d.%m.%Y") %></strong></p>
-                    <p>modificé le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <p>créé le <strong><%= project.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <p>modifié le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
                   </div>
                   <div class="card-contributor"><% project.contributors.each do |contributor| %>
                       <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
@@ -156,16 +156,16 @@
               <ul class="list-modifications">
                 <div class="list">
                   <% project.text.modifications.last(3).each do |modification| %>
-                    <%= link_to(discussion_path(modification.id)) do %>
-                      <li><%= modification.context %></li>
+                    <%= link_to(discussion_path(modification.discussion)) do %>
+                      <li><%= modification.title %></li>
                     <% end %>
                   <% end %>
                 </div>
               </ul>
               <div class="last-modification">
                 <% if project.modifications.where(user: current_user).last %>
-                  <%= link_to(discussion_path(project.modifications.where(user: current_user).last.id)) do %>
-                    <p><strong>Votre dernière contribution:</strong> <%= project.modifications.where(user: current_user).last.context%> </p>
+                  <%= link_to(discussion_path(project.modifications.where(user: current_user).last.discussion)) do %>
+                    <p><strong>Votre dernière contribution:</strong> <%= project.modifications.where(user: current_user).last.title%> </p>
                   <% end %>
                 <% else %>
                  <p><strong>Votre dernière contribution:</strong> Aucune </p>

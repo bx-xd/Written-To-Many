@@ -25,7 +25,7 @@ class ModificationsController < ApplicationController
       diff.each do |modif_block|
         block = data["blocks"].find { |block| block["id"] == modif_block["id"] }
         block["data"]["class"] = "custom-modification"
-        block["data"]["id"] = @discussion.id
+        block["data"]["id"] = @modification.id
       end
 
       @modification.content_after = data.to_json

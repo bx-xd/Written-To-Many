@@ -41,13 +41,12 @@
       color: black;
     }
 
-    li{
+    li {
       list-style: none;
       color: black;
       margin: 16px;
       font-size:18px;
       font-family:$BP-med;
-
       &:hover {
         cursor: pointer;
         color: $primary-light
