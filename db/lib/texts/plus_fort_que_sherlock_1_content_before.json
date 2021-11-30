@@ -1,12 +1,12 @@
 {
-  "time": 1638029474014,
+  "time": 1638265093396,
   "blocks": [
     {
       "id": "4yAqG2Yjc5",
       "type": "header",
       "data": {
-        "level": 1,
-        "text": "I"
+        "text": "I",
+        "level": 1
       }
     },
     {
@@ -132,8 +132,8 @@
       "id": "q_lFwEx09k",
       "type": "header",
       "data": {
-        "level": 1,
-        "text": "II"
+        "text": "II",
+        "level": 1
       }
     },
     {
@@ -420,16 +420,16 @@
       "id": "iqL7pBn8L_",
       "type": "header",
       "data": {
-        "level": 1,
-        "text": "III"
+        "text": "III",
+        "level": 1
       }
     },
     {
       "id": "mxJr9WkHb7",
       "type": "header",
       "data": {
-        "level": 2,
-        "text": "EXTRAITS DE LETTRES A SA MÈRE"
+        "text": "EXTRAITS DE LETTRES A SA MÈRE",
+        "level": 2
       }
     },
     {
