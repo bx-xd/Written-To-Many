@@ -95,7 +95,7 @@
         <% @projects.each do |project| %>
           <div class="card-project">
             <%= link_to(text_path(project.text)) do %>
-              <%= cl_image_tag project.photo.key, class: "project-img"%>
+              <%= cl_image_tag project.photo.key, class: "project-img" %>
             <% end %>
             <div class="card-project-info">
               <div class="card-project-header">
@@ -105,7 +105,9 @@
                 <div class="card-project-header-infos">
                   <div class="date-infos">
                     <p>créé le <strong><%= project.created_at.strftime("%d.%m.%Y") %></strong></p>
-                    <p>modifié le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <% if project.modifications.any? %>
+                      <p>modifié le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <% end %>
                   </div>
                   <div class="card-contributor">
                     <% project.contributors.each do |contributor| %>
@@ -114,12 +116,14 @@
                   </div>
                 </div>
               </div>
+              <% if project.modifications.any? %>
               <ul class="list-modifications">
                 <% project.text.modifications.each do |modification| %>
                   <%= link_to(discussion_path(modification.discussion)) do %>
                       <li><%= modification.title %></li>
                   <% end %>
                 <% end %>
+              <% end %>
               </ul>
             </div>
           </div>

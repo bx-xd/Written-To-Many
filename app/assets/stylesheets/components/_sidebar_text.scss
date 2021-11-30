@@ -4,8 +4,8 @@
   background-color: #141414;
   position: fixed;
   box-sizing: content-box;
-  transition-duration: 1s;
-  transition-property: width;
+  transition-duration: .3s;
+  transform:translateX(0px);
 
   #sideArrow {
     position: absolute;
@@ -41,6 +41,8 @@
     padding: 20px;
     border-bottom: 1px solid $super-light;
     align-items: center;
+    opacity:1;
+    //transition:2s;
   }
 
   #list_titles {
@@ -65,7 +67,7 @@
   height: 100vh;
   background-color: #141414;
   position: fixed;
-
+  transition: width .5s;
   #sideArrow {
     transition-duration: 1s;
     transition-property: rotate, left;
@@ -85,9 +87,43 @@
 
   #project_title {
     display: none;
+    opacity:0;
+    //transition: opacity 0s;
   }
 
   #list_titles {
     display: none;
+    opacity:0;
+    //transition: opacity 2s;
+  }
+}
+
+#sidebar.collapsed {
+  transform:translateX(-200px);
+  transition:.3s;
+  #sideArrow {
+    transition-duration: 1s;
+    transition-property: rotate, left;
+    transform: rotate(180deg);
+    position: absolute;
+    transform-origin:center;
+    top: 42px;
+    left: 300px;
+    background-color: black;
+    color: white;
+    padding: 7px;
+    width: 33px;
+    font-size: 20px;
+    border-radius: 50%;
+    text-align: center;
+    z-index: 1000;
+  }
+  #project_title {
+    opacity:0;
+  }
+  #list_titles {
+    display: none;
+    opacity:0;
+    //transition: opacity 2s;
   }
 }

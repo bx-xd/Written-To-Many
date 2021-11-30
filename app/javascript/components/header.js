@@ -1,3 +1,5 @@
+import { Button } from "bootstrap";
+
 const header = () => {
   const txtEditor = document.querySelector("#editorjs");
 
@@ -9,40 +11,28 @@ const header = () => {
     const loadTitle = () => {
 
       Array.from(h1sText).forEach((h1, index) => {
+        h1.id = `header-${index}`;
 
-        headersSidebar.insertAdjacentHTML("beforeend",
-        `<button class="boutonSide">
-        ${h1.innerText}
-        </button>`);
+        const btn = document.createElement("button")
+        btn.setAttribute("id", `btn-${index}`)
+        btn.classList.add("boutonSide")
+        btn.innerText = h1.innerText
 
-        const buttonsInside = document.getElementsByClassName("boutonSide")
-        scrollBtn(buttonsInside, h1)
-      });
-    }
+        headersSidebar.appendChild(btn);
 
-    const scrollBtn = (buttons, header) => {
-      if (buttons) {
-        Array.from(buttons).forEach((button) => {
-          button.addEventListener("click", (event) => {
-            event.preventDefault();
-
-            const h1Position = Math.round(header.getBoundingClientRect()["y"]);
-
-            window.scrollTo({
-              top: h1Position,
-              left: 0,
-              behavior: 'smooth'
-            });
+        btn.addEventListener("click", (event) => {
+          const header = document.getElementById(`header-${index}`)
+          header.scrollIntoView({
+            behavior: 'smooth'
           })
         })
-      }
+      });
     }
 
 
     // Permet de charger tous les titres dès que la souris passe sur la page
     document.addEventListener('mousemove', (event) => {
       event.preventDefault();
-
       headersSidebar.innerHTML = "";
 
       loadTitle();

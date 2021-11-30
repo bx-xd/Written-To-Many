@@ -15,5 +15,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :username, presence: true
+  validates :photo, presence: true
   validates :username, uniqueness: true
 end

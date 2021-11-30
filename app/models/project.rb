@@ -8,4 +8,5 @@ class Project < ApplicationRecord
   has_many :discussions
 
   validates :title, presence: true
+  validates :photo, presence: true
 end

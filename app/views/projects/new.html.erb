@@ -10,6 +10,9 @@
         <div class="form-inputs">
           <%= form.input :title %>
           <%= form.input :description %>
+          <%= form.input :photo,
+                          required: true,
+                          as: :file %>
         </div>
 
         <div class="form-actions">

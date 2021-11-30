@@ -1,3 +1,10 @@
+#textAvatar {
+  width: 4rem;
+  height: 4rem;
+  position: fixed;
+  top: 3rem;
+  right: 2rem;
+}
 
 #text_title {
   margin: 3rem 0 3rem 0;
@@ -33,7 +40,7 @@
   }
 }
 
-// EditorJS styling
+// ------ EditorJS styling -------
 
 #editorjs {
   font-size: 24px;
@@ -54,4 +61,10 @@
 }
 .cdx-block {
   max-width: 100% !important;
+}
+
+.custom-modification {
+  padding-left: 2rem !important;
+  border-left: 1rem solid #faefef;
+  background: linear-gradient(90deg, rgb(255, 250, 248) 0%, rgba(246,246,246,0.5) 25%, rgba(255,255,255,0) 100%);
 }
