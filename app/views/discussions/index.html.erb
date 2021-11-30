@@ -1,112 +1,142 @@
 <div class="disc-header">
   <div class="container">
-    <div class="nav-item dropdown avatar-btn">
-      <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-        <%= link_to "Mon compte", dashboard_path, class: "dropdown-item" %>
-        <%= link_to "Deconnexion", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+    <div class="navbar-page-info">
+      <div class="navbar-body">
+        <%= cl_image_tag @project.photo.key, class: 'navbar-page-image' %>
+        <div class="navbar-info">
+          <div class="title">
+          <h1><%= @project.title.capitalize %></h1>
+          </div>
+          <div class="subtitle">
+            Projet créé par <strong><%= @project.user.username.capitalize %></strong>
+          </div>
+          <div class="subinfos">
+            <p><%= @project.modifications.count %> contributions</p>
+            <p><%= @project.text.content.length %> caractères écrits</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="disc-project-title">
-      <h1><%= @project.title.capitalize %></h1>
-      <p class="project-creator">Projet créé par <%= @project.user.username.capitalize %></p>
-    </div>
+      <div class="navbar-side-infos">
+        <div class="navbar-links">
+            <% if @project_creator %>
+              <%= link_to "Inviter des contributeurs", new_project_contributor_path, class: "add-contributor", id: "add-contributor" %>
+            <% end %>
+            <div class="card-contributor"><% @project.contributors.each do |contributor| %>
+                          <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+      <div class="nav-item dropdown avatar-btn">
+          <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <%= link_to "Mon compte", dashboard_path, class: "dropdown-item" %>
+            <%= link_to "Deconnexion", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </div>
+      </div>
+
+
+<div class="container tab-content">
+  <div class="dashboard-container">
     <div class="disc-nav">
-      <ul class="nav list-inline" role="tablist">
-        <li id="disc-nav-global" class="list-inline-item nav-item">
-          <a class="nav-link active" id="global-tab" data-toggle="tab" href="#global-disc" role="tab" aria-controls="global-disc" aria-selected="true">
+      <ul class="nav list-inline mb-3" id="pills-tab" role="tablist">
+        <li id="disc-nav-global" class="list-inline-item nav-item" role="presentation">
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">
             <i class="far fa-comment-alt"></i> Discussions générales
           </a>
         </li>
-
-        <li id="disc-nav-modification" class="list-inline-item nav-item">
-          <a class="nav-link" id="modification-tab" data-toggle="tab" href="#modification-disc" role="tab" aria-controls="modification-disc" aria-selected="false">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">
             <i class="far fa-edit"></i> Modifications
           </a>
         </li>
       </ul>
-      <% if @project_creator %>
-        <%= link_to "Inviter des contributeurs", new_project_contributor_path, class: "btn btn-ghost", id: "add-contributor" %>
-      <% end %>
     </div>
-  </div>
-</div>
 
-<div class="project-info container">
-  <h2>Informations à propos du projet</h2>
-  <p><%= @project.description %></p>
-</div>
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div id="global-disc" class="tab-pane fade show active" role="tabpanel" aria-labelledby="global-tab">
+          <ul class="disc-list">
+            <% @global_disc.each do |d| %>
+              <%= link_to(discussion_path(d.id), html_options = {class: "disc-card-link"}) do %>
+                <li class="disc-card">
+                  <div class="disc-card-info">
+                    <h3><%= d.title.capitalize %></h3>
+                    <p><%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
+                  </div>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+          <div class="add-global-disc">
+            <button class="btn btn-toggle btn-ghost collapsed text-left collapsed" data-toggle="collapse" data-target="#addDiscCollapse" aria-expanded="false" aria-controls="addDiscCollapse">
+              <i class="fas fa-plus"></i> Créer un nouvelle discussion
+            </button>
+            <div class="collapse p-2" id="addDiscCollapse">
+              <%= simple_form_for([@project, @discussion], remote: true, html: { id: "add-global-disc-form" }) do |form| %>
+                <%= form.input :title, label: "Titre de la discussion", placeholder: "Titre de la discussion", class: "add-global-disc-input" %>
+                <%= form.input :context, label: "Contexte de la discussion", placeholder: "Donnez nous le contexte de cette nouvelle discussion", class: "add-global-disc-input" %>
 
-<div class="disc-index container tab-content">
-  <div id="global-disc" class="tab-pane fade show active" role="tabpanel" aria-labelledby="global-tab">
-    <h2>Discussions générales</h2>
-    <ul class="disc-list">
-      <% @global_disc.each do |d| %>
-        <%= link_to(discussion_path(d.id), html_options = {class: "disc-card-link"}) do %>
-          <li class="disc-card">
-            <div class="disc-card-info">
-              <h3><%= d.title.capitalize %></h3>
-              <p><%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
+                <%= form.button :submit, "Valider", class: "btn btn-primary add-global-disc-btn", method: :update %>
+              <% end %>
             </div>
-          </li>
-        <% end %>
-      <% end %>
-    </ul>
-    <div class="add-global-disc">
-      <button class="btn btn-toggle btn-ghost collapsed text-left collapsed" data-toggle="collapse" data-target="#addDiscCollapse" aria-expanded="false" aria-controls="addDiscCollapse">
-        <i class="fas fa-plus"></i> Créer un nouvelle discussion
-      </button>
-      <div class="collapse p-2" id="addDiscCollapse">
-        <%= simple_form_for([@project, @discussion], remote: true, html: { id: "add-global-disc-form" }) do |form| %>
-          <%= form.input :title, label: "Titre de la discussion", placeholder: "Titre de la discussion", class: "add-global-disc-input" %>
-          <%= form.input :context, label: "Contexte de la discussion", placeholder: "Donnez nous le contexte de cette nouvelle discussion", class: "add-global-disc-input" %>
-
-          <%= form.button :submit, "Valider", class: "btn btn-primary add-global-disc-btn", method: :update %>
-        <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <div id="modification-disc">
+          <% unless @opened_modif_disc.empty? %>
+            <h3>Ouvertes</h3>
+            <ul class="disc-list">
+              <% @opened_modif_disc.each do |d| %>
+                <%= link_to(discussion_path(d.id), html_options = {class: "disc-card-link"}) do %>
+                  <li class="card-notif card-notif-modifications">
+                    <div class="card-notif-head">
+                      <div class="notif-head-info">
+                        <%= cl_image_tag d.modification.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+                        <div>
+                        <p class="notif-main-infos"><%= d.title.capitalize %></p>
+                        <p class="subtitle">Crée par <%= d.modification.user.username.capitalize  %> le <%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          <% end %>
+          <% unless @closed_modif_disc.empty? %>
+            <h3>Fermées</h3>
+            <ul class="disc-list">
+              <% @closed_modif_disc.each do |d| %>
+                <%= link_to(discussion_path(d.id), html_options = {class: "disc-card-link"}) do %>
+                  <li class="card-notif card-notif-modifications">
+                    <div class="card-notif-head">
+                      <div class="notif-head-info">
+                        <%= cl_image_tag d.modification.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+                        <div>
+                        <p class="notif-main-infos"><%= d.title.capitalize %></p>
+                        <p class="subtitle">Crée par <%= d.modification.user.username.capitalize  %> le <%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="modification-disc" class="tab-pane fade" role="tabpanel" aria-labelledby="modification-tab">
-    <h2>Modifications</h2>
-    <% unless @opened_modif_disc.empty? %>
-      <h3>Ouvertes</h3>
-      <ul class="disc-list">
-        <% @opened_modif_disc.each do |d| %>
-          <%= link_to(discussion_path(d.id), html_options = {class: "disc-card-link"}) do %>
-            <li class="disc-card">
-              <div class="disc-card-info">
-                <h3><%= d.title.capitalize %></h3>
-                <p><%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
-              </div>
-              <div class="disc-creator col-1">
-                <%= cl_image_tag d.modification.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
-                <p><%= d.modification.user.username.capitalize %></p>
-              </div>
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
-    <% end %>
-    <% unless @closed_modif_disc.empty? %>
-      <h3>Fermées</h3>
-      <ul class="disc-list">
-        <% @closed_modif_disc.each do |d| %>
-          <%= link_to(discussion_path(d.id), html_options = {class: "disc-card-link"}) do %>
-            <li class="disc-card">
-              <div class="disc-card-info">
-                <h3><%= d.title.capitalize %></h3>
-                <p><%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
-              </div>
-              <div class="disc-creator">
-                <%= cl_image_tag d.modification.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
-                <p><%= d.modification.user.username.capitalize %></p>
-              </div>
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
-    <% end %>
+
+
+
+
   </div>
 </div>
 <%= link_to text_path(@project.text), class: "btn btn-round text-link" do %>
