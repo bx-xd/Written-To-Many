@@ -41,7 +41,7 @@
         </li>
         <li class="create-project">
           <i class="fas fa-plus"></i>
-          <a href="#">Nouveau Projet</a>
+          <a href="/projects/new">Nouveau Projet</a>
         </li>
       </ul>
     </div>
@@ -105,10 +105,11 @@
                 <% end %>
                 <div class="card-project-header-infos">
                   <div class="date-infos">
-                    <p>crée le <strong><%= project.created_at.strftime("%d.%m.%Y") %></strong></p>
-                    <p>modificé le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <p>créé le <strong><%= project.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <p>modifié le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
                   </div>
-                  <div class="card-contributor"><% project.contributors.each do |contributor| %>
+                  <div class="card-contributor">
+                    <% project.contributors.each do |contributor| %>
                       <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
                     <% end %>
                   </div>
@@ -116,8 +117,8 @@
               </div>
               <ul class="list-modifications">
                 <% project.text.modifications.each do |modification| %>
-                  <%= link_to(discussion_path(modification.id)) do %>
-                      <li><%= modification.context %></li>
+                  <%= link_to(discussion_path(modification.discussion)) do %>
+                      <li><%= modification.title %></li>
                   <% end %>
                 <% end %>
               </ul>
@@ -140,8 +141,8 @@
                 <% end %>
                 <div class="card-project-header-infos">
                   <div class="date-infos">
-                    <p>crée le <strong><%= project.created_at.strftime("%d.%m.%Y") %></strong></p>
-                    <p>modificé le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <p>créé le <strong><%= project.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <p>modifié le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
                   </div>
                   <div class="card-contributor"><% project.contributors.each do |contributor| %>
                       <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
@@ -152,16 +153,16 @@
               <ul class="list-modifications">
                 <div class="list">
                   <% project.text.modifications.last(3).each do |modification| %>
-                    <%= link_to(discussion_path(modification.id)) do %>
-                      <li><%= modification.context %></li>
+                    <%= link_to(discussion_path(modification.discussion)) do %>
+                      <li><%= modification.title %></li>
                     <% end %>
                   <% end %>
                 </div>
               </ul>
               <div class="last-modification">
                 <% if project.modifications.where(user: current_user).last %>
-                  <%= link_to(discussion_path(project.modifications.where(user: current_user).last.id)) do %>
-                    <p><strong>Votre dernière contribution:</strong> <%= project.modifications.where(user: current_user).last.context%> </p>
+                  <%= link_to(discussion_path(project.modifications.where(user: current_user).last.discussion)) do %>
+                    <p><strong>Votre dernière contribution:</strong> <%= project.modifications.where(user: current_user).last.title%> </p>
                   <% end %>
                 <% else %>
                  <p><strong>Votre dernière contribution:</strong> Aucune </p>
