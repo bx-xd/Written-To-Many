@@ -2,11 +2,30 @@
   margin-bottom: 0px;
 }
 
+.modif-head {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 0px;
+}
+
+.modif-title {
+  padding-left: 16px;
+}
+
+.modif-date {
+  color: $light-gray
+}
+
+.modif-user {
+  display: flex;
+}
 .get-back {
   margin: 16px 0px;
   a {
     text-decoration: underline;
-    color: gray;
+    color: black;
+    opacity: 0.4;
+    font-family: $BP-med;
   }
 }
 .disc-box {
@@ -99,6 +118,7 @@
     padding: 24px;
     color: $primary;
     border-radius:2px;
+    margin-bottom: 16px;
   }
 
   #modifContentCollapse {
