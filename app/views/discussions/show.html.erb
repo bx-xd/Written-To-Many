@@ -1,77 +1,100 @@
 <div class="disc-header">
   <div class="container">
-    <div class="nav-item dropdown avatar-btn">
-      <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-        <%= link_to "Mon compte", dashboard_path, class: "dropdown-item" %>
-        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+    <div class="navbar-page-info">
+      <div class="navbar-body">
+        <%= cl_image_tag @project.photo.key, class: 'navbar-page-image' %>
+        <div class="navbar-info">
+          <div class="title">
+          <h1><%= @project.title.capitalize %></h1>
+          </div>
+          <div class="subtitle">
+            Projet créé par <strong><%= @project.user.username.capitalize %></strong>
+          </div>
+          <div class="subinfos">
+            <p><%= @project.modifications.count %> contributions</p>
+            <p><%= @project.text.content.length %> caractères écrits</p>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="disc-project-title">
-      <h1><%= @project.title.capitalize %></h1>
-      <p class="project-creator">Projet créé par <%= @project.user.username.capitalize %></p>
-    </div>
-    <div class="disc-nav">
-      <ul class="nav list-inline" role="tablist">
-        <li id="disc-nav-global" class="list-inline-item nav-item">
-          <%= link_to project_discussions_path(@project), class: "nav-link #{ "active" unless @discussion.modification }", id: "global-tab" do %>
-            <i class="far fa-comment-alt"></i> Discussions générales
-          <% end %>
-        </li>
-
-        <li id="disc-nav-modification" class="list-inline-item nav-item">
-          <%= link_to project_discussions_path(@project), class: "nav-link #{ "active" if @discussion.modification }", id: "modification-tab" do %>
-            <i class="far fa-edit"></i> Modifications
-          <% end %>
-        </li>
-      </ul>
-      <% if @project_creator %>
-        <%= link_to "Inviter des contributeurs", new_project_contributor_path, class: "btn btn-ghost", id: "add-contributor" %>
-      <% end %>
-    </div>
+      <div class="navbar-side-infos">
+        <div class="navbar-links">
+            <% if @project_creator %>
+              <%= link_to "Inviter des contributeurs", new_project_contributor_path(@project), class: "add-contributor", id: "add-contributor" %>
+            <% end %>
+            <div class="card-contributor"><% @project.contributors.each do |contributor| %>
+                          <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
 
+      <div class="nav-item dropdown avatar-btn">
+          <%= cl_image_tag current_user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <%= link_to "Mon compte", dashboard_path, class: "dropdown-item" %>
+            <%= link_to "Deconnexion", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          </div>
+        </div>
+      </div>
+
 <% unless @modification.nil? %>
   <div class="container">
-    <div class="modif-context">
-      <% if @modification.context.nil? && current_user == @modification.user %>
-        <h2>Ma nouvelle modification</h2>
-        <%= simple_form_for(@modification, remote: true, html: { class: "add-context-form" }) do |form| %>
-          <%= form.input :title, label: "Titre de la modification", placeholder: "Titre de la modification", class: "add-context-input" %>
-          <%= form.input :context, label: "Contexte de la modification", placeholder: "Donnez nous le contexte de votre modification", class: "add-context-input" %>
+      <div class="modif-context">
+        <% if @modification.context.nil? && current_user == @modification.user %>
+          <h2>Ma nouvelle modification</h2>
+          <%= simple_form_for(@modification, remote: true, html: { class: "add-context-form" }) do |form| %>
+            <%= form.input :title, label: "Titre de la modification", placeholder: "Titre de la modification", class: "add-context-input" %>
+            <%= form.input :context, label: "Contexte de la modification", placeholder: "Donnez nous le contexte de votre modification", class: "add-context-input" %>
 
-          <%= form.button :submit, "Valider", class: "btn btn-primary add-context-btn", method: :update %>
+            <%= form.button :submit, "Valider", class: "btn btn-primary add-context-btn", method: :update %>
+          <% end %>
+        <% else %>
+          <div class="get-back">
+            <%= link_to "Retour aux modifications", project_discussions_path(@project) %>
+          </div>
+          <div class="modif-head">
+            <div class="modif-head">
+              <div class="modif-avatar">
+                <%= cl_image_tag @modification.user.photo.key, class:"avatar" %>
+              </div>
+              <div class="modif-title">
+                <h3><%= @modification.title.capitalize %></h3>
+              </div>
+            </div>
+            <div class="modif-date">
+            <%= @modification.created_at.strftime("%m/%d at %I:%M") %>
+            </div>
+          </div>
+          <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContextCollapse" aria-expanded="true" aria-controls="modifContextCollapse">
+            <h2>Contexte</h2>
+          </button>
+          <div class="collapse show" id="modifContextCollapse">
+            <span><%= @modification.context %></span>
+          </div>
         <% end %>
-      <% else %>
-        <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContextCollapse" aria-expanded="true" aria-controls="modifContextCollapse">
-          <h2>Contexte de la modification</h2>
+        <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContentCollapse" aria-expanded="true" aria-controls="modifContentCollapse">
+          <h2>Modification proposée</h2>
         </button>
-        <div class="collapse show p-2" id="modifContextCollapse">
-          <p><%= @modification.context %></p>
+        <div class="collapse show" id="modifContentCollapse">
+          <% @modification_content.each do |modif_content| %>
+            <%= sanitize(block_to_html(modif_content)) %>
+          <% end %>
         </div>
-      <% end %>
-      <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContentCollapse" aria-expanded="true" aria-controls="modifContentCollapse">
-        <h2>Modification proposée</h2>
-      </button>
-      <div class="collapse show p-2" id="modifContentCollapse">
-        <% @modification_content.each do |modif_content| %>
-          <%= sanitize(block_to_html(modif_content)) %>
+        <% if current_user == @project.user && @modification.status == "pending" %>
+          <div class="valid-btns text-right">
+            <%= link_to "Valider la modification", validate_modification_path(@modification), method: :patch, class: "btn btn-primary btn-validate" %>
+            <%= link_to "Refuser la modification", deny_modification_path(@modification), method: :patch, class: "btn btn-flat btn-deny" %>
+          </div>
+        <% elsif @modification.status == "accepted" %>
+          <h4 class="text-right">La modification à été <strong>validée</strong></h4>
+        <% elsif @modification.status == "denied" %>
+          <h4 class="text-right">La modification à été <strong>refusée</strong></h4>
+        <% else %>
+          <h4 class="text-right">La modification est en cours de <strong>discussion</strong></h4>
         <% end %>
       </div>
-      <% if current_user == @project.user && @modification.status == "pending" %>
-        <div class="valid-btns text-right">
-          <%= link_to "Valider la modification", validate_modification_path(@modification), method: :patch, class: "btn btn-primary btn-validate" %>
-          <%= link_to "Refuser la modification", deny_modification_path(@modification), method: :patch, class: "btn btn-flat btn-deny" %>
-        </div>
-      <% elsif @modification.status == "accepted" %>
-        <h4 class="text-right">La modification à été <strong>validée</strong></h4>
-      <% elsif @modification.status == "denied" %>
-        <h4 class="text-right">La modification à été <strong>refusée</strong></h4>
-      <% else %>
-        <h4 class="text-right">La modification est en cours de <strong>discussion</strong></h4>
-      <% end %>
-    </div>
   </div>
 <% end %>
 <div class="container d-flex">
