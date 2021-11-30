@@ -96,20 +96,19 @@ puts "-> #{Contributor.count} contributors have been created."
 
 
 puts "-> Create 6 Texts"
-def create_text(project, text_file_name)
-  extension = text_file_name == "plus_fort_que_sherlock"  ? ".json" : ".txt"
+def create_text(project, text_file_name, extension)
   file = File.open("db/lib/texts/#{text_file_name}#{extension}")
   result = file.read
   text = Text.new(project: project, content: result, created_at: project.created_at)
   text.save!
 end
 
-create_text(dialogue, "dialogue_aux_enfers_entre_machiavel_et_montesquieu")
-create_text(pays_des_moines, "au_pays_des_moines")
-create_text(savant_russe, "aventures_extraordinaires_d_un_savant_russe")
-create_text(effrayante, "effreyante_aventure")
-create_text(jean_qui_pleure, "jean_qui_grogne_jean_qui_rit")
-create_text(fort_sherlock, "plus_fort_que_sherlock")
+create_text(dialogue, "dialogue_aux_enfers_entre_machiavel_et_montesquieu", ".txt")
+create_text(pays_des_moines, "au_pays_des_moines", ".txt")
+create_text(savant_russe, "aventures_extraordinaires_d_un_savant_russe", ".txt")
+create_text(effrayante, "effreyante_aventure", ".txt")
+create_text(jean_qui_pleure, "jean_qui_grogne_jean_qui_rit", ".txt")
+create_text(fort_sherlock, "plus_fort_que_sherlock", ".json")
 puts "-> #{Text.count} texts have been created."
 
 
@@ -124,25 +123,39 @@ def create_modification(text, user, modification_file_name = nil, status, contex
                                   content_before: text.content,
                                   content_after: result ? result : "text.content",
                                   status: status,
-                                  context: context,
+                                  title: context,
                                   created_at: created_at)
   modification.save!
   return modification
 end
 
 def create_json_modification(text, user, modification_file_name = nil, status, context, created_at)
-  if modification_file_name
-    file = File.open("db/lib/texts/#{modification_file_name}.json")
-    result = file.read
-  end
+  file = File.open("db/lib/texts/plus_fort_que_sherlock_#{modification_file_name}_content_before.json")
+  content_before = file.read
+  file = File.open("db/lib/texts/plus_fort_que_sherlock_#{modification_file_name}_content_after.json")
+  content_after = file.read
+
   modification = Modification.new(text: text,
                                   user: user,
-                                  content_before: text.content,
-                                  content_after: result ? result : "text.content",
+                                  content_before: content_before,
+                                  content_after: content_after,
                                   status: status,
-                                  context: context,
+                                  title: context,
                                   created_at: created_at)
   modification.save!
+
+  diff = JSON.parse(modification.content_after)["blocks"] - JSON.parse(modification.content_before)["blocks"]
+  data = JSON.parse(modification.content_after)
+
+  diff.each do |modif_block|
+    block = data["blocks"].find { |block| block["id"] == modif_block["id"] }
+    block["data"]["class"] = "custom-modification"
+    block["data"]["id"] = modification.id
+  end
+
+  modification.content_after = data.to_json
+  modification.save!
+
   return modification
 end
 
@@ -177,36 +190,37 @@ add_intro = create_modification(dialogue.text,
                                 "Ajout d'une introduction sur les intentions du text",
                                 Date.new(2021, 11, 25))
 
+
 following_story = create_json_modification(fort_sherlock.text,
                                            paul,
-                                           "plus_fort_que_sherlock1",
+                                           "1",
                                            "pending",
-                                           "Ajout de la partie 5",
+                                           "Ajout de l'introduction",
                                            Date.new(2021, 11, 25))
 add_mother_story = create_json_modification(fort_sherlock.text,
                                             louis,
-                                            "plus_fort_que_sherlock2",
+                                            "2",
                                             "pending",
                                             "Ajout d'un paragraphe pour détailler la vie difficile de la jeune femme",
                                             Date.new(2021, 11, 24))
 add_letter = create_json_modification(fort_sherlock.text,
                                       marine,
-                                      "plus_fort_que_sherlock3",
-                                      "accepted",
+                                      "3",
+                                      "pending",
                                       "Ajoute une lettre de l'enfant à sa mère pour appuyer les difficultés de l'enfant",
                                       Date.new(2021, 11, 27))
-delete_story = create_json_modification(fort_sherlock.text,
-                                        louis,
-                                        "plus_fort_que_sherlock4",
-                                        "pending",
-                                        "Suppression d'une annecdote superflue sur l'enfant', perpétue l'intrigue",
-                                        Date.new(2021, 11, 22))
-add_intro_sherlock = create_json_modification(fort_sherlock.text,
-                                              joanna,
-                                              "plus_fort_que_sherlock5",
-                                              "accepted",
-                                              "Ajout d'une introduction 'mystérieuse' sur le détéctive",
-                                              Date.new(2021, 11, 19))
+# delete_story = create_json_modification(fort_sherlock.text,
+#                                         louis,
+#                                         "plus_fort_que_sherlock4",
+#                                         "pending",
+#                                         "Suppression d'une annecdote superflue sur l'enfant', perpétue l'intrigue",
+#                                         Date.new(2021, 11, 22))
+# add_intro_sherlock = create_json_modification(fort_sherlock.text,
+#                                               joanna,
+#                                               "plus_fort_que_sherlock5",
+#                                               "accepted",
+#                                               "Ajout d'une introduction 'mystérieuse' sur le détéctive",
+#                                               Date.new(2021, 11, 19))
 puts "-> #{Modification.count} modifications have been created."
 
 
@@ -228,12 +242,9 @@ dsc_delete_dialogue = create_discussion("Suppression d'un dialogue de Montesquie
 create_discussion("Ajout d'une introduction", add_intro.context, dialogue, add_intro)
 
 create_discussion("Limite de la parodie", nil, fort_sherlock)
-dsc_following_story = create_discussion("Partie 5", following_story.context, fort_sherlock, following_story)
-create_discussion("Parti 2, 3, 4", following_story.context, fort_sherlock, following_story)
-dsc_add_mother_story = create_discussion("Annecdote sur la mère", add_mother_story.context, fort_sherlock, add_mother_story)
-create_discussion("Ajout d'une lettre, partie 4", add_letter.context, fort_sherlock, add_letter)
-create_discussion("Suppression d'une annecdote sur l'enfant", delete_story.context, fort_sherlock, delete_story)
-create_discussion("Ajout d'une intro sur le detective", add_intro_sherlock.context, fort_sherlock, add_intro_sherlock)
+dsc_following_story = create_discussion("Partie 5", following_story.title, fort_sherlock, following_story)
+dsc_add_mother_story = create_discussion("Annecdote sur la mère", add_mother_story.title, fort_sherlock, add_mother_story)
+dsc_add_letter = create_discussion("Ajout d'une lettre, partie 3", add_letter.title, fort_sherlock, add_letter)
 puts "-> #{Discussion.count} discussions have been created."
 
 
@@ -273,8 +284,8 @@ create_post(joanna, dsc_delete_dialogue,
             Date.new(2021, 11, 30))
 # Modification accépté
 create_post(louis, dsc_add_mother_story,
-            "Je me suis permis de rajouter ce passage, je trouver que ça nous permettait de passer
-            à la suite de façon moins abrupt",
+            "Je me suis permis de rajouter ce passage, je trouvais que ça nous permettait de passer
+            à la suite de façon moins abrupte",
             Date.new(2021, 11, 24))
 create_post(syd, dsc_add_mother_story,
             "Je suis pas du tout d'accord, je trouver justement que le passage à la suite nous permettait
