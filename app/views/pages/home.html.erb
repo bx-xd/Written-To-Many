@@ -1,12 +1,12 @@
 <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://res.cloudinary.com/jbteuma/image/upload/v1637749315/banner_itok2f.jpg);">
-  <%= link_to "Connexion", dashboard_path, class: "btn btn-flat" %>
+  <%= link_to "#{current_user ? "Mon compte" : "Connexion"}", dashboard_path, class: "btn btn-flat" %>
   <div class="container text-center">
 
     <div class="logo" style="color:white; font-size:32px;">W/M</div>
 
     <div class="content active">
-      <h1>Pourquoi <strong>écrire</strong> seul quand on peut le faire à <strong>plusieurs</strong>!</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni voluptate deleniti nihil consequuntur voluptates.</p>
+      <h1>Pourquoi <strong>écrire</strong> seul quand on peut le faire à <strong>plusieurs</strong> ?</h1>
+      <p>Associez le plaisir de lire au plaisir d'écrire. Partagez l'écriture de votre prochain chef d'oeuvre et profitez d'une interface de discussion dédiée.</p>
       <%= link_to "Créer mon projet", new_project_path, class: "btn btn-primary" %>
     </div>
 
@@ -15,7 +15,7 @@
 
 
 <div class="container value-proposition">
-  <h2>Une expérience de lecture inoubliable</h2>
+  <h2>Tout ce qu'il faut pour réussir</h2>
   <div class="value-cards">
     <div class="value-card">
       <img src="https://res.cloudinary.com/jbteuma/image/upload/v1637754487/writting_qideou.png" alt="machine à écrire">
@@ -42,9 +42,7 @@
       </div>
       <div class="section-info col-4">
         <h2>Une experience d'écriture <strong>inoubliable</strong></h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Veniam assumenda magnam voluptas quas expedita ad delectus omnis at suscipit nemo dolores,
-          asperiores animi ea voluptates rem excepturi provident perferendis. Rerum.
+        <p>A l'aide de cette interface d'écriture minimaliste concentrez vous sur l'essentiel, votre oeuvre. Un affichage clair pour ne jamais se perdre dans le texte et une lecture confortable.
         </p>
         <%= link_to "Créer mon projet", new_project_path, class: "btn btn-ghost" %>
       </div>
@@ -59,10 +57,8 @@
         <img src="https://res.cloudinary.com/jbteuma/image/upload/v1637754487/discussion_dbqugm.png" alt="">
       </div>
       <div class="section-info col-4">
-        <h2>Un espace de travail <strong>Multicanal</strong> pour chaque projet</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Veniam assumenda magnam voluptas quas expedita ad delectus omnis at suscipit nemo dolores,
-          asperiores animi ea voluptates rem excepturi provident perferendis. Rerum.
+        <h2>Un espace de communication <strong>Multicanal</strong> pour chaque projet</h2>
+        <p>Pour tirer le meilleur de chaque idée, rien de tel que d'en parler. L'espace de discussion permet de discuter à propos du texte mais aussi autour d'une modification spécifique.
         </p>
         <%= link_to "Créer mon projet", new_project_path, class: "btn btn-ghost" %>
       </div>
@@ -77,10 +73,8 @@
         <img src="https://res.cloudinary.com/jbteuma/image/upload/v1637754487/edition_qbvhrn.png" alt="">
       </div>
       <div class="section-info col-4">
-        <h2>Deux clics suffisent pour <strong>modifier</strong> le texte</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Veniam assumenda magnam voluptas quas expedita ad delectus omnis at suscipit nemo dolores,
-          asperiores animi ea voluptates rem excepturi provident perferendis. Rerum.
+        <h2>Suggerez des <strong>modifications</strong> à tout moment</h2>
+        <p>Envie d'ajouter un paragraphe ? Un simple double click dans le texte et vous pouvez proposer un modification. Vous pourrez ensuite échanger avec les autres contributeurs et le créateur du projet pourra décider d'integrer votre texte à la version finale.
         </p>
         <%= link_to "Créer mon projet", new_project_path, class: "btn btn-ghost" %>
       </div>
