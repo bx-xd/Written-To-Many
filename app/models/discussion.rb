@@ -5,5 +5,5 @@ class Discussion < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :users, through: :posts
 
-  validates :title, presence: true
+  # validates :title, presence: true
 end

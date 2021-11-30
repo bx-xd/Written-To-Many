@@ -13,9 +13,13 @@ class ModificationsController < ApplicationController
 
 
     if @modification.save
-      @discussion = Discussion.create(modification: @modification, title: "Nouvelle modification", project: @text.project)
+      @discussion = Discussion.create(modification: @modification, project: @text.project)
 
-      diff = JSON.parse(@modification.content_after)["blocks"] - JSON.parse(@modification.content_before)["blocks"]
+      if @modification.content_before == "null"
+        diff = JSON.parse(@modification.content_after)["blocks"]
+      else
+        diff = JSON.parse(@modification.content_after)["blocks"] - JSON.parse(@modification.content_before)["blocks"]
+      end
       data = JSON.parse(@modification.content_after)
 
       diff.each do |modif_block|
@@ -30,7 +34,7 @@ class ModificationsController < ApplicationController
 
 
       respond_to do |format|
-        format.html { redirect_to discussion_path(@discussion), notice: "Votre modif a été envoyée !" }
+        format.html { redirect_to discussion_path(@modification.discussion), notice: "Votre modif a été envoyée !" }
         format.text
       end
     else

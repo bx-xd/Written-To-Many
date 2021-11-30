@@ -11,7 +11,7 @@ class DashboardsController < ApplicationController
   def compting_writing_character
     compteur = 0
     @projects.each do |project|
-      compteur += project.text.content.length
+      compteur += project.text.content.length unless project.text.content.nil?
     end
 
     @user.modifications.each do |modification|

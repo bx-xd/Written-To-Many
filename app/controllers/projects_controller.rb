@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.user = current_user
-    text = Text.new
+    text = Text.new(content: "{\"blocks\": []}")
     @project.text = text
 
     if @project.save && text.save
@@ -26,6 +26,6 @@ class ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:title, :description)
+    params.require(:project).permit(:title, :description, :photo)
   end
 end

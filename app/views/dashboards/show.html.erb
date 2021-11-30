@@ -41,7 +41,7 @@
         </li>
         <li class="create-project">
           <i class="fas fa-plus"></i>
-          <a href="#">Nouveau Projet</a>
+          <a href="/projects/new">Nouveau Projet</a>
         </li>
       </ul>
     </div>
@@ -96,7 +96,7 @@
         <% @projects.each do |project| %>
           <div class="card-project">
             <%= link_to(text_path(project.text)) do %>
-              <%= cl_image_tag project.photo.key, class: "project-img"%>
+              <%= cl_image_tag project.photo.key, class: "project-img" %>
             <% end %>
             <div class="card-project-info">
               <div class="card-project-header">
@@ -105,8 +105,10 @@
                 <% end %>
                 <div class="card-project-header-infos">
                   <div class="date-infos">
-                    <p>crée le <strong><%= project.created_at.strftime("%d.%m.%Y") %></strong></p>
-                    <p>modificé le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <p>créé le <strong><%= project.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <% if project.modifications.any? %>
+                      <p>modifié le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <% end %>
                   </div>
                   <div class="card-contributor"><% project.contributors.each do |contributor| %>
                       <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
@@ -114,12 +116,14 @@
                   </div>
                 </div>
               </div>
+              <% if project.modifications.any? %>
               <ul class="list-modifications">
                 <% project.text.modifications.each do |modification| %>
                   <%= link_to(discussion_path(modification.id)) do %>
                       <li><%= modification.context %></li>
                   <% end %>
                 <% end %>
+              <% end %>
               </ul>
             </div>
           </div>
