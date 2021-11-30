@@ -63,10 +63,15 @@
           <ul class="disc-list">
             <% @global_disc.each do |d| %>
               <%= link_to(discussion_path(d.id), html_options = {class: "disc-card-link"}) do %>
-                <li class="disc-card">
-                  <div class="disc-card-info">
-                    <h3><%= d.title.capitalize %></h3>
-                    <p><%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
+                <li class="card-notif card-notif-modifications">
+                  <div class="card-notif-head">
+                    <div class="notif-head-info">
+                      <%= cl_image_tag d.project.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+                      <div>
+                      <p class="notif-main-infos"><%= d.title.capitalize %></p>
+                      <p class="subtitle">Crée le <%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
+                      </div>
+                    </div>
                   </div>
                 </li>
               <% end %>
