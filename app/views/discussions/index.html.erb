@@ -141,8 +141,8 @@
           <% end %>
         </div>
       </div>
-      <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
-        <div id="info-disc" class="tab-pane fade show active" role="tabpanel" aria-labelledby="info-tab">
+      <div class="tab-pane fade show" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
+        <div id="info-disc">
           <h3>Description du projet</h3>
           <p><%= @project.description %></p>
           <h3>Créateur.ice du projet</h3>
@@ -168,8 +168,8 @@
                     <div class="notif-head-info">
                       <%= cl_image_tag contributor.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
                       <div>
-                      <p class="notif-main-infos"><%= contributor.user.username %></p>
-                      <p class="subtitle">A rejoint le projet le <%= contributor.created_at.strftime("%m/%d at %I:%M") %></p>
+                        <p class="notif-main-infos"><%= contributor.user.username %></p>
+                        <p class="subtitle">A rejoint le projet le <%= contributor.created_at.strftime("%m/%d at %I:%M") %></p>
                       </div>
                     </div>
                   </div>
