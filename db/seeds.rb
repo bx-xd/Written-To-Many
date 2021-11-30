@@ -76,6 +76,7 @@ savant_russe = create_project("aventures_extraordinaires_d_un_savant_russe", mar
 effrayante = create_project("effreyante_aventure", paul, Date.new(2021, 11, 10))
 jean_qui_pleure = create_project("jean_qui_grogne_jean_qui_rit", louis, Date.new(2021, 8, 18))
 fort_sherlock = create_project("plus_fort_que_sherlock", joanna, Date.new(2021, 9, 28))
+fort_sherlock.update(description: "Je vous propose d'écrire une parodie de Sherlock Holmes à plusieurs")
 puts "-> #{Project.count} Projects have been created."
 
 
