@@ -7,7 +7,6 @@
         <div class="navbar-info">
           <h1 class="username"><%= @user.username.capitalize %></h1>
           <div class="subtitle">Membre depuis le 21.02.2012</div>
-
           <div class="subinfos">
             <p>Contributeur dans <%= @contributions.count %> projets</p>
             <p>Créateur de <%= @projects.count %> projets</p>
@@ -22,9 +21,9 @@
 </div>
 
 
-<div class="container dashboard-container col-11">
+<div class="container">
 <%# La classe 'content' et 'active' sont là pour le JS. Elles permettent de faire jouer le display %>
-  <div class="row">
+  <div class="dashboard-container">
     <div class="colonne tabs">
       <ul class="list-inline tabs-underlined">
         <li data-content-active="dashboard-show" class="tab-underlined active">
