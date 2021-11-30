@@ -79,7 +79,7 @@ fort_sherlock = create_project("plus_fort_que_sherlock", joanna, Date.new(2021, 
 puts "-> #{Project.count} Projects have been created."
 
 
-puts "-> Create 20 Contributors"
+puts "-> Create 21 Contributors"
 def create_contributor(project, users)
   users.each do |user|
     contributor = Contributor.new(project: project, user: user)
@@ -112,8 +112,8 @@ create_text(fort_sherlock, "plus_fort_que_sherlock", ".json")
 puts "-> #{Text.count} texts have been created."
 
 
-puts "-> Create 8 Modifs"
-def create_modification(text, user, modification_file_name = nil, status, context, created_at)
+puts "-> Create 18 Modifs"
+def create_modification(text, user, status, title, context, created_at, modification_file_name = nil)
   if modification_file_name
     file = File.open("db/lib/texts/#{modification_file_name}.txt")
     result = file.read
@@ -123,13 +123,14 @@ def create_modification(text, user, modification_file_name = nil, status, contex
                                   content_before: text.content,
                                   content_after: result ? result : "text.content",
                                   status: status,
-                                  title: context,
+                                  title: title,
+                                  context: context,
                                   created_at: created_at)
   modification.save!
   return modification
 end
 
-def create_json_modification(text, user, modification_file_name = nil, status, context, created_at)
+def create_json_modification(text, user, status, title, context, created_at, modification_file_name = nil)
   file = File.open("db/lib/texts/plus_fort_que_sherlock_#{modification_file_name}_content_before.json")
   content_before = file.read
   file = File.open("db/lib/texts/plus_fort_que_sherlock_#{modification_file_name}_content_after.json")
@@ -140,7 +141,8 @@ def create_json_modification(text, user, modification_file_name = nil, status, c
                                   content_before: content_before,
                                   content_after: content_after,
                                   status: status,
-                                  title: context,
+                                  title: title,
+                                  context: context,
                                   created_at: created_at)
   modification.save!
 
@@ -159,56 +161,62 @@ def create_json_modification(text, user, modification_file_name = nil, status, c
   return modification
 end
 
-create_modification(pays_des_moines.text, paul, "pending", "Partie 4", Date.new(2021, 11, 24))
-create_modification(pays_des_moines.text, george, "pending", "Ajout de déscriptions du monastère", Date.new(2021, 11, 15))
-create_modification(pays_des_moines.text, louis, "pending", "Reprise de la liaison entre partie 2 et 3", Date.new(2021, 11, 28))
-create_modification(savant_russe.text, david, "pending", "La mort de Raspoutine", Date.new(2021, 11, 20))
-create_modification(savant_russe.text, sophie, "pending", "Dénouement de l'arc sur le voyage du savant", Date.new(2021, 11, 23))
-create_modification(effrayante.text, syd, "pending", "Suite et fin du personnage de Josie", Date.new(2021, 11, 10))
-create_modification(effrayante.text, siouxsie, "pending", "Partie 3", Date.new(2021, 11, 11))
-create_modification(effrayante.text, louis, "pending", "Supression de la conclusion partie 2", Date.new(2021, 11, 12))
-create_modification(effrayante.text, paul, "pending", "Introduciton du personnage de Tom", Date.new(2021, 11, 13))
-create_modification(jean_qui_pleure.text, ringo, "pending", "Titres des parties", Date.new(2021, 8, 18))
-create_modification(jean_qui_pleure.text, david, "pending", "Déscription de la maison de campagne", Date.new(2021, 8, 19))
-create_modification(jean_qui_pleure.text, john, "pending", "Passage dans la cours décole - Chapitre 3", Date.new(2021, 8, 20))
+modif_1 = create_modification(pays_des_moines.text, paul, "pending", "Partie 4", "Ajout de la partie 4", Date.new(2021, 11, 24))
+modif_2 = create_modification(pays_des_moines.text, george, "pending", "Description du monastère", "Ajout de déscriptions du monastère", Date.new(2021, 11, 15))
+modif_3 = create_modification(pays_des_moines.text, louis, "pending", "Liaison partie 2 et 3", "Reprise de la liaison entre partie 2 et 3", Date.new(2021, 11, 28))
+modif_4 = create_modification(savant_russe.text, david, "pending", "La mort de Raspoutine", "Explication de la mort de Raspoutine", Date.new(2021, 11, 20))
+modif_5 = create_modification(savant_russe.text, sophie, "pending", "Dénouement de l'arc sur le voyage du savant", "Ajout de la fin de l'arc sur le voyage du savant", Date.new(2021, 11, 23))
+modif_6 = create_modification(effrayante.text, syd, "pending", "Suite et fin du personnage de Josie", "Ajout de la fin de la description de Josie", Date.new(2021, 11, 10))
+modif_7 = create_modification(effrayante.text, siouxsie, "pending", "Partie 3", "Ajout de la partie 3", Date.new(2021, 11, 11))
+modif_8 = create_modification(effrayante.text, louis, "pending", "Supression de la conclusion partie 2", "Je ne trouve pas la partie 2 interessante, déso", Date.new(2021, 11, 12))
+modif_9 = create_modification(effrayante.text, paul, "pending", "Introduciton du personnage de Tom", "Description de Tom", Date.new(2021, 11, 13))
+modif_10 = create_modification(jean_qui_pleure.text, ringo, "pending", "Titres des parties", "Modification des titres", Date.new(2021, 8, 18))
+modif_11 = create_modification(jean_qui_pleure.text, david, "pending", "Description de la maison de campagne", "Bienvenu à la campagne, dans les champs avec un belle chaumière", Date.new(2021, 8, 19))
+modif_12 = create_modification(jean_qui_pleure.text, john, "pending", "Passage dans la cours d'école - Chapitre 3", "Ajout dans le chapitre 3 d'une histoire dans la cours d'école", Date.new(2021, 8, 20))
 add_dialogue = create_modification(dialogue.text,
                                    joanna,
-                                   "dialogue_aux_enfers_entre_machiavel_et_montesquieu1",
                                    "pending",
+                                   "Dialogue de Machavel",
                                    "Ajout d'un dialogue de Machiavel",
-                                   Date.new(2021, 11, 29))
+                                   Date.new(2021, 11, 29),
+                                   "dialogue_aux_enfers_entre_machiavel_et_montesquieu1")
 delete_dialogue = create_modification(dialogue.text,
-                                      richard,
-                                      "dialogue_aux_enfers_entre_machiavel_et_montesquieu2",
-                                      "accepted",
-                                      "suppression d'un passage de Montesquieu inexacte par rapport à sa philosophie",
-                                      Date.new(2021, 11, 27))
+                                    richard,
+                                    "accepted",
+                                    "Suppression d'un passage",
+                                    "suppression d'un passage de Montesquieu inexacte par rapport à sa philosophie",
+                                    Date.new(2021, 11, 27),
+                                    "dialogue_aux_enfers_entre_machiavel_et_montesquieu2")
 add_intro = create_modification(dialogue.text,
                                 richard,
-                                "dialogue_aux_enfers_entre_machiavel_et_montesquieu3",
                                 "denied",
+                                "Intro du texte",
                                 "Ajout d'une introduction sur les intentions du text",
-                                Date.new(2021, 11, 25))
+                                Date.new(2021, 11, 25),
+                                "dialogue_aux_enfers_entre_machiavel_et_montesquieu3")
 
 
 following_story = create_json_modification(fort_sherlock.text,
-                                           paul,
-                                           "1",
-                                           "pending",
-                                           "Ajout de l'introduction",
-                                           Date.new(2021, 11, 25))
+                                            paul,
+                                            "pending",
+                                            "Ajout de l'introduction",
+                                            "J'ai écrit l'introduction",
+                                            Date.new(2021, 11, 25),
+                                            "1")
 add_mother_story = create_json_modification(fort_sherlock.text,
                                             louis,
-                                            "2",
                                             "pending",
+                                            "Détail de la vie de la jeune femme",
                                             "Ajout d'un paragraphe pour détailler la vie difficile de la jeune femme",
-                                            Date.new(2021, 11, 24))
+                                            Date.new(2021, 11, 24),
+                                            "2")
 add_letter = create_json_modification(fort_sherlock.text,
                                       marine,
-                                      "3",
                                       "pending",
+                                      "Lettre de l'enfant à sa mère",
                                       "Ajoute une lettre de l'enfant à sa mère pour appuyer les difficultés de l'enfant",
-                                      Date.new(2021, 11, 27))
+                                      Date.new(2021, 11, 27),
+                                      "3")
 # delete_story = create_json_modification(fort_sherlock.text,
 #                                         louis,
 #                                         "plus_fort_que_sherlock4",
@@ -224,27 +232,48 @@ add_letter = create_json_modification(fort_sherlock.text,
 puts "-> #{Modification.count} modifications have been created."
 
 
-puts "-> Create 11 Discussions"
-def create_discussion(title, context = nil, project = nil, modification = nil)
+puts "-> Create 19 Discussions"
+def create_discussion(title, context, project, modification = nil)
   discussion = Discussion.new(title: title,
-                              context: context,
-                              modification: modification,
-                              project: project,
-                              created_at: modification ? modification.created_at : project.created_at)
+  context: context,
+  modification: modification,
+  project: project,
+  created_at: modification ? modification.created_at : project.created_at)
   discussion.save!
   return discussion
 end
 
-create_discussion("Attachement à la rigueur historique", nil, dialogue)
-create_discussion("Moral philosophique du texte", nil, dialogue)
-create_discussion("Ajout de dialogue de Machiavel", add_dialogue.context, dialogue, add_dialogue)
-dsc_delete_dialogue = create_discussion("Suppression d'un dialogue de Montesquieu", delete_dialogue.context, dialogue, delete_dialogue)
-create_discussion("Ajout d'une introduction", add_intro.context, dialogue, add_intro)
+# create_discussion(title, context, project, modification = nil)
+disc_1 = create_discussion(modif_1.title, modif_1.context, modif_1.text.project, modif_1)
+disc_2 = create_discussion(modif_2.title, modif_2.context, modif_2.text.project, modif_2)
+disc_3 = create_discussion(modif_3.title, modif_3.context, modif_3.text.project, modif_3)
+disc_4 = create_discussion(modif_4.title, modif_4.context, modif_4.text.project, modif_4)
+disc_5 = create_discussion(modif_5.title, modif_5.context, modif_5.text.project, modif_5)
+disc_6 = create_discussion(modif_6.title, modif_6.context, modif_6.text.project, modif_6)
+disc_7 = create_discussion(modif_7.title, modif_7.context, modif_7.text.project, modif_7)
+disc_8 = create_discussion(modif_8.title, modif_8.context, modif_8.text.project, modif_8)
+disc_9 = create_discussion(modif_9.title, modif_9.context, modif_9.text.project, modif_9)
+disc_10 = create_discussion(modif_10.title, modif_10.context, modif_10.text.project, modif_10)
+disc_11 = create_discussion(modif_11.title, modif_11.context, modif_11.text.project, modif_11)
+disc_12 = create_discussion(modif_12.title, modif_12.context, modif_12.text.project, modif_12)
 
-create_discussion("Limite de la parodie", nil, fort_sherlock)
-dsc_following_story = create_discussion("Partie 5", following_story.title, fort_sherlock, following_story)
-dsc_add_mother_story = create_discussion("Annecdote sur la mère", add_mother_story.title, fort_sherlock, add_mother_story)
-dsc_add_letter = create_discussion("Ajout d'une lettre, partie 3", add_letter.title, fort_sherlock, add_letter)
+create_discussion(add_dialogue.title, add_dialogue.context, add_dialogue.text.project, add_dialogue)
+dsc_delete_dialogue = create_discussion(delete_dialogue.title, delete_dialogue.context, delete_dialogue.text.project, delete_dialogue)
+create_discussion(add_intro.title, add_intro.context, add_intro.text.project, add_intro)
+# create_discussion("Attachement à la rigueur historique", nil, dialogue)
+# create_discussion("Moral philosophique du texte", nil, dialogue)
+# create_discussion("Ajout de dialogue de Machiavel", add_dialogue.context, dialogue, add_dialogue)
+# dsc_delete_dialogue = create_discussion("Suppression d'un dialogue de Montesquieu", delete_dialogue.context, dialogue, delete_dialogue)
+# create_discussion("Ajout d'une introduction", add_intro.context, dialogue, add_intro)
+
+create_discussion("Limite de la parodie", "Je trouve que la parodie à ses limites, où s'arreter ?", fort_sherlock) # disc générale fort_sherlock
+
+dsc_following_story = create_discussion(following_story.title, following_story.context, following_story.text.project, following_story)
+dsc_add_mother_story = create_discussion(add_mother_story.title, add_mother_story.context, add_mother_story.text.project, add_mother_story)
+dsc_add_letter = create_discussion(add_letter.title, add_letter.context, add_letter.text.project, add_letter)
+# dsc_following_story = create_discussion("Partie 5", following_story.title, fort_sherlock, following_story)
+# dsc_add_mother_story = create_discussion("Annecdote sur la mère", add_mother_story.title, fort_sherlock, add_mother_story)
+# dsc_add_letter = create_discussion("Ajout d'une lettre, partie 3", add_letter.title, fort_sherlock, add_letter)
 puts "-> #{Discussion.count} discussions have been created."
 
 
