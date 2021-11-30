@@ -54,6 +54,11 @@
             <i class="far fa-edit"></i> Modifications
           </a>
         </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="pills-info-tab" data-toggle="pill" href="#pills-info" role="tab" aria-controls="pills-info" aria-selected="false">
+            <i class="far fa-edit"></i> Informations sur le projet
+          </a>
+        </li>
       </ul>
     </div>
 
@@ -134,6 +139,44 @@
               <% end %>
             </ul>
           <% end %>
+        </div>
+      </div>
+      <div class="tab-pane fade show active" id="pills-info" role="tabpanel" aria-labelledby="pills-info-tab">
+        <div id="info-disc" class="tab-pane fade show active" role="tabpanel" aria-labelledby="info-tab">
+          <h3>Description du projet</h3>
+          <p><%= @project.description %></p>
+          <h3>Créateur.ice du projet</h3>
+          <ul class="disc-list">
+            <li class="card-notif card-notif-modifications">
+              <div class="card-notif-head">
+                <div class="notif-head-info">
+                  <%= cl_image_tag @project.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+                  <div>
+                  <p class="notif-main-infos"><%= @project.user.username %></p>
+                  <p class="subtitle">A rejoint le projet le <%= @project.created_at.strftime("%m/%d at %I:%M") %></p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <h3>Contributeurs</h3>
+          <div class="contributors">
+            <ul class="disc-list">
+              <% @project.contributors.each do |contributor| %>
+                <li class="card-notif card-notif-modifications">
+                  <div class="card-notif-head">
+                    <div class="notif-head-info">
+                      <%= cl_image_tag contributor.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
+                      <div>
+                      <p class="notif-main-infos"><%= contributor.user.username %></p>
+                      <p class="subtitle">A rejoint le projet le <%= contributor.created_at.strftime("%m/%d at %I:%M") %></p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
