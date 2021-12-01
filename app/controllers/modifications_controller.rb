@@ -14,11 +14,12 @@ class ModificationsController < ApplicationController
     if @modification.save
       @discussion = Discussion.create(title: "Sans titre", modification: @modification, project: @text.project)
 
-      if @modification.content_before == "null"
-        diff = JSON.parse(@modification.content_after)["blocks"]
-      else
-        diff = JSON.parse(@modification.content_after)["blocks"] - JSON.parse(@modification.content_before)["blocks"]
+      before_ids = JSON.parse(@modification.content_before)["blocks"].map { |block| block["id"] }
+
+      diff = JSON.parse(@modification.content_after)["blocks"].reject do |block|
+        before_ids.include?(block["id"])
       end
+
       data = JSON.parse(@modification.content_after)
 
       diff.each do |modif_block|
@@ -50,7 +51,23 @@ class ModificationsController < ApplicationController
 
   def validate
     @modification = Modification.find(params[:id])
-    @modification.update(status: "accepted")
+
+    before_ids = JSON.parse(@modification.content_before)["blocks"].map { |block| block["id"] }
+
+    diff = JSON.parse(@modification.content_after)["blocks"].reject do |block|
+      before_ids.include?(block["id"])
+    end
+
+    data = JSON.parse(@modification.content_after)
+
+    diff.each do |modif_block|
+      block = data["blocks"].find { |block| block["id"] == modif_block["id"] }
+      block["data"]["class"] = "accepted"
+    end
+
+    @modification.content_after = data.to_json
+    @modification.status = "accepted"
+    @modification.save
     redirect_to discussion_path(@modification.discussion)
   end
 
