@@ -123,6 +123,7 @@
               </div>
               <% if project.modifications.any? %>
               <ul class="list-modifications">
+                <span>Dernières discussions</span>
                 <% project.text.modifications.each do |modification| %>
                   <%= link_to(discussion_path(modification.discussion)) do %>
                       <li><%= modification.title %></li>
@@ -169,11 +170,11 @@
               </ul>
               <div class="last-modification">
                 <% if project.modifications.where(user: current_user).last %>
-                  <%= link_to(discussion_path(project.modifications.where(user: current_user).last.discussion)) do %>
-                    <p><strong>Votre dernière contribution:</strong> <%= project.modifications.where(user: current_user).last.title%> </p>
+                  <%= link_to(discussion_path(project.modifications.where(user: current_user).last.discussion), class:"last-modification-user") do %>
+                    <p>Votre dernière contribution<strong> <%= project.modifications.where(user: current_user).last.title%></strong></p>
                   <% end %>
                 <% else %>
-                 <p><strong>Votre dernière contribution:</strong> Aucune </p>
+                 <p><strong>Aucune contribution </strong> </p>
                 <% end %>
               </div>
             </div>

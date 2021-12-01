@@ -7,12 +7,12 @@
 }
 
 .card-notif:after {
-    content:'';
-    height:1px;
-    width:100%;
-    bottom:-16px;
-    background:$super-light;
-    position:absolute;
+  content:'';
+  height:1px;
+  width:100%;
+  bottom:-16px;
+  background:$super-light;
+  position:absolute;
 }
 
 
@@ -130,6 +130,7 @@
   }
   &:hover {
     transition:.3s;
+    cursor:pointer;
     //transform:scale(1.05);
   }
   a:first-child {
@@ -151,6 +152,9 @@
   height: 100%;
 }
 .card-project-header {
+  h4 {
+    margin-bottom: 0px;
+  }
   .card-project-header-infos {
     display: flex;
     justify-content: space-between;
@@ -163,26 +167,43 @@
     margin: 8px;
     color: $light-gray;
   }
+  p:first-child {
+    margin-left:0px;
+  }
 }
 
 
 .list-modifications {
   list-style: none;
-  margin:12px 0 12px 12px;
-  color:$gray;
-  opacity:.8;
+  margin:8px 0 12px 0px;
+  border-radius:4px;
+  color:$medium-gray;
   padding:25px;
-  background-color: $light-grey;
+  background-color: $ultra-light;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  li {
-    border-left:2px solid $medium-gray;
-    font-size:14px;
-    opacity:.75;
+  a {
+    border-radius: 0px;
+    width: 100%;
   }
-  .last-modification {
+  span {
+    font-size: 14px;
+    margin-bottom: 12px;
+    font-family:$BP-med;
+  }
+  li {
+    border-left:1px solid $medium-gray;
     font-size:14px;
+    color:$medium-gray;
+  }
+}
+
+.last-modification-user, .last-modification {
+  width:100% !important;
+  color:$medium-gray;
+  &:hover {
+    color:$medium-gray;
   }
 }
 

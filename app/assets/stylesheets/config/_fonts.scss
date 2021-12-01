@@ -31,6 +31,10 @@ $body-font: "BP-Reg", "Helvetica", "sans-serif";
 $headers-font: "BP-Med", "Helvetica", "sans-serif";
 
 
+html {
+  font-variant-numeric: oldstyle-nums;
+}
+
 h1 {
   font-size:64px !important;
 }
@@ -41,5 +45,5 @@ h2 {
 }
 
 strong {
-  font-family: $BP-reg;
+  font-family: $BP-med;
 }

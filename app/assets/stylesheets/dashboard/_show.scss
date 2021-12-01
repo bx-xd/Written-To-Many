@@ -24,7 +24,7 @@
 
 .dashboard-container {
   border: 1px solid $super-light;
-  border-radius: 2px;
+  border-radius: 4px;
   margin-bottom: 2rem;
 
   .tabs {
@@ -39,8 +39,13 @@
   margin-bottom: 0px;
   position:relative;
 
+  .tab-underlined {
+    margin-right:12px;
+  }
+
   i {
     font-size: 15px;
+    margin-right:6px;
   }
 
   a{
@@ -70,7 +75,7 @@
       font-family: $BP-bold;
       opacity:1 !important;
       position: absolute;
-      right: 0;
+      right: 8px;
       a {
         color: $primary-light !important;
       }
@@ -111,7 +116,7 @@
 }
 
 .dashboard-cards{
-  margin: 24px 24px;
+  margin: 32px 24px;
 }
 
 .dashboard-cards-project {
