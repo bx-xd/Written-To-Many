@@ -34,7 +34,7 @@
               </div>
             </div>
             <div class="modif-date">
-            Crée le <%= @modification.created_at.strftime("%m/%d at %I:%M") %>
+            Crée <%= Jekyll::Timeago.timeago(from = @modification.created_at, to = Date.today, options = {locale: :fr}) %>
             </div>
           </div>
           <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContextCollapse" aria-expanded="true" aria-controls="modifContextCollapse">
@@ -81,7 +81,7 @@
         <% end %>
           <%= cl_image_tag p.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
           <div id="post-<%= p.id %>" class="post-content">
-            <p class="post-info"><%= p.user.username.capitalize %>, <%= p.created_at.strftime("%m/%d at %I:%M") %></p>
+            <p class="post-info"><%= p.user.username.capitalize %>, <%= Jekyll::Timeago.timeago(from = p.created_at, to = Date.today, options = {locale: :fr}).capitalize %></p>
             <p class="post-text"><%= p.text %></p>
           </div>
         </li>
