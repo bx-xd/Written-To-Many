@@ -109,6 +109,8 @@ GEM
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.3)
       activesupport (>= 5.0.0)
+    jekyll-timeago (0.14.0)
+      mini_i18n (>= 0.8.0)
     listen (3.7.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -123,6 +125,7 @@ GEM
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.1115)
+    mini_i18n (0.8.0)
     mini_mime (1.1.2)
     mini_portile2 (2.6.1)
     minitest (5.14.4)
@@ -173,6 +176,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
+    rails-timeago (2.19.1)
+      actionpack (>= 3.1)
+      activesupport (>= 3.1)
     railties (6.0.4.1)
       actionpack (= 6.0.4.1)
       activesupport (= 6.0.4.1)
@@ -270,12 +276,14 @@ DEPENDENCIES
   dotenv-rails
   font-awesome-sass
   jbuilder (~> 2.7)
+  jekyll-timeago
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
   pry-byebug
   pry-rails
   puma (~> 4.1)
   rails (~> 6.0.4, >= 6.0.4.1)
+  rails-timeago (~> 2.0)
   redis (~> 4.0)
   sass-rails (>= 6)
   selenium-webdriver
