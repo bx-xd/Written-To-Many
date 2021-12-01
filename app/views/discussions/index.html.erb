@@ -109,7 +109,7 @@
                       <div class="notif-head-info">
                         <%= cl_image_tag d.modification.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
                         <div>
-                        <p class="notif-main-infos"><%= d.title.capitalize %></p>
+                        <p class="notif-main-infos"><%= "#{d.title ? d.title.capitalize : "Sans titre"}" %></p>
                         <p class="subtitle">Crée par <%= d.modification.user.username.capitalize  %> le <%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
                         </div>
                       </div>
