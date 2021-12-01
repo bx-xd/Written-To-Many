@@ -11,9 +11,8 @@ class ModificationsController < ApplicationController
 
     @modification.status = "pending"
 
-
     if @modification.save
-      @discussion = Discussion.create(modification: @modification, project: @text.project)
+      @discussion = Discussion.create(title: "Sans titre", modification: @modification, project: @text.project)
 
       if @modification.content_before == "null"
         diff = JSON.parse(@modification.content_after)["blocks"]
@@ -31,7 +30,6 @@ class ModificationsController < ApplicationController
       @modification.content_after = data.to_json
 
       @modification.save
-
 
       respond_to do |format|
         format.html { redirect_to discussion_path(@modification.discussion), notice: "Votre modif a été envoyée !" }

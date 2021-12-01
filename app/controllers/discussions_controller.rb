@@ -11,7 +11,11 @@ class DiscussionsController < ApplicationController
 
     # Permet d'afficher ce qui est PROPRE à la modif'
     if @discussion.modification
-      @modification_content = JSON.parse(@discussion.modification.content_after)["blocks"] - JSON.parse(@discussion.modification.content_before)["blocks"]
+      before_ids = JSON.parse(@discussion.modification.content_before)["blocks"].map { |block| block["id"] }
+
+      @modification_content = JSON.parse(@discussion.modification.content_after)["blocks"].reject do |block|
+        before_ids.include?(block["id"])
+      end
     end
   end
 
