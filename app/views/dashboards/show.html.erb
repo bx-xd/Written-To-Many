@@ -1,29 +1,4 @@
-<div class="dashboard-navbar">
-  <div class="container">
-    <div class="navbar-page-info">
-      <div class="navbar-body">
-        <%= cl_image_tag current_user.photo.key, class: 'navbar-page-image' %>
-
-        <div class="navbar-info">
-          <h1 class="username"><%= @user.username.capitalize %></h1>
-          <div class="subtitle">Membre depuis le 21.02.2012</div>
-          <div class="subinfos">
-            <p>Contributeur dans <%= @contributions.count %> projets</p>
-            <p>Créateur de <%= @projects.count %> projets</p>
-            <p> <%= @character %> caractères écrits</p>
-          </div>
-        </div>
-      </div>
-      <div class="link">
-        <%= link_to destroy_user_session_path, method: :delete do %>
-          <i class="fas fa-sign-out-alt"></i>
-          <span>Déconnexion</span>
-        <% end %>
-      </div>
-    </div>
-
-  </div>
-</div>
+<%= render "shared/dash_navbar" %>
 
 
 <div class="container">

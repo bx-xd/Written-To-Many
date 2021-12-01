@@ -8,6 +8,8 @@ class DashboardsController < ApplicationController
     @random_user_two = User.find_by_username("george")
   end
 
+  private
+
   def compting_writing_character
     compteur = 0
     @projects.each do |project|
