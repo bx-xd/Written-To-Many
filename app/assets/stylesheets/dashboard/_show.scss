@@ -37,24 +37,34 @@
   border-bottom: 1px solid $super-light;
   align-items: center;
   margin-bottom: 0px;
-    a{
-      color: black;
-    }
+  position:relative;
 
-    li {
-      list-style: none;
-      color: black;
-      margin: 16px;
-      font-size:18px;
-      font-family:$BP-med;
-      &:hover {
-        cursor: pointer;
-        color: $primary-light
-      }
-      &:not(.active) {
-        opacity:.5;
+  i {
+    font-size: 15px;
+  }
+
+  a{
+    color: black;
+  }
+
+  li {
+    list-style: none;
+    color: black;
+    margin: 16px;
+    font-size:18px;
+    font-family:$BP-med;
+    &:hover {
+      cursor: pointer;
+      color: $primary-light
+    }
+    &:not(.active) {
+      color:$light-gray;
+      a {
+        color:$light-gray;
+        font-family:$BP-reg;
       }
     }
+  }
 
     .create-project {
       font-family: $BP-bold;
@@ -72,7 +82,7 @@
     .active {
       font-weight: bold;
       border-bottom: 4px solid #e03715;
-      padding-bottom: 17px;
+      padding-bottom: 12px;
       margin-bottom:0px;
       i {
         color:$primary-light;

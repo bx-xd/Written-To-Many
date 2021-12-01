@@ -107,6 +107,17 @@
   display: flex;
   align-items: center;
   margin:16px auto;
+  border-radius: 2px;
+  &:hover .project-img {
+    transform:scale(1.15);
+    transition:.3s;
+  }
+  a {
+    height: 100%;
+    width: 196px;
+    overflow:hidden;
+    border-radius:2px 0 0 2px;
+  }
   .avatar {
     margin-right:-16px;
     border: 1px solid $light-grey;
@@ -118,10 +129,8 @@
     margin-right: 3px;
   }
   &:hover {
-    box-shadow: 5px 0px 30px rgba(0,0,0,0.3);
     transition:.3s;
     //transform:scale(1.05);
-    transform:translateY(-5px);
   }
   a:first-child {
     height: 100%;
@@ -129,9 +138,9 @@
 }
 
 .card-project .project-img {
-  height: 100%;
-  width: 196px;
   object-fit: cover;
+  height:100%;
+  transition:.2s;
 }
 .card-project-info {
   padding:24px;
@@ -152,7 +161,7 @@
   }
   p {
     margin: 8px;
-    color: $medium-gray
+    color: $light-gray;
   }
 }
 
