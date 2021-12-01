@@ -7,8 +7,6 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-require("rails-timeago")
-require("rails-timeago-all")
 
 import "trix"
 import "@rails/actiontext"
