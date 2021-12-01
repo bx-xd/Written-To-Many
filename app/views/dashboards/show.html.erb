@@ -25,51 +25,138 @@
       </ul>
     </div>
     <div class="colonne content active" id="dashboard-show" >
-      <div class="dashboard-cards" >
-        <div class="card-notif">
-          <div class="card-notif-head">
-            <div class="notif-head-info">
-              <%= cl_image_tag @random_user_two.photo.key, class: "avatar" %>
-              <div>
-                <p class="notif-main-infos"><strong><%= @random_user_two.username.capitalize %></strong> a repondu à <strong><%= @random_user_two.projects.last.modifications.last.context %></strong></p>
-                <p class="subtitle">Dans <strong><%= @random_user_two.projects.last.title %></strong> de <strong> <%= @random_user_two.projects.last.user.username.capitalize %></strong></p>
+      <% @feed_list.each do |feed| %>
+        <% if feed.class == Discussion && feed.modification && feed.posts.any? %>
+          <div class="dashboard-cards" >
+            <div class="card-notif">
+              <div class="card-notif-head">
+                <div class="notif-head-info">
+                  <%= cl_image_tag feed.posts.last.user.photo.key, class: "avatar" %>
+                  <div>
+                    <p class="notif-main-infos"><strong><%= feed.posts.last.user.username.capitalize %></strong> a repondu à <strong><%= feed.title ? feed.title : "Sans titre" %></strong></p>
+                    <p class="subtitle">Dans le projet <strong><%= feed.project.title %></strong> de <strong> <%= feed.project.user.username.capitalize %></strong></p>
+                  </div>
+                </div>
+                <div class="notif-head-time">
+                  <p><%= feed.updated_at %></p>
+                </div>
+              </div>
+              <div class="card-notif-body">
+                <p><%= feed.posts.last.text %></p>
               </div>
             </div>
-            <div class="notif-head-time">
-              <p>2 hours ago</p>
-            </div>
           </div>
-          <div class="card-notif-body">
-            <p>Il y a, dans le moment où Jean se chahute avec ses camarades, une situation dramatique
-            qui à mon sens mériterait d'être mieux traité.
-            J'ai réécris un des passage et me suis permis d'étoffer d'autres où on passait rapidement dessus
-            histoire d'appuyer cette idée d'une situation dramatique, sans trop être tire larme.</p>
-          </div>
-        </div>
-      </div>
-      <div class="dashboard-cards" >
-        <div class="card-notif">
-          <div class="card-notif-head">
-            <div class="notif-head-info">
-              <%= cl_image_tag @random_user.photo.key, class: "avatar" %>
-              <div>
-                <p class="notif-main-infos"><strong><%= @random_user.username.capitalize %></strong> à ajouter une modification: <strong><%= @random_user.modifications.last.context %></strong></p>
-                <p class="subtitle">Dans <strong><%= @random_user.modifications.last.text.project.title %></strong> de <strong> <%= @random_user.modifications.last.text.project.user.username.capitalize %></strong></p>
+        <% end %>
+
+        <% if feed.class == Discussion && feed.modification && feed.posts.empty? %>
+          <div class="dashboard-cards" >
+            <div class="card-notif">
+              <div class="card-notif-head">
+                <div class="notif-head-info">
+                  <%= cl_image_tag feed.modification.user.photo.key, class: "avatar" %>
+                  <div>
+                    <p class="notif-main-infos"><strong><%= feed.modification.user.username.capitalize %></strong> a créé la modification : <strong><%= feed.title ? feed.title : "Sans titre" %></strong></p>
+                    <p class="subtitle">Dans le projet <strong><%= feed.project.title %></strong> de <strong> <%= feed.project.user.username.capitalize %></strong></p>
+                  </div>
+                </div>
+                <div class="notif-head-time">
+                  <p><%= feed.updated_at %></p>
+                </div>
+              </div>
+              <div class="card-notif-body">
+                <p><%= feed.context %></p>
               </div>
             </div>
-            <div class="notif-head-time">
-              <p>22 hours ago</p>
+          </div>
+        <% end %>
+
+        <% if feed.class == Discussion && feed.modification.nil? && feed.posts.any? %>
+          <div class="dashboard-cards" >
+            <div class="card-notif">
+              <div class="card-notif-head">
+                <div class="notif-head-info">
+                  <%= cl_image_tag feed.posts.last.user.photo.key, class: "avatar" %>
+                  <div>
+                    <p class="notif-main-infos"><strong><%= feed.posts.last.user.username.capitalize %></strong> a repondu à <strong><%= feed.title ? feed.title : "Sans titre" %></strong></p>
+                    <p class="subtitle">Dans le projet <strong><%= feed.project.title %></strong> de <strong> <%= feed.project.user.username.capitalize %></strong></p>
+                  </div>
+                </div>
+                <div class="notif-head-time">
+                  <p><%= feed.updated_at %></p>
+                </div>
+              </div>
+              <div class="card-notif-body">
+                <p><%= feed.posts.last.text %></p>
+              </div>
             </div>
           </div>
-          <div class="card-notif-body">
-            <p>Il y a, dans le moment où Jean se chahute avec ses camarades, une situation dramatique
-            qui à mon sens mériterait d'être mieux traité.
-            J'ai réécris un des passage et me suis permis d'étoffer d'autres où on passait rapidement dessus
-            histoire d'appuyer cette idée d'une situation dramatique, sans trop être tire larme.</p>
+        <% end %>
+
+        <% if feed.class == Discussion && feed.modification.nil? && feed.posts.empty? %>
+          <div class="dashboard-cards" >
+            <div class="card-notif">
+              <div class="card-notif-head">
+                <div class="notif-head-info">
+                  <%= cl_image_tag feed.project.user.photo.key, class: "avatar" %>
+                  <div>
+                    <p class="notif-main-infos"><strong><%= feed.project.user.username.capitalize %></strong> a créé la discussion : <strong><%= feed.title %></strong></p>
+                    <p class="subtitle">Dans le projet <strong><%= feed.project.title %></strong></p>
+                  </div>
+                </div>
+                <div class="notif-head-time">
+                  <p><%= feed.updated_at %></p>
+                </div>
+              </div>
+              <div class="card-notif-body">
+                <p><%= feed.context %></p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        <% end %>
+
+        <% if feed.class == Modification && feed.status != "pending" %>
+          <div class="dashboard-cards" >
+            <div class="card-notif">
+              <div class="card-notif-head">
+                <div class="notif-head-info">
+                  <%= cl_image_tag feed.text.project.user.photo.key, class: "avatar" %>
+                  <div>
+                    <p class="notif-main-infos"><strong><%= feed.text.project.user.username.capitalize %></strong> a <%= feed.status == "validated" ? "accepté" : "refusé" %> la modification : <strong><%= feed.title %></strong></p>
+                    <p class="subtitle">Dans le projet <strong><%= feed.text.project.title %></strong></p>
+                  </div>
+                </div>
+                <div class="notif-head-time">
+                  <p><%= feed.updated_at %></p>
+                </div>
+              </div>
+              <div class="card-notif-body">
+                <p><%= feed.context %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <% if feed.class == Contributor %>
+          <div class="dashboard-cards" >
+            <div class="card-notif">
+              <div class="card-notif-head">
+                <div class="notif-head-info">
+                  <%= cl_image_tag feed.user.photo.key, class: "avatar" %>
+                  <div>
+                    <p class="notif-main-infos"><strong><%= feed.user.username.capitalize %></strong> a été ajouté à la liste des <strong>contributeurs</strong></p>
+                    <p class="subtitle">Dans le projet <strong><%= feed.project.title %></strong></p>
+                  </div>
+                </div>
+                <div class="notif-head-time">
+                  <p><%= feed.updated_at %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     </div>
+
     <div class="colonne content" id="dashboard-rental">
       <div class="dashboard-cards-projects", style="padding: 0px 16px;" >
         <% @projects.each do |project| %>

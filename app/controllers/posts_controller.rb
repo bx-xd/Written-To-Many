@@ -5,7 +5,11 @@ class PostsController < ApplicationController
     @discussion = Discussion.find(params[:discussion_id])
     @post.discussion = @discussion
 
-    flash[:notice] = "Post creation failed" unless @post.save
+    if @post.save
+      @discussion.update(updated_at: Time.now)
+    else
+      flash[:notice] = "Post creation failed"
+    end
 
     redirect_to discussion_path(@discussion, anchor: "post-#{@post.id}")
   end

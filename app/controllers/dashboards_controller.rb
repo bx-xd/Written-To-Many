@@ -6,6 +6,7 @@ class DashboardsController < ApplicationController
     @character = compting_writing_character
     @random_user = User.first
     @random_user_two = User.find_by_username("george")
+    @feed_list = feed_list
   end
 
   private
@@ -22,5 +23,21 @@ class DashboardsController < ApplicationController
       end
     end
     return compteur
+  end
+
+  private
+
+  def feed_list
+    projects = current_user.projects + current_user.projects_contributions
+    feed_list = []
+    projects.each { |project|
+      project.discussions.each { |discussion| feed_list << discussion }
+
+      project.text.modifications.each { |modification| feed_list << modification }
+
+      project.contributors.each { |contributor| feed_list << contributor }
+    }
+    feed_list.sort_by!{ |feed| feed.updated_at }
+    return feed_list.reverse!
   end
 end
