@@ -35,7 +35,7 @@ class DashboardsController < ApplicationController
 
       project.contributors.each { |contributor| feed_list << contributor }
     }
-    feed_list.sort_by!{ |feed| feed.created_at }
+    feed_list.sort_by!{ |feed| feed.updated_at }
     return feed_list.reverse!
   end
 end

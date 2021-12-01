@@ -50,7 +50,7 @@
       </ul>
     </div>
     <div class="colonne content active" id="dashboard-show" >
-      <% @feed_list.first(20).each do |feed| %>
+      <% @feed_list.each do |feed| %>
         <% if feed.class == Discussion && feed.modification && feed.posts.any? %>
           <div class="dashboard-cards" >
             <div class="card-notif">
