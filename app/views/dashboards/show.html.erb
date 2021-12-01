@@ -88,9 +88,11 @@
                   <p><%= feed.updated_at %></p>
                 </div>
               </div>
-              <div class="card-notif-body">
-                <p><%= feed.context %></p>
-              </div>
+              <% if feed.context %>
+                <div class="card-notif-body">
+                  <p><%= feed.context %></p>
+                </div>
+              <% end %>
             </div>
           </div>
         <% end %>
