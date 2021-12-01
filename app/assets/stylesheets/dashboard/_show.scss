@@ -41,7 +41,15 @@
 
   .tab-underlined {
     margin-right:12px;
+    i {
+      transition:.2s;
+    }
+    &:hover i {
+      color:$primary !important;
+      transition:.2s;
+    }
   }
+
 
   i {
     font-size: 15px;
