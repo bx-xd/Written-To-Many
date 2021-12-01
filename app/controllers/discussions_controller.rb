@@ -3,6 +3,7 @@ class DiscussionsController < ApplicationController
     @discussion = Discussion.find(params[:id])
     @modification = @discussion.modification
     @project = @discussion.project
+    @project_creator = current_user == @project.user
     @posts = @discussion.posts
     @post = Post.new
     @contributors = @posts.map(&:user).uniq
