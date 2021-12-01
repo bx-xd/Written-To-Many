@@ -1,7 +1,7 @@
 <div class="container">
-  <div class="row">
-    <div class="col-6 offset-3">
-      <h2>Log in</h2>
+  <div class="row row-log">
+    <div class="col-6 offset-3 big-form">
+      <h2>Connectez vous</h2>
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-inputs">
           <%= f.input :email,
@@ -15,7 +15,7 @@
         </div>
 
         <div class="form-actions">
-          <%= f.button :submit, "Log in" %>
+          <%= f.button :submit, "Se connecter", class: "btn btn-primary" %>
         </div>
       <% end %>
       <div>
