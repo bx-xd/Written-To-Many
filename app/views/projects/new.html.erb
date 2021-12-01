@@ -1,7 +1,10 @@
+<%= render "shared/dash_navbar" %>
+
+<%= link_to dashboard_path, class: "dashboard-back btn btn-ghost return-btn" do %>
+    <i class="fas fa-reply"></i> Retourner aux Projets
+<% end %>
 <div class="container">
   <div id="form-project" class="row d-grid">
-    <div class="col-4">
-    </div>
     <div class="col-8">
 
       <h2>Nouveau Projet</h2>
@@ -16,7 +19,7 @@
         </div>
 
         <div class="form-actions">
-          <%= form.button :submit, "Créer !", class: "btn btn-primary", method: :post %>
+          <%= form.button :submit, "Créer votre projet!", class: "btn btn-primary", method: :post %>
         </div>
 
       <% end %>
