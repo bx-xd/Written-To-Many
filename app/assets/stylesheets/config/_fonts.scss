@@ -33,6 +33,7 @@ $headers-font: "BP-Med", "Helvetica", "sans-serif";
 
 html {
   font-variant-numeric: oldstyle-nums;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1 {
