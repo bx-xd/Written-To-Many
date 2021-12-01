@@ -1,4 +1,8 @@
 .add-contrib-form {
+  justify-content: center;
+  display: flex;
+  margin-top: 32px;
+
   .return-btn {
     margin-bottom: 2rem;
     margin-top: 1rem;
@@ -13,4 +17,10 @@
     font-size: 1.2rem;
     padding: 0.7rem 1.2rem;
   }
+}
+
+.project-back {
+  position: absolute;
+  top: 188px;
+  left: 55px;
 }

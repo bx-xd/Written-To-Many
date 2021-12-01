@@ -1,11 +1,16 @@
-<div class="container add-contrib-form">
-  <%= link_to project_discussions_path(@project), class: "btn btn-ghost return-btn" do %>
-    <i class="fas fa-reply"></i> Retourner au Projet
-  <% end %>
-  <h2>Ajouter un contributeur au projet <strong><%= @project.title %></strong></h2>
-  <%= simple_form_for([@project, @contributor]) do |form| %>
-    <%= form.association :user, label: "Contributeur", collection: @users, label_method: :second, value_method: :first, input_html: { data: { controller: 'select2' }} %>
+<%= render "shared/disc_navbar" %>
 
-    <%= form.button :submit, "Ajouter un contributeur", class: "btn btn-primary add-contrib-btn", method: :post %>
-  <% end %>
+<%= link_to project_discussions_path(@project), class: "project-back btn btn-ghost return-btn" do %>
+  <i class="fas fa-reply"></i> Retourner au Projet
+<% end %>
+<div class="container add-contrib-form">
+  <div class="col-8">
+    <h2>Ajouter un contributeur au projet <strong><%= @project.title %></strong></h2>
+    <%= simple_form_for([@project, @contributor]) do |form| %>
+      <%= form.association :user, label: "Contributeur", collection: @users, label_method: :second, value_method: :first, input_html: { data: { controller: 'select2' }} %>
+      <div class="form-actions">
+        <%= form.button :submit, "Ajouter un contributeur", class: "btn btn-primary add-contrib-btn", method: :post %>
+      </div>
+    <% end %>
+  </div>
 </div>
