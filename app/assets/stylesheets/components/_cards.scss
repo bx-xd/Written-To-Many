@@ -27,11 +27,25 @@
     height:32px;
   }
   .notif-main-infos {
+    display: flex;
     margin:0;
   }
   .notif-head-info {
     display:flex;
     align-items: center;
+  }
+  .modification-status-pills {
+    padding:6px;
+    border-radius:4px;
+    margin:0 12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    h4 {
+      font-size:14px;
+      margin:0;
+      font-family:$BP-reg;
+    }
   }
   p {
     font-size: 16px;

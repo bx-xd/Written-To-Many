@@ -12,31 +12,31 @@
   }
 }
 
+.modification-status-pills {
+  padding:6px;
+  border-radius:4px;
+  margin:0 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  h4 {
+    font-size:14px;
+    margin:0;
+    font-family:$BP-reg;
+  }
+}
+.success {
+  background: #ECFDF5;
+  color:#23B981;
+}
+.decline {
+  background: #FEF2F2;
+  color:#EF4444;
+}
+
 .modif-title {
   padding-left: 16px;
   display:flex;
-  .modification-status-pills {
-
-    padding:6px;
-    border-radius:4px;
-    margin:0 12px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    h4 {
-      font-size:14px;
-      margin:0;
-      font-family:$BP-reg;
-    }
-  }
-  .success {
-    background: #ECFDF5;
-    color:#23B981;
-  }
-  .decline {
-    background: #FEF2F2;
-    color:#EF4444;
-  }
   .open {
     background: $ultra-light;
     color: $medium-gray;

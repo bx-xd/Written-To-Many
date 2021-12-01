@@ -22,15 +22,19 @@
               </div>
               <div class="modif-title">
                 <h1><%= @modification.title.capitalize %></h1>
-                <div class="modification-status-pills success">
-                  <h4>Validée</h4>
-                </div>
-                <div class="modification-status-pills decline">
-                  <h4>Refusée</h4>
-                </div>
-                <div class="modification-status-pills open">
-                  <h4>En cours</h4>
-                </div>
+                <% if @modification.status == "accepted" %>
+                  <div class="modification-status-pills success">
+                    <h4>Validée</h4>
+                  </div>
+                <% elsif @modification.status == "denied" %>
+                  <div class="modification-status-pills decline">
+                    <h4>Refusée</h4>
+                  </div>
+                <% else %>
+                  <div class="modification-status-pills open">
+                    <h4>En cours</h4>
+                  </div>
+                <% end %>
               </div>
             </div>
             <div class="modif-date">

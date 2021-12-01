@@ -90,7 +90,18 @@
                       <div class="notif-head-info">
                         <%= cl_image_tag d.modification.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
                         <div>
-                        <p class="notif-main-infos"><%= d.title.capitalize %></p>
+                        <div class="notif-main-infos">
+                          <p class="notif-main-title"><%= d.title.capitalize %></p>
+                          <% if d.modification.status == "accepted" %>
+                            <div class="modification-status-pills success">
+                              <h4>Validée</h4>
+                            </div>
+                          <% else d.modification.status == "denied" %>
+                            <div class="modification-status-pills decline">
+                              <h4>Refusée</h4>
+                            </div>
+                          <% end %>
+                        </div>
                         <p class="subtitle">Crée par <%= d.modification.user.username.capitalize  %> le <%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
                         </div>
                       </div>
