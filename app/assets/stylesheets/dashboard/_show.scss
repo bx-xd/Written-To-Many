@@ -59,6 +59,8 @@
     .create-project {
       font-family: $BP-bold;
       opacity:1 !important;
+      position: absolute;
+      right: 0;
       a {
         color: $primary-light !important;
       }
@@ -72,6 +74,9 @@
       border-bottom: 4px solid #e03715;
       padding-bottom: 17px;
       margin-bottom:0px;
+      i {
+        color:$primary-light;
+      }
     }
   }
 }

@@ -14,7 +14,12 @@
           </div>
         </div>
       </div>
-      <div class="link"><%= link_to "Deconnexion", destroy_user_session_path, method: :delete %></div>
+      <div class="link">
+        <%= link_to destroy_user_session_path, method: :delete do %>
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Déconnexion</span>
+        <% end %>
+      </div>
     </div>
 
   </div>
@@ -28,7 +33,7 @@
       <ul class="list-inline tabs-underlined">
         <li data-content-active="dashboard-show" class="tab-underlined active">
           <i class="fas fa-bell"></i>
-          <a href="#dashboard-show">Dernières Modifications</a>
+          <a href="#dashboard-show">Dernières modifications</a>
         </li>
         <li data-content-active="dashboard-rental" class="tab-underlined">
           <i class="fas fa-pen"></i>
