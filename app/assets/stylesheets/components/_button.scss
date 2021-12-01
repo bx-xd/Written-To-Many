@@ -14,7 +14,8 @@
   background: $primary;
   transition: 0.5s ease;
   border: 0.15rem solid transparent;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  font-family:$BP-med;
 
   &:hover {
   background: transparent;
@@ -42,7 +43,6 @@
 .btn-ghost {
   color: $primary;
   padding: 8px 0;
-  font-weight: lighter;
   transition: 0.5s ease;
 }
 
@@ -57,8 +57,8 @@
   padding: 1rem 2.5rem;
   border-radius: 5rem;
   border: 0.15rem solid $primary;
-  font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1rem;
+  font-family:$BP-med;
 }
 
 .btn-flat:hover {
@@ -71,7 +71,6 @@
   color: white;
   padding: 8px 24px;
   border-radius: 4px;
-  font-weight: bold;
   background: linear-gradient(#167FFB, #0F60C4);
   transition: background 0.3s ease;
   border: 1px solid #0F60C4;
@@ -90,7 +89,8 @@
   background: $primary;
   transition: 0.5s ease;
   border: 2px solid transparent;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  font-family:$BP-med;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -109,7 +109,8 @@
   background: $white;
   transition: 0.5s ease;
   border: 0.15rem solid transparent;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  font-family:$BP-med;
 
   &:hover {
   background: $primary;

@@ -24,7 +24,7 @@
 
 .dashboard-container {
   border: 1px solid $super-light;
-  border-radius: 2px;
+  border-radius: 4px;
   margin-bottom: 2rem;
 
   .tabs {
@@ -37,30 +37,53 @@
   border-bottom: 1px solid $super-light;
   align-items: center;
   margin-bottom: 0px;
-    a{
-      color: black;
-    }
+  position:relative;
 
-    li {
-      list-style: none;
-      color: black;
-      margin: 16px;
-      font-size:18px;
-      font-family:$BP-med;
-      &:hover {
-        cursor: pointer;
-        color: $primary-light
-      }
-      &:not(.active) {
-        opacity:.5;
+  .tab-underlined {
+    margin-right:12px;
+    i {
+      transition:.2s;
+    }
+    &:hover i {
+      color:$primary !important;
+      transition:.2s;
+    }
+  }
+
+
+  i {
+    font-size: 15px;
+    margin-right:6px;
+  }
+
+  a{
+    color: black;
+  }
+
+  li {
+    list-style: none;
+    color: black;
+    margin: 16px;
+    font-size:18px;
+    font-family:$BP-med;
+    &:hover {
+      cursor: pointer;
+      color: $primary-light
+    }
+    &:not(.active) {
+      color:$light-gray;
+      a {
+        color:$light-gray;
+        font-family:$BP-reg;
       }
     }
+  }
 
     .create-project {
       font-family: $BP-bold;
       opacity:1 !important;
       position: absolute;
-      right: 0;
+      right: 8px;
       a {
         color: $primary-light !important;
       }
@@ -70,9 +93,9 @@
     }
 
     .active {
-      font-weight: bold;
+      font-family:$BP-med;
       border-bottom: 4px solid #e03715;
-      padding-bottom: 17px;
+      padding-bottom: 12px;
       margin-bottom:0px;
       i {
         color:$primary-light;
@@ -101,7 +124,7 @@
 }
 
 .dashboard-cards{
-  margin: 24px 24px;
+  margin: 32px 24px;
 }
 
 .dashboard-cards-project {

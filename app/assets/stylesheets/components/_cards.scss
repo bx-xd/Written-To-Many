@@ -7,12 +7,12 @@
 }
 
 .card-notif:after {
-    content:'';
-    height:1px;
-    width:100%;
-    bottom:-16px;
-    background:$super-light;
-    position:absolute;
+  content:'';
+  height:1px;
+  width:100%;
+  bottom:-16px;
+  background:$super-light;
+  position:absolute;
 }
 
 
@@ -103,10 +103,21 @@
   width: 100%;
   background: white;
   background-size: cover;
-  border: 1px solid $light-grey;
+  border: 1px solid $super-light;
   display: flex;
   align-items: center;
   margin:16px auto;
+  border-radius: 2px;
+  &:hover .project-img {
+    transform:scale(1.15);
+    transition:.3s;
+  }
+  a {
+    height: 100%;
+    width: 196px;
+    overflow:hidden;
+    border-radius:2px 0 0 2px;
+  }
   .avatar {
     margin-right:-16px;
     border: 1px solid $light-grey;
@@ -118,10 +129,9 @@
     margin-right: 3px;
   }
   &:hover {
-    box-shadow: 5px 0px 30px rgba(0,0,0,0.3);
     transition:.3s;
+    cursor:pointer;
     //transform:scale(1.05);
-    transform:translateY(-5px);
   }
   a:first-child {
     height: 100%;
@@ -129,9 +139,9 @@
 }
 
 .card-project .project-img {
-  height: 100%;
-  width: 196px;
   object-fit: cover;
+  height:100%;
+  transition:.2s;
 }
 .card-project-info {
   padding:24px;
@@ -142,6 +152,9 @@
   height: 100%;
 }
 .card-project-header {
+  h4 {
+    margin-bottom: 0px;
+  }
   .card-project-header-infos {
     display: flex;
     justify-content: space-between;
@@ -152,28 +165,45 @@
   }
   p {
     margin: 8px;
-    color: $medium-gray
+    color: $light-gray;
+  }
+  p:first-child {
+    margin-left:0px;
   }
 }
 
 
 .list-modifications {
   list-style: none;
-  margin:12px 0 12px 12px;
-  color:$gray;
-  opacity:.8;
+  margin:8px 0 12px 0px;
+  border-radius:4px;
+  color:$medium-gray;
   padding:25px;
-  background-color: $light-grey;
+  background-color: $ultra-light;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  li {
-    border-left:2px solid $medium-gray;
-    font-size:14px;
-    opacity:.75;
+  a {
+    border-radius: 0px;
+    width: 100%;
   }
-  .last-modification {
+  span {
+    font-size: 14px;
+    margin-bottom: 12px;
+    font-family:$BP-med;
+  }
+  li {
+    border-left:1px solid $medium-gray;
     font-size:14px;
+    color:$medium-gray;
+  }
+}
+
+.last-modification-user, .last-modification {
+  width:100% !important;
+  color:$medium-gray;
+  &:hover {
+    color:$medium-gray;
   }
 }
 
