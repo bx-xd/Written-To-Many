@@ -85,6 +85,16 @@
   }
 }
 
+.tab-content {
+  margin-top: 32px;
+}
+
+.disc-nav ul li a.active{
+  color:$gray !important;
+  font-family:$BP-med !important;
+  padding-bottom: 17px !important;
+}
+
 .disc-info-box {
   // border: 1px solid #e2e5ec;
   // border-radius: 2px;

@@ -56,7 +56,7 @@
         </li>
         <li class="nav-item" role="presentation">
           <a class="nav-link" id="pills-info-tab" data-toggle="pill" href="#pills-info" role="tab" aria-controls="pills-info" aria-selected="false">
-            <i class="far fa-edit"></i> Informations sur le projet
+            <i class="far fa-bookmark"></i> Informations sur le projet
           </a>
         </li>
       </ul>
@@ -84,7 +84,7 @@
           </ul>
           <div class="add-global-disc">
             <button class="btn btn-toggle btn-ghost collapsed text-left collapsed" data-toggle="collapse" data-target="#addDiscCollapse" aria-expanded="false" aria-controls="addDiscCollapse">
-              <i class="fas fa-plus"></i> Créer un nouvelle discussion
+              <i class="fas fa-plus"></i> Démarrer une nouvelle discussion
             </button>
             <div class="collapse p-2" id="addDiscCollapse">
               <%= simple_form_for([@project, @discussion], remote: true, html: { id: "add-global-disc-form" }) do |form| %>
@@ -145,7 +145,7 @@
         <div id="info-disc">
           <h3>Description du projet</h3>
           <p><%= @project.description %></p>
-          <h3>Créateur.ice du projet</h3>
+          <h3>Créateur·ice du projet</h3>
           <ul class="disc-list">
             <li class="card-notif card-notif-modifications">
               <div class="card-notif-head">
