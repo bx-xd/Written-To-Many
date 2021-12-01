@@ -60,22 +60,31 @@
                 <%= cl_image_tag @modification.user.photo.key, class:"avatar" %>
               </div>
               <div class="modif-title">
-                <h3><%= @modification.title.capitalize %></h3>
+                <h1><%= @modification.title.capitalize %></h1>
+                <div class="modification-status-pills success">
+                  <h4>Validée</h4>
+                </div>
+                <div class="modification-status-pills decline">
+                  <h4>Refusée</h4>
+                </div>
+                <div class="modification-status-pills open">
+                  <h4>En cours</h4>
+                </div>
               </div>
             </div>
             <div class="modif-date">
-            Créer le <%= @modification.created_at.strftime("%m/%d at %I:%M") %>
+            Crée le <%= @modification.created_at.strftime("%m/%d at %I:%M") %>
             </div>
           </div>
           <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContextCollapse" aria-expanded="true" aria-controls="modifContextCollapse">
-            <h3>Contexte</h3>
+            <h2>Contexte</h2>
           </button>
           <div class="collapse show" id="modifContextCollapse">
             <span><%= @modification.context %></span>
           </div>
         <% end %>
         <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContentCollapse" aria-expanded="true" aria-controls="modifContentCollapse">
-          <h3>Modification proposée</h3>
+          <h2>Modification proposée</h2>
         </button>
         <div class="collapse show" id="modifContentCollapse">
           <% @modification_content.each do |modif_content| %>
@@ -88,11 +97,11 @@
             <%= link_to "Refuser la modification", deny_modification_path(@modification), method: :patch, class: "btn btn-flat btn-deny" %>
           </div>
         <% elsif @modification.status == "accepted" %>
-          <h4 class="text-right">La modification à été <strong>validée</strong></h4>
+          <h4 class="modification-status">La modification à été <strong>validée</strong></h4>
         <% elsif @modification.status == "denied" %>
-          <h4 class="text-right">La modification à été <strong>refusée</strong></h4>
+          <h4 class="modification-status">La modification à été <strong>refusée</strong></h4>
         <% else %>
-          <h4 class="text-right">La modification est en cours de <strong>discussion</strong></h4>
+          <h4 class="modification-status">La modification est en cours de <strong>discussion</strong></h4>
         <% end %>
       </div>
   </div>
