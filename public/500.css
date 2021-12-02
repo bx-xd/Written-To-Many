@@ -1,28 +1,28 @@
-#error-404 body {
+#error-500 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
   color: aliceblue;
   margin: 0;
 }
 
-#error-404 h1 {
+#error-500 h1 {
   font-size: 64px;
 }
 
-#error-404 p {
+#error-500 p {
   font-size: 24px;
   margin-bottom: 5rem;
 }
 
 
-#error-404 .bg-image {
+#error-500 .bg-image {
   background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url('img/wtf.webp');
   background-size: cover;
   background-position: center;
   padding: 15rem 0;
   height: 50vh;
 }
-#error-404 .bg-image a {
+#error-500 .bg-image a {
   text-decoration: none;
   font-size: 24px;
   padding: 1rem 3rem;
@@ -32,7 +32,7 @@
   transition: color .3s, background-color .3s;
 }
 
-#error-404 .bg-image a:hover {
+#error-500 .bg-image a:hover {
   border: 2px solid #e0371e;
   background-color: white;
   color: #e0371e;
