@@ -168,16 +168,16 @@ def create_json_modification(text, user, status, title, context, created_at, mod
 end
 
 modif_1 = create_modification(pays_des_moines.text, paul, "pending", "Partie 4", "Ajout de la partie 4", DateTime.new(2021, 11, 24, 13, 52, 3))
-modif_2 = create_modification(pays_des_moines.text, george, "pending", "Description du monastère", "Ajout de déscriptions du monastère", DateTime.new(2021, 11, 15, 1, 32, 6))
-modif_3 = create_modification(pays_des_moines.text, louis, "pending", "Liaison partie 2 et 3", "Reprise de la liaison entre partie 2 et 3", DateTime.new(2021, 11, 28, 18, 46, 21))
+modif_2 = create_modification(pays_des_moines.text, george, "pending", "Description du monastère", "Ajout de descriptions du monastère", DateTime.new(2021, 11, 15, 1, 32, 6))
+modif_3 = create_modification(pays_des_moines.text, louis, "pending", "Liaison partie 2 et 3", "Reprise de la liaison entre les parties 2 et 3", DateTime.new(2021, 11, 28, 18, 46, 21))
 modif_4 = create_modification(savant_russe.text, david, "pending", "La mort de Raspoutine", "Explication de la mort de Raspoutine", DateTime.new(2021, 11, 20, 15, 37, 7))
 modif_5 = create_modification(savant_russe.text, sophie, "pending", "Dénouement de l'arc sur le voyage du savant", "Ajout de la fin de l'arc sur le voyage du savant", DateTime.new(2021, 11, 23, 13, 26, 39))
 modif_6 = create_modification(effrayante.text, syd, "pending", "Suite et fin du personnage de Josie", "Ajout de la fin de la description de Josie", DateTime.new(2021, 11, 12, 11, 18, 32))
 modif_7 = create_modification(effrayante.text, siouxsie, "pending", "Partie 3", "Ajout de la partie 3", DateTime.new(2021, 11, 11, 10, 10, 1))
-modif_8 = create_modification(effrayante.text, louis, "pending", "Supression de la conclusion partie 2", "Je ne trouve pas la partie 2 interessante, déso", DateTime.new(2021, 11, 12, 17, 15, 11))
-modif_9 = create_modification(effrayante.text, paul, "pending", "Introduciton du personnage de Tom", "Description de Tom", DateTime.new(2021, 11, 13, 17, 9, 8))
+modif_8 = create_modification(effrayante.text, louis, "pending", "Suppression de la conclusion partie 2", "Je ne trouve pas la partie 2 interessante, déso", DateTime.new(2021, 11, 12, 17, 15, 11))
+modif_9 = create_modification(effrayante.text, paul, "pending", "Introduction du personnage de Tom", "Description de Tom", DateTime.new(2021, 11, 13, 17, 9, 8))
 modif_10 = create_modification(jean_qui_pleure.text, ringo, "pending", "Titres des parties", "Modification des titres", DateTime.new(2021, 8, 20, 14, 19, 22))
-modif_11 = create_modification(jean_qui_pleure.text, david, "pending", "Description de la maison de campagne", "Bienvenu à la campagne, dans les champs avec un belle chaumière", DateTime.new(2021, 8, 19, 20, 36, 44))
+modif_11 = create_modification(jean_qui_pleure.text, david, "pending", "Description de la maison de campagne", "Bienvenue à la campagne, dans les champs avec un belle chaumière", DateTime.new(2021, 8, 19, 20, 36, 44))
 modif_12 = create_modification(jean_qui_pleure.text, john, "pending", "Passage dans la cours d'école - Chapitre 3", "Ajout dans le chapitre 3 d'une histoire dans la cours d'école", DateTime.new(2021, 8, 21, 22, 49, 11))
 add_dialogue = create_modification(dialogue.text,
                                    joanna,
@@ -197,7 +197,7 @@ add_intro = create_modification(dialogue.text,
                                 richard,
                                 "denied",
                                 "Intro du texte",
-                                "Ajout d'une introduction sur les intentions du text",
+                                "Ajout d'une introduction sur les intentions du texte",
                                 DateTime.new(2021, 11, 25, 9, 16, 49),
                                 "dialogue_aux_enfers_entre_machiavel_et_montesquieu3")
 
@@ -223,6 +223,16 @@ add_letter = create_json_modification(fort_sherlock.text,
                                       "Ajoute une lettre de l'enfant à sa mère pour appuyer les difficultés de l'enfant",
                                       DateTime.new(2021, 11, 27, 13, 35, 44),
                                       "3")
+
+add_detectiv_desc = create_json_modification(fort_sherlock.text,
+                                      syd,
+                                      "pending",
+                                      "Ajout d'une description du detective",
+                                      "Voici un proposition de description du détective, un peu osée mais je pense que ça correspond bien pour cette parodie",
+                                      DateTime.new(2021, 11, 22, 22, 23, 24),
+                                      "3")
+
+
 # delete_story = create_json_modification(fort_sherlock.text,
 #                                         louis,
 #                                         "plus_fort_que_sherlock4",
@@ -238,7 +248,7 @@ add_letter = create_json_modification(fort_sherlock.text,
 puts "-> #{Modification.count} modifications have been created."
 
 
-puts "-> Create 19 Discussions"
+puts "-> Create 20 Discussions"
 def create_discussion(title, context, project, modification = nil)
   discussion = Discussion.new(title: title,
                               context: context,
@@ -273,11 +283,13 @@ create_discussion(add_intro.title, add_intro.context, add_intro.text.project, ad
 # dsc_delete_dialogue = create_discussion("Suppression d'un dialogue de Montesquieu", delete_dialogue.context, dialogue, delete_dialogue)
 # create_discussion("Ajout d'une introduction", add_intro.context, dialogue, add_intro)
 
-create_discussion("Limite de la parodie", "Je trouve que la parodie à ses limites, où s'arreter ?", fort_sherlock) # disc générale fort_sherlock
+general_disc = create_discussion("Limite de la parodie", "Je trouve que la parodie a ses limites, où s'arreter ?", fort_sherlock) # disc générale fort_sherlock
+general_disc.update(updated_at: general_disc.created_at)
 
 dsc_following_story = create_discussion(following_story.title, following_story.context, following_story.text.project, following_story)
 dsc_add_mother_story = create_discussion(add_mother_story.title, add_mother_story.context, add_mother_story.text.project, add_mother_story)
 dsc_add_letter = create_discussion(add_letter.title, add_letter.context, add_letter.text.project, add_letter)
+dsc_add_detectiv_desc = create_discussion(add_detectiv_desc.title, add_detectiv_desc.context, add_detectiv_desc.text.project, add_detectiv_desc)
 # dsc_following_story = create_discussion("Partie 5", following_story.title, fort_sherlock, following_story)
 # dsc_add_mother_story = create_discussion("Annecdote sur la mère", add_mother_story.title, fort_sherlock, add_mother_story)
 # dsc_add_letter = create_discussion("Ajout d'une lettre, partie 3", add_letter.title, fort_sherlock, add_letter)
@@ -293,12 +305,12 @@ def create_post(user, discussion, text, created_at)
 end
 
 create_post(richard, dsc_delete_dialogue,
-            "Je me suis permis de supprimé le passage de Montesquieu qui se présente à Machiavel,
+            "Je me suis permis de supprimer le passage de Montesquieu qui se présente à Machiavel,
             En effet ce passage me parait peu rigoureux historiquement parlant, Montesquieu se présente
             comme un ministre de Louis XVI ce qu'il n'était pas. De plus les locutions pour se dire bonjour ne
             correspondent pas, vers 1750, date du décès de celui-ci, dans ce dialogue le 'bon' et le 'jour' sont
             séparés alors que cette façon d'écrire correspond plus à une tradition littéraire du XIIIeme siècle.
-            De manière général j'ai supprimé l'ensemble du passage pour qu'il soit travailler du fait qu'il ne
+            De manière général j'ai supprimé l'ensemble du passage pour qu'il soit retravailler du fait qu'il ne
             convenait pas à la rigueur qu'on s'est fixé au préalable sur le texte mais aussi car il rompt avec
             le sens logique des personnages historiques.",
             DateTime.new(2021, 11, 27, 20, 24, 56))
@@ -306,7 +318,7 @@ create_post(louis, dsc_delete_dialogue,
             "Je te rejoins sur la rigueur des locutions, pour le coup elles sont ici vraiment annachroniques
             et difficile à lire de manière général, de la même manière qu'il se présente en tant que ministre
             pose un soucis de cohérence historique pas compliqué à verifier.
-            Par contre je trouve la suppression totale du passage trop sévère. Ce dernier avant l'avantage d'éclairer
+            Par contre je trouve la suppression totale du passage trop sévère. Ce dernier avait l'avantage d'éclairer
             correctement la philosophie de Montesquieu et de l'introduire correctement. J'aimerai aussi rajouter que
             on est ici dans un genre proche du postiche, malgré notre volonté de faux écrits, par conséquent
             je pense qu'on ne doit pas non plus exercer trop de pression pour suivre une forme de rigueur dans nos
@@ -327,15 +339,15 @@ create_post(louis, dsc_add_mother_story,
             DateTime.new(2021, 11, 24, 22, 34, 37))
 create_post(syd, dsc_add_mother_story,
             "Je suis pas du tout d'accord, je trouve justement que le passage à la suite nous permettait
-            d'en déduire ou d'imaginer pleins de choses par rapport à ce qui lui été arriver.",
+            d'en déduire ou d'imaginer pleins de choses par rapport à ce qui lui était arrivé.",
             DateTime.new(2021, 11, 25, 11, 12, 13))
 create_post(joanna, dsc_add_mother_story,
-            "Je rejoins Syd là dessus, je trouve que ça rallonge le texte pour rien, je suis par contre ouverte
-            à ce que l'ensemble de la partie qui introduit la mère soit plus longue et peut être plus étoffé
+            "Je rejoins Syd là-dessus, je trouve que ça rallonge le texte pour rien, je suis par contre ouverte
+            à ce que l'ensemble de la partie qui introduit la mère soit plus longue et peut être plus étoffée
             mais pas sur cette fin de partie.",
             DateTime.new(2021, 11, 25, 13, 46, 34))
 create_post(louis, dsc_add_mother_story,
-            "Je peux aussi retravailler le passage pour y ajouter du suspens, j'aimer bien l'idée quand même qu'on
+            "Je peux aussi retravailler le passage pour y ajouter du suspens, j'aime quand même bien l'idée qu'on
             explicite mieux le background des personnages et qu'on laisse des non-dits plus loins dans le récit.",
             DateTime.new(2021, 11, 26, 21, 35, 44))
 create_post(paul, dsc_add_mother_story,
@@ -346,39 +358,50 @@ create_post(joanna, dsc_add_mother_story,
             "Si tout le monde est d'accord je me permets de refuser ce passage.",
             DateTime.new(2021, 12, 2, 14, 22, 48))
 # Modification refusé
-create_post(joanna, dsc_following_story,
+create_post(paul, dsc_following_story,
             "J'ouvre la discussion autour de cette nouvelle partie que je viens d'ajouter",
             DateTime.new(2021, 11, 25, 20, 36, 45))
 create_post(louis, dsc_following_story,
-            "J'aime beaucoup le suspence laisser à la fin et en même temps l'arriver du détéctive",
+            "J'aime beaucoup le suspense laissé à la fin et en même temps l'arrivée du détéctive",
             DateTime.new(2021, 11, 25, 21, 11, 46))
-create_post(paul, dsc_following_story,
+create_post(joanna, dsc_following_story,
             "Par contre il faut qu'on se pose la question vis à vis de la parodie, par ce que là c'est
             très bien écrit mais on dirait du pure Conan Doyle, j'ai du mal à voir le pastiche ici.",
             DateTime.new(2021, 11, 26, 11, 34, 13))
 create_post(marine, dsc_following_story,
-            "Je rejoins Paul néanmoins on peut nuancer, cette super introduction du détéctive ira parfaitement
+            "Je rejoins Joanna néanmoins on peut nuancer, cette super introduction du détéctive ira parfaitement
             en contrepoint de la parodie du personnage qui viendra plus tard dans le texte. Je pense c'est important
             de pas non plus s'acharner sur ce personnage, on souhaite le parodier, pas le tourner complétement en ridicule,
             c'est bien par ce qu'on apprécie tous Sherlock qu'on est ici à vouloir le parodier.
-            Dans tous les cas je suis hyper contente de lire ce passage sur son introduction, bravo joanna.",
+            Dans tous les cas je suis hyper contente de lire ce passage sur son introduction, bravo Paul.",
             DateTime.new(2021, 11, 27, 16, 12, 13))
 create_post(joanna, dsc_following_story,
             "Merci Marine, en effet j'avais prévu dans la suite du texte de venir introduire un contrepoint, notamment
             au moment où il est utilisé dans le cadre de son enquête, ses dons d'observations. J'avais pensés à tout un passage
-            très déscriptif où ces dons permettent de résoudre une histoire très anciennes des fermiers chez qui il est sans pour
+            très déscriptif où ces dons permettent de résoudre une histoire très anciennes, des fermiers chez qui il est sans pour
             autant résoudre l'affaire en court.
             A mon sens c'est une manière pour nous aussi de continuer à rendre hommage tout en s'adonnant à une gentille parodie.",
             DateTime.new(2021, 11, 28, 8, 12, 49))
 create_post(syd, dsc_following_story,
-            "Attention à ne pas rejouer la discussion du channel général, je rejoins quand même Paul sur son idée
-            il faut un minimum introduire notre volonté de parodier Holmes si on ne veut pas créer un décalage de ton
+            "Attention à ne pas rejouer la discussion du channel général, je suis d'accord, il faut un minimum
+            introduire notre volonté de parodier Holmes si on ne veut pas créer un décalage de ton
             au moment où on souhaitera le parodier franchement.
-            Pour le moment lorsqu'on relis le texte on a dut mal à discerner l'humour ou la parodie qui pourra intérvenir,
+            Pour le moment lorsqu'on relit le texte on a du mal à discerner l'humour ou la parodie qui pourra intervenir,
             c'est même franchement un texte plutôt triste.
-            A mon avis, soit on retouche cette modification, soit on ajoute plus en amont du texte des éléments qui appellent
+            A mon avis, soit on retouche cette modification, soit on ajoute plus en amont du texte, des éléments, qui appellent
             à l'humour qu'on souhaitera utiliser plus tard.",
             DateTime.new(2021, 11, 29, 18, 46, 32))
+create_post(joanna, dsc_add_detectiv_desc,
+            "Désolée de le dire d'une manière si brutale mais le plagiat n'est pas toléré ici non plus Syd !
+             Je sais que c'était une blague mais je ne veux pas encourager les mauvais comportements.",
+            DateTime.new(2021, 11, 23, 8, 32, 11))
 puts "-> #{Post.count} posts have been created."
+
+
+# Accept / deny modif
+
+add_detectiv_desc.update(status: "denied", updated_at: DateTime.new(2021, 11, 23, 8, 35, 22))
+
+add_letter.update(status: "accepted", updated_at: DateTime.new(2021, 11, 27, 20, 10, 4))
 
 puts "-> End of seeding"
