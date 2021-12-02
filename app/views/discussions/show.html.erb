@@ -4,12 +4,16 @@
   <div class="container">
       <div class="modif-context">
         <% if @modification.context.nil? && current_user == @modification.user %>
-          <h2>Ma nouvelle modification</h2>
           <%= simple_form_for(@modification, remote: true, html: { class: "add-context-form" }) do |form| %>
-            <%= form.input :title, label: "Titre de la modification", placeholder: "Titre de la modification", class: "add-context-input" %>
-            <%= form.input :context, label: "Contexte de la modification", placeholder: "Donnez nous le contexte de votre modification", class: "add-context-input" %>
-
-            <%= form.button :submit, "Valider", class: "btn btn-primary add-context-btn", method: :update %>
+            <%= form.input :title, label: "Titre de la modification", class: "add-context-input" %>
+            <%= form.input :context, label: "Contexte de la modification", class: "add-context-input" %>
+              <h2>Modification proposée</h2>
+            <div class="collapse show" id="modifContentCollapse">
+              <% @modification_content.each do |modif_content| %>
+                <%= sanitize(block_to_html(modif_content)) %>
+              <% end %>
+            </div>
+            <%= form.button :submit, "Enregistrer", class: "btn btn-primary add-context-btn", method: :update %>
           <% end %>
         <% else %>
           <div class="get-back">
@@ -38,7 +42,7 @@
               </div>
             </div>
             <div class="modif-date">
-            Crée <%= Jekyll::Timeago.timeago(from = @modification.created_at, to = Date.today, options = {locale: :fr}) %>
+            Créé <%= Jekyll::Timeago.timeago(from = @modification.created_at, to = Date.today, options = {locale: :fr}) %>
             </div>
           </div>
           <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContextCollapse" aria-expanded="true" aria-controls="modifContextCollapse">
@@ -48,6 +52,7 @@
             <span><%= @modification.context %></span>
           </div>
         <% end %>
+        <% if @modification.context %>
         <button class="btn btn-toggle collapsed text-left" data-toggle="collapse" data-target="#modifContentCollapse" aria-expanded="true" aria-controls="modifContentCollapse">
           <h2>Modification proposée</h2>
         </button>
@@ -56,24 +61,19 @@
             <%= sanitize(block_to_html(modif_content)) %>
           <% end %>
         </div>
+        <% end %>
         <% if current_user == @project.user && @modification.status == "pending" %>
           <div class="valid-btns text-right">
             <%= link_to "Valider la modification", validate_modification_path(@modification), method: :patch, class: "btn btn-primary btn-validate" %>
             <%= link_to "Refuser la modification", deny_modification_path(@modification), method: :patch, class: "btn btn-flat btn-deny" %>
           </div>
-        <% elsif @modification.status == "accepted" %>
-          <h4 class="modification-status">La modification à été <strong>validée</strong></h4>
-        <% elsif @modification.status == "denied" %>
-          <h4 class="modification-status">La modification à été <strong>refusée</strong></h4>
-        <% else %>
-          <h4 class="modification-status">La modification est en cours de <strong>discussion</strong></h4>
         <% end %>
       </div>
   </div>
 <% end %>
 <div class="container d-flex">
   <div class="disc-box col-8">
-    <h2><%= @discussion.title %></h2>
+    <h2>Discussion</h2>
     <a href="#add-post-anchor" class="btn btn-ghost" id="add-post-btn">Derniers commentaires <i class="fas fa-arrow-circle-down"></i></a>
     <p><%= "Ajoutez le premier commentaire" if @posts.empty? %></p>
     <ul class="posts">

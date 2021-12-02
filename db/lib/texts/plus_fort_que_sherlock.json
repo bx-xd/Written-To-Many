@@ -6,7 +6,7 @@
       "type": "header",
       "data": {
         "level": 1,
-        "text": "I"
+        "text": "I - Chapitre 1"
       }
     },
     {
@@ -133,7 +133,7 @@
       "type": "header",
       "data": {
         "level": 1,
-        "text": "II"
+        "text": "II - Chapitre 2"
       }
     },
     {
@@ -421,7 +421,7 @@
       "type": "header",
       "data": {
         "level": 1,
-        "text": "III"
+        "text": "III - Chapitre 3"
       }
     },
     {
@@ -736,4 +736,3 @@
   ],
   "version": "2.22.2"
 }
-

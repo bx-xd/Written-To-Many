@@ -31,6 +31,10 @@
     font-weight: bold;
   }
 
+  strong {
+    font-family: $BP-thin;
+  }
+
   p {
     margin-bottom: 3rem;
     font-size: 20px;
@@ -65,20 +69,22 @@
     color:grey;
 
     img {
-      width: 50%;
-      border-radius: 50%;
-      background-color: grey;
+      width: 80%;
     }
 
     h3 {
       margin-top:40px;
+    }
+
+    strong {
+      font-family: $BP-thin;
     }
   }
 }
 
 .value-section {
   background-color: #F6F8FA;
-  padding: 3rem 0;
+  padding: 10rem 0;
 
   .section-value-img {
     padding-right: 2rem;
@@ -86,6 +92,10 @@
     img {
       width: 100%;
     }
+  }
+
+  strong {
+    font-family: $BP-thin;
   }
 }
 
@@ -100,6 +110,10 @@
 
   p {
     direction: ltr;
+  }
+
+  strong {
+    font-family: $BP-thin;
   }
 }
 

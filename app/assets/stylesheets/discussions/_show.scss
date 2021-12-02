@@ -67,6 +67,7 @@
   padding: 2rem;
   position:relative;
   margin-bottom: 2rem;
+  padding-left: 0;
 
   #add-post-btn {
     position: absolute;
@@ -159,11 +160,11 @@
 
 
   #modifContextCollapse {
-    background-color: lighten($primary, 47);
     padding: 24px;
-    color: $primary;
     border-radius:2px;
     margin-bottom: 16px;
+    color:$medium-gray;
+    background-color: $ultra-light;
   }
 
   #modifContentCollapse {
@@ -189,7 +190,6 @@
   }
 
   .add-context-form {
-    text-align: right;
 
     .form-group {
       text-align: left;

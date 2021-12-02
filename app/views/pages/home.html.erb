@@ -2,7 +2,9 @@
   <%= link_to "#{current_user ? "Mon compte" : "Connexion"}", dashboard_path, class: "btn btn-flat" %>
   <div class="container text-center">
 
-    <div class="logo" style="color:white; font-size:32px;">W/M</div>
+    <div class="logo" style="color:white; font-size:32px;">
+      <%= image_tag('WM-logo-banner.png') %>
+    </div>
 
     <div class="content active">
       <h1>Pourquoi <strong>écrire</strong> seul quand on peut le faire à <strong>plusieurs</strong> ?</h1>
@@ -15,20 +17,19 @@
 
 
 <div class="container value-proposition">
-  <h2>Tout ce qu'il faut pour réussir</h2>
   <div class="value-cards">
     <div class="value-card">
-      <img src="https://res.cloudinary.com/jbteuma/image/upload/v1637754487/writting_qideou.png" alt="machine à écrire">
+      <%= image_tag('image-value-1.png') %>
       <h3>Créer</h3>
     </div>
 
     <div class="value-card">
-      <img src="https://res.cloudinary.com/jbteuma/image/upload/v1637754487/community_vj8ace.png" alt="Discussion">
+      <%= image_tag('image-value-2.png') %>
       <h3>Echanger</h3>
     </div>
 
     <div class="value-card">
-      <img src="https://res.cloudinary.com/jbteuma/image/upload/v1637754487/sharing_glmbwd.png" alt="Contribution">
+      <%= image_tag('image-value-3.png') %>
       <h3>Contribuer</h3>
     </div>
   </div>
@@ -38,7 +39,7 @@
   <div class="container">
     <div class="d-flex">
       <div class="section-value-img col-8">
-        <img src="https://res.cloudinary.com/jbteuma/image/upload/v1637754487/write_oohamp.png" alt="">
+        <%= image_tag('image-banner-1') %>
       </div>
       <div class="section-info col-4">
         <h2>Une experience d'écriture <strong>inoubliable</strong></h2>
@@ -54,7 +55,7 @@
   <div class="container">
     <div class="d-flex">
     <div class="section-value-img col-8">
-        <img src="https://res.cloudinary.com/jbteuma/image/upload/v1637754487/discussion_dbqugm.png" alt="">
+        <%= image_tag('image-banner-2') %>
       </div>
       <div class="section-info col-4">
         <h2>Un espace de communication <strong>Multicanal</strong> pour chaque projet</h2>
@@ -70,7 +71,7 @@
   <div class="container">
     <div class="d-flex">
       <div class="section-value-img col-8">
-        <img src="https://res.cloudinary.com/jbteuma/image/upload/v1637754487/edition_qbvhrn.png" alt="">
+        <%= image_tag('image-banner-3') %>
       </div>
       <div class="section-info col-4">
         <h2>Suggerez des <strong>modifications</strong> à tout moment</h2>

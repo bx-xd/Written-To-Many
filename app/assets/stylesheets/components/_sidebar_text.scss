@@ -6,6 +6,7 @@
   box-sizing: content-box;
   transition-duration: .3s;
   transform:translateX(0px);
+  z-index: 1000;
 
   #sideArrow {
     position: absolute;
@@ -37,7 +38,7 @@
     font-weight: bold;
     font-size: 2rem;
     color: #ffffff;
-    margin: 1rem 0;
+    margin-bottom: 1rem;
     padding: 20px;
     border-bottom: 1px solid $super-light;
     align-items: center;
