@@ -18,7 +18,7 @@
       </div>
       <div class="navbar-side-infos">
         <div class="navbar-links">
-            <% if @project.user %>
+            <% if @project.user == current_user %>
               <%= link_to "Inviter des contributeurs", new_project_contributor_path(@project), class: "add-contributor", id: "add-contributor" %>
             <% end %>
             <div class="card-contributor"><% @project.contributors.each do |contributor| %>
