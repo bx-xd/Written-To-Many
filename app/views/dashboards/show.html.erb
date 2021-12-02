@@ -185,7 +185,7 @@
                 <% end %>
                 <div class="card-project-header-infos">
                   <div class="date-infos">
-                    <p>crée le <strong><%= project.created_at.strftime('%e.%m.%Y') %></strong></p>
+                    <p>créé le <strong><%= project.created_at.strftime('%e.%m.%Y') %></strong></p>
                     <% if project.modifications.any? %>
                       <p>modifié <strong><%= Jekyll::Timeago.timeago(from = project.modifications.last.updated_at, to = Date.today, options = {locale: :fr, depth: 1, threshold: 0.05}) %></strong></p>
                     <% end %>
@@ -198,15 +198,15 @@
                 </div>
               </div>
               <% if project.modifications.any? %>
-              <ul class="list-modifications">
-                <span>Dernières discussions</span>
-                <% project.text.modifications.each do |modification| %>
-                  <%= link_to(discussion_path(modification.discussion)) do %>
-                      <li><%= modification.title %></li>
+                <ul class="list-modifications">
+                  <span>Dernières discussions</span>
+                  <% project.text.modifications.last(3).each do |modification| %>
+                    <%= link_to(discussion_path(modification.discussion)) do %>
+                        <li><%= modification.title %></li>
+                    <% end %>
                   <% end %>
-                <% end %>
+                </ul>
               <% end %>
-              </ul>
             </div>
           </div>
         <% end %>

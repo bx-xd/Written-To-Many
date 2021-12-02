@@ -89,9 +89,11 @@
                     <div class="card-notif-head">
                       <div class="notif-head-info">
                         <%= cl_image_tag d.modification.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
-                        <div>
-                        <div class="notif-main-infos">
-                          <p class="notif-main-title"><%= d.title.capitalize %></p>
+                        <div class="d-flex">
+                          <div class="notif-main-infos">
+                            <p class="notif-main-title"><%= d.title.capitalize %></p>
+                            <p class="subtitle">Créé par <%= d.modification.user.username.capitalize  %> le <%= Jekyll::Timeago.timeago(from = d.updated_at, to = Date.today, options = {locale: :fr}) %></p>
+                          </div>
                           <% if d.modification.status == "accepted" %>
                             <div class="modification-status-pills success">
                               <h4>Validée</h4>
@@ -101,8 +103,6 @@
                               <h4>Refusée</h4>
                             </div>
                           <% end %>
-                        </div>
-                        <p class="subtitle">Créé par <%= d.modification.user.username.capitalize  %> le <%= Jekyll::Timeago.timeago(from = d.updated_at, to = Date.today, options = {locale: :fr}) %></p>
                         </div>
                       </div>
                     </div>
@@ -152,11 +152,6 @@
         </div>
       </div>
     </div>
-
-
-
-
-
   </div>
 </div>
 <%= link_to text_path(@project.text), class: "btn btn-round text-link" do %>
