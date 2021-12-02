@@ -1,5 +1,4 @@
 meta_product_name: "Written To Many"
 meta_title: "Written To Many - Plateforme d'écriture collaborative"
 meta_description: "Writtent To Many vous permet de créer et de modifier des textes à plusieurs"
-meta_image: "favicon.ico" # should exist in `app/assets/images/`
-meta_og: "og-image.png"
+meta_image: "https://res.cloudinary.com/dmjyrdcrd/image/upload/v1638456738/og-image_lky5sh.png" # should exist in `app/assets/images/`
