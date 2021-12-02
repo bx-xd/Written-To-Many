@@ -18,7 +18,9 @@
       </div>
       <div class="navbar-side-infos">
         <div class="navbar-links">
+            <% if @project.user %>
               <%= link_to "Inviter des contributeurs", new_project_contributor_path(@project), class: "add-contributor", id: "add-contributor" %>
+            <% end %>
             <div class="card-contributor"><% @project.contributors.each do |contributor| %>
                           <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
             <% end %>

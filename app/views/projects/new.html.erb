@@ -11,8 +11,8 @@
 
       <%= simple_form_for(@project) do |form| %>
         <div class="form-inputs">
-          <%= form.input :title %>
-          <%= form.input :description %>
+          <%= form.input :title, label: "Titre de votre projet" %>
+          <%= form.input :description , label: "Description" %>
           <%= form.input :photo,
                           required: true,
                           as: :file %>
