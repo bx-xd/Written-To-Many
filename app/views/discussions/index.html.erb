@@ -81,7 +81,7 @@
             </ul>
           <% end %>
           <% unless @closed_modif_disc.empty? %>
-            <h3>Fermées</h3>
+            <h3 class='modif-closed'>Fermées</h3>
             <ul class="disc-list">
               <% @closed_modif_disc.each do |d| %>
                 <%= link_to(discussion_path(d.id), html_options = {class: "disc-card-link"}) do %>
