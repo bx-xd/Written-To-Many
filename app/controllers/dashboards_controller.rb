@@ -1,8 +1,8 @@
 class DashboardsController < ApplicationController
   def show
     @user = current_user
-    @projects = @user.projects
-    @contributions = @user.projects_contributions
+    @projects = @user.projects.sort_by(&:updated_at)
+    @contributions = @user.projects_contributions.sort_by(&:updated_at).reverse
     @character = compting_writing_character
     @random_user = User.first
     @random_user_two = User.find_by_username("george")
