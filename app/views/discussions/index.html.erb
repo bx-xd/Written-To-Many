@@ -49,8 +49,8 @@
             </button>
             <div class="collapse p-2" id="addDiscCollapse">
               <%= simple_form_for([@project, @discussion], remote: true, html: { id: "add-global-disc-form" }) do |form| %>
-                <%= form.input :title, label: "Titre de la discussion", placeholder: "Titre de la discussion", class: "add-global-disc-input" %>
-                <%= form.input :context, label: "Contexte de la discussion", placeholder: "Donnez nous le contexte de cette nouvelle discussion", class: "add-global-disc-input" %>
+                <%= form.input :title, label: "Titre de la discussion", class: "add-global-disc-input" %>
+                <%= form.input :context, label: "Contexte de la discussion", class: "add-global-disc-input" %>
 
                 <%= form.button :submit, "Valider", class: "btn btn-primary add-global-disc-btn", method: :update %>
               <% end %>
@@ -141,7 +141,7 @@
                       <%= cl_image_tag contributor.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
                       <div>
                         <p class="notif-main-infos"><%= contributor.user.username %></p>
-                        <p class="subtitle">A rejoint le projet le <%= ("%m/%d at %I:%M")Jekyll::Timeago.timeago(from = contributor.created_at, to = Date.today, options = {locale: :fr}) %></p>
+                        <p class="subtitle">A rejoint le projet le <%= Jekyll::Timeago.timeago(from = contributor.created_at, to = Date.today, options = {locale: :fr}) %></p>
                       </div>
                     </div>
                   </div>
