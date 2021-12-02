@@ -73,7 +73,7 @@ end
 dialogue = create_project("dialogue_aux_enfers_entre_machiavel_et_montesquieu", louis, DateTime.new(2021, 10, 28, 11, 32, 53))
 pays_des_moines = create_project("au_pays_des_moines", george, DateTime.new(2021, 11, 3, 13, 58, 11))
 savant_russe = create_project("aventures_extraordinaires_d_un_savant_russe", marine, DateTime.new(2021, 11, 15, 21, 22, 48))
-effrayante = create_project("effraeyante_aventure", paul, DateTime.new(2021, 11, 10, 16, 15, 42))
+effrayante = create_project("effrayante_aventure", paul, DateTime.new(2021, 11, 10, 16, 15, 42))
 jean_qui_pleure = create_project("jean_qui_grogne_jean_qui_rit", louis, DateTime.new(2021, 8, 18, 12, 2, 19))
 fort_sherlock = create_project("plus_fort_que_sherlock", joanna, DateTime.new(2021, 9, 28, 9, 45, 11))
 fort_sherlock.update(description: "Je vous propose d'écrire une parodie de Sherlock Holmes à plusieurs")
