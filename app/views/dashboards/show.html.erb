@@ -56,16 +56,18 @@
               <div class="card-notif-head">
                 <div class="notif-head-info">
                   <%= cl_image_tag feed.modification.user.photo.key, class: "avatar" %>
-                  <div>
-                    <p class="notif-main-infos"><strong><%= feed.modification.user.username.capitalize %></strong> a crée la modification : <strong><%= feed.title ? feed.title : "Sans titre" %></strong></p>
-                    <p class="subtitle">Dans le projet <strong><%= feed.project.title %></strong> de <strong> <%= feed.project.user.username.capitalize %></strong></p>
-                  </div>
+                  <%= link_to discussion_path(feed) do %>
+                    <div>
+                      <p class="notif-main-infos"><strong><%= feed.modification.user.username.capitalize %></strong> a crée la modification : <strong><%= feed.title ? feed.title : "Sans titre" %></strong></p>
+                      <p class="subtitle">Dans le projet <strong><%= feed.project.title %></strong> de <strong> <%= feed.project.user.username.capitalize %></strong></p>
+                    </div>
+                  <% end %>
                 </div>
                 <div class="notif-head-time">
                   <p><%= Jekyll::Timeago.timeago(from = feed.updated_at, to = Date.today, options = {locale: :fr}).capitalize %></p>
                 </div>
               </div>
-              <%= link_to discussion_path(feed) do %>
+              <% if feed.context %>
                 <div class="card-notif-body">
                   <p><%= feed.context %></p>
                 </div>
