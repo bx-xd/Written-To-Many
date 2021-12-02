@@ -8,7 +8,7 @@
       <ul class="list-inline tabs-underlined">
         <li data-content-active="dashboard-show" class="tab-underlined active">
           <i class="fas fa-bell"></i>
-          <a href="#dashboard-show">Dernières modifications</a>
+          <a href="#dashboard-show">Mes notifications</a>
         </li>
         <li data-content-active="dashboard-rental" class="tab-underlined">
           <i class="fas fa-pen"></i>
@@ -58,7 +58,7 @@
                   <%= cl_image_tag feed.modification.user.photo.key, class: "avatar" %>
                   <%= link_to discussion_path(feed) do %>
                     <div>
-                      <p class="notif-main-infos"><strong><%= feed.modification.user.username.capitalize %></strong> a crée la modification : <strong><%= feed.title ? feed.title : "Sans titre" %></strong></p>
+                      <p class="notif-main-infos"><strong><%= feed.modification.user.username.capitalize %></strong> a créé la modification <strong><%= feed.title ? feed.title : "Sans titre" %></strong></p>
                       <p class="subtitle">Dans le projet <strong><%= feed.project.title %></strong> de <strong> <%= feed.project.user.username.capitalize %></strong></p>
                     </div>
                   <% end %>
@@ -108,7 +108,7 @@
                   <%= cl_image_tag feed.project.user.photo.key, class: "avatar" %>
                   <%= link_to discussion_path(feed) do %>
                     <div>
-                      <p class="notif-main-infos"><strong><%= feed.project.user.username.capitalize %></strong> a crée la discussion : <strong><%= feed.title %></strong></p>
+                      <p class="notif-main-infos"><strong><%= feed.project.user.username.capitalize %></strong> a créé la discussion <strong><%= feed.title %></strong></p>
                       <p class="subtitle">Dans le projet <strong><%= feed.project.title %></strong></p>
                     </div>
                   <% end %>

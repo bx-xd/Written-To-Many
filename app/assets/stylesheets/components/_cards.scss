@@ -40,6 +40,8 @@
     display:flex;
     align-items:center;
     justify-content:center;
+    height:fit-content;
+    margin-top:-4px;
     h4 {
       font-size:14px;
       margin:0;
@@ -69,6 +71,7 @@
     opacity:  0.7;
   }
 }
+
 
 .dashboard-card {
   width: 345px;
