@@ -35,7 +35,7 @@
                       <%= cl_image_tag d.project.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
                       <div>
                       <p class="notif-main-infos"><%= d.title.capitalize %></p>
-                      <p class="subtitle">Crée le <%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
+                      <p class="subtitle">Créé <%= Jekyll::Timeago.timeago(from = d.updated_at, to = Date.today, options = {locale: :fr}) %></p>
                       </div>
                     </div>
                   </div>
@@ -71,7 +71,7 @@
                         <%= cl_image_tag d.modification.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
                         <div>
                         <p class="notif-main-infos"><%= "#{d.title ? d.title.capitalize : "Sans titre"}" %></p>
-                        <p class="subtitle">Crée par <%= d.modification.user.username.capitalize  %> le <%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
+                        <p class="subtitle">Créé par <%= d.modification.user.username.capitalize  %> <%= Jekyll::Timeago.timeago(from = d.updated_at, to = Date.today, options = {locale: :fr}) %></p>
                         </div>
                       </div>
                     </div>
@@ -102,7 +102,7 @@
                             </div>
                           <% end %>
                         </div>
-                        <p class="subtitle">Crée par <%= d.modification.user.username.capitalize  %> le <%= d.updated_at.strftime("%m/%d at %I:%M") %></p>
+                        <p class="subtitle">Créé par <%= d.modification.user.username.capitalize  %> le <%= Jekyll::Timeago.timeago(from = d.updated_at, to = Date.today, options = {locale: :fr}) %></p>
                         </div>
                       </div>
                     </div>
@@ -125,7 +125,7 @@
                   <%= cl_image_tag @project.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
                   <div>
                   <p class="notif-main-infos"><%= @project.user.username %></p>
-                  <p class="subtitle">A rejoint le projet le <%= @project.created_at.strftime("%m/%d at %I:%M") %></p>
+                  <p class="subtitle">A rejoint le projet le <%= Jekyll::Timeago.timeago(from = @project.created_at, to = Date.today, options = {locale: :fr}) %></p>
                   </div>
                 </div>
               </div>
@@ -141,7 +141,7 @@
                       <%= cl_image_tag contributor.user.photo.key, class: "avatar", 'aria-haspopup': true, 'aria-expanded': false %>
                       <div>
                         <p class="notif-main-infos"><%= contributor.user.username %></p>
-                        <p class="subtitle">A rejoint le projet le <%= contributor.created_at.strftime("%m/%d at %I:%M") %></p>
+                        <p class="subtitle">A rejoint le projet le <%= ("%m/%d at %I:%M")Jekyll::Timeago.timeago(from = contributor.created_at, to = Date.today, options = {locale: :fr}) %></p>
                       </div>
                     </div>
                   </div>
