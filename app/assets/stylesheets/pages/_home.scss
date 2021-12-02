@@ -31,6 +31,10 @@
     font-weight: bold;
   }
 
+  strong {
+    font-family: $BP-thin;
+  }
+
   p {
     margin-bottom: 3rem;
     font-size: 20px;
@@ -73,6 +77,10 @@
     h3 {
       margin-top:40px;
     }
+
+    strong {
+      font-family: $BP-thin;
+    }
   }
 }
 
@@ -87,6 +95,10 @@
       width: 100%;
     }
   }
+
+  strong {
+    font-family: $BP-thin;
+  }
 }
 
 .value-section:nth-child(2n) {
@@ -100,6 +112,10 @@
 
   p {
     direction: ltr;
+  }
+
+  strong {
+    font-family: $BP-thin;
   }
 }
 
