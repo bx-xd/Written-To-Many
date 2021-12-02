@@ -2,7 +2,9 @@
   <%= link_to "#{current_user ? "Mon compte" : "Connexion"}", dashboard_path, class: "btn btn-flat" %>
   <div class="container text-center">
 
-    <div class="logo" style="color:white; font-size:32px;">W/M</div>
+    <div class="logo" style="color:white; font-size:32px;">
+      <%= image_tag('WM-logo-banner.png') %>
+    </div>
 
     <div class="content active">
       <h1>Pourquoi <strong>écrire</strong> seul quand on peut le faire à <strong>plusieurs</strong> ?</h1>
