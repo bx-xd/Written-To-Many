@@ -38,12 +38,14 @@
                   </div>
                 </div>
                 <div class="notif-head-time">
-                  <p><%= feed.updated_at %></p>
+                  <p><%= Jekyll::Timeago.timeago(from = feed.updated_at, to = Date.today, options = {locale: :fr}).capitalize %></p>
                 </div>
               </div>
-              <div class="card-notif-body">
-                <p><%= feed.posts.last.text %></p>
-              </div>
+              <%= link_to discussion_path(feed) do %>
+                <div class="card-notif-body">
+                  <p><%= feed.posts.last.text %></p>
+                </div>
+              <% end %>
             </div>
           </div>
         <% end %>
@@ -55,17 +57,19 @@
                 <div class="notif-head-info">
                   <%= cl_image_tag feed.modification.user.photo.key, class: "avatar" %>
                   <div>
-                    <p class="notif-main-infos"><strong><%= feed.modification.user.username.capitalize %></strong> a créé la modification : <strong><%= feed.title ? feed.title : "Sans titre" %></strong></p>
+                    <p class="notif-main-infos"><strong><%= feed.modification.user.username.capitalize %></strong> a crée la modification : <strong><%= feed.title ? feed.title : "Sans titre" %></strong></p>
                     <p class="subtitle">Dans le projet <strong><%= feed.project.title %></strong> de <strong> <%= feed.project.user.username.capitalize %></strong></p>
                   </div>
                 </div>
                 <div class="notif-head-time">
-                  <p><%= feed.updated_at %></p>
+                  <p><%= Jekyll::Timeago.timeago(from = feed.updated_at, to = Date.today, options = {locale: :fr}).capitalize %></p>
                 </div>
               </div>
-              <div class="card-notif-body">
-                <p><%= feed.context %></p>
-              </div>
+              <%= link_to discussion_path(feed) do %>
+                <div class="card-notif-body">
+                  <p><%= feed.context %></p>
+                </div>
+              <% end %>
             </div>
           </div>
         <% end %>
@@ -82,12 +86,14 @@
                   </div>
                 </div>
                 <div class="notif-head-time">
-                  <p><%= feed.updated_at %></p>
+                  <p><%= Jekyll::Timeago.timeago(from = feed.updated_at, to = Date.today, options = {locale: :fr}).capitalize %></p>
                 </div>
               </div>
-              <div class="card-notif-body">
-                <p><%= feed.posts.last.text %></p>
-              </div>
+              <%= link_to discussion_path(feed) do %>
+                <div class="card-notif-body">
+                  <p><%= feed.posts.last.text %></p>
+                </div>
+              <% end %>
             </div>
           </div>
         <% end %>
@@ -99,17 +105,19 @@
                 <div class="notif-head-info">
                   <%= cl_image_tag feed.project.user.photo.key, class: "avatar" %>
                   <div>
-                    <p class="notif-main-infos"><strong><%= feed.project.user.username.capitalize %></strong> a créé la discussion : <strong><%= feed.title %></strong></p>
+                    <p class="notif-main-infos"><strong><%= feed.project.user.username.capitalize %></strong> a crée la discussion : <strong><%= feed.title %></strong></p>
                     <p class="subtitle">Dans le projet <strong><%= feed.project.title %></strong></p>
                   </div>
                 </div>
                 <div class="notif-head-time">
-                  <p><%= feed.updated_at %></p>
+                  <p><%= Jekyll::Timeago.timeago(from = feed.updated_at, to = Date.today, options = {locale: :fr}).capitalize %></p>
                 </div>
               </div>
-              <div class="card-notif-body">
-                <p><%= feed.context %></p>
-              </div>
+              <%= link_to discussion_path(feed) do %>
+                <div class="card-notif-body">
+                  <p><%= feed.context %></p>
+                </div>
+              <% end %>
             </div>
           </div>
         <% end %>
@@ -126,12 +134,14 @@
                   </div>
                 </div>
                 <div class="notif-head-time">
-                  <p><%= feed.updated_at %></p>
+                  <p><%= Jekyll::Timeago.timeago(from = feed.updated_at, to = Date.today, options = {locale: :fr}).capitalize %></p>
                 </div>
               </div>
-              <div class="card-notif-body">
-                <p><%= feed.context %></p>
-              </div>
+              <%= link_to discussion_path(feed.discussion) do %>
+                <div class="card-notif-body">
+                  <p><%= feed.context %></p>
+                </div>
+              <% end %>
             </div>
           </div>
         <% end %>
@@ -141,15 +151,17 @@
             <div class="card-notif">
               <div class="card-notif-head">
                 <div class="notif-head-info">
-                  <%= cl_image_tag feed.user.photo.key, class: "avatar" %>
-                  <div>
-                    <p class="notif-main-infos"><strong><%= feed.user.username.capitalize %></strong> a été ajouté à la liste des <strong>contributeurs</strong></p>
-                    <p class="subtitle">Dans le projet <strong><%= feed.project.title %></strong></p>
+                    <%= cl_image_tag feed.user.photo.key, class: "avatar" %>
+                <%= link_to project_discussions_path(feed.project) do %>
+                    <div>
+                      <p class="notif-main-infos"><strong><%= feed.user.username.capitalize %></strong> a été ajouté à la liste des <strong>contributeurs</strong></p>
+                      <p class="subtitle">Dans le projet <strong><%= feed.project.title %></strong></p>
+                    </div>
                   </div>
-                </div>
-                <div class="notif-head-time">
-                  <p><%= feed.updated_at %></p>
-                </div>
+                  <div class="notif-head-time">
+                    <p><%= Jekyll::Timeago.timeago(from = feed.updated_at, to = Date.today, options = {locale: :fr}).capitalize %></p>
+                  </div>
+                <% end %>
               </div>
             </div>
           </div>
@@ -171,9 +183,9 @@
                 <% end %>
                 <div class="card-project-header-infos">
                   <div class="date-infos">
-                    <p>créé le <strong><%= project.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <p>crée le <strong><%= project.created_at.strftime('%e.%m.%Y') %></strong></p>
                     <% if project.modifications.any? %>
-                      <p>modifié le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
+                      <p>modifié <strong><%= Jekyll::Timeago.timeago(from = project.modifications.last.updated_at, to = Date.today, options = {locale: :fr, depth: 1, threshold: 0.05}) %></strong></p>
                     <% end %>
                   </div>
                   <div class="card-contributor">
@@ -212,8 +224,8 @@
                 <% end %>
                 <div class="card-project-header-infos">
                   <div class="date-infos">
-                    <p>créé le <strong><%= project.created_at.strftime("%d.%m.%Y") %></strong></p>
-                    <p>modifié le <strong><%= project.modifications.last.created_at.strftime("%d.%m.%Y") %></strong></p>
+                    <p>crée le <strong><%= project.created_at.strftime('%e.%m.%Y') %></strong></p>
+                    <p>modifié <strong><%= Jekyll::Timeago.timeago(from = project.modifications.last.updated_at, to = Date.today, options = {locale: :fr, depth: 1, threshold: 0.05}) %></strong></p>
                   </div>
                   <div class="card-contributor"><% project.contributors.each do |contributor| %>
                       <%= cl_image_tag contributor.user.photo.key, class: "avatar" %>
@@ -223,6 +235,7 @@
               </div>
               <ul class="list-modifications">
                 <div class="list">
+                <span>Dernières discussions</span>
                   <% project.text.modifications.last(3).each do |modification| %>
                     <%= link_to(discussion_path(modification.discussion)) do %>
                       <li><%= modification.title %></li>
