@@ -1,2 +1,2 @@
 vite: bin/vite dev
-web: bin/rails s
+web: bundle exec puma -C config/puma.rb
