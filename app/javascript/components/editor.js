@@ -2,6 +2,7 @@ import EditorJS from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 import List from '@editorjs/list';
 import Paragraph from '@editorjs/paragraph';
+import { header } from './header';
 
 class CustomParagraph extends Paragraph {
   set data(data) {
@@ -51,6 +52,7 @@ class CustomHeader extends Header {
 const initEditor = () => {
 
   const form = document.getElementById("new_modification")
+
   if (form) {
     const data = document.getElementById("textContent").dataset.json
     const url = form.action
@@ -81,14 +83,12 @@ const initEditor = () => {
           class: CustomParagraph,
         },
       },
-
-
-      /**
-       * Previously saved data that should be rendered
-       */
-      data: JSON.parse(data)
+      data: JSON.parse(data),
+      onReady: () => {
+        console.log('ready !')
+        header()
+      }
     });
-
 
     const btn = document.getElementById("saveBtn")
     btn.addEventListener("click", (event) => {

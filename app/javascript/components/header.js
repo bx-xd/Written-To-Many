@@ -1,5 +1,3 @@
-import { Button } from "bootstrap";
-
 const header = () => {
   const txtEditor = document.querySelector("#editorjs");
 
@@ -9,7 +7,7 @@ const header = () => {
 
     // Permet d'afficher les titres H1 dans la sidebar
     const loadTitle = () => {
-
+      console.log(h1sText)
       Array.from(h1sText).forEach((h1, index) => {
         h1.id = `header-${index}`;
 
@@ -28,15 +26,7 @@ const header = () => {
         })
       });
     }
-
-
-    // Permet de charger tous les titres dès que la souris passe sur la page
-    document.addEventListener('mousemove', (event) => {
-      event.preventDefault();
-      headersSidebar.innerHTML = "";
-
-      loadTitle();
-    });
+    loadTitle()
   }
 };
 
