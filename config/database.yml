@@ -80,4 +80,6 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV['POSTGRESQL_ADDON_URI'] %>
+  database: written_to_many_production
+  username: written_to_many
+  password: <%= ENV["WRITTEN_TO_MANY_DATABASE_PASSWORD"] %>
