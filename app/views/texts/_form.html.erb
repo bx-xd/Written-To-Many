@@ -1,8 +1,8 @@
-<%= simple_form_for [@text, @modification] do |f| %>
+<%= simple_form_for [@text, @modification], html: { "data-editor-target" => "form"  } do |f| %>
   <%= f.input :content_before, as: :hidden, value: @content.to_json %>
   <%= f.input :content_after, as: :hidden %>
 <% end %>
 
-<div class="d-none" id="textContent" data-json="<%= @content.to_json %>"></div>
+<div class="d-none" id="textContent" data-editor-target="textContent" data-json="<%= @content.to_json %>"></div>
 
-<div id="editorjs"></div>
+<div id="editorjs" data-editor-target="html"></div>

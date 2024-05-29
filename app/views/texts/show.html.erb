@@ -1,4 +1,4 @@
-<div class="d-flex">
+<div class="d-flex" data-controller="editor">
   <%= render "shared/sidebar_text" %>
   <div class="container">
 
@@ -13,9 +13,9 @@
     </div>
   </div>
 
-  <button id="saveBtn">Créer une nouvelle modification</button>
+  <button id="saveBtn" data-editor-target="saveBtn">Créer une nouvelle modification</button>
 
-  <%= link_to project_discussions_path(@text.project), class: "btn btn-round text-link" do %>
+  <%= link_to project_discussions_path(@text.project), class: "btn btn-round text-link", style: "z-index: 50;" do %>
     <i class="far fa-comment-alt"></i>
   <% end %>
 </div>
